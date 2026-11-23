@@ -1,0 +1,27 @@
+{
+  "citation_basis": "Ali, Richardson, and Spirtes (2009), Definition 3.11 and Tables A.1-A.3",
+  "doi": "10.1214/08-AOS626",
+  "source_url": "https://www.cmu.edu/dietrich/philosophy/docs/spirtes/AOS626.pdf",
+  "status": "independently constructed regression, not a graph reported in the paper",
+  "purpose": "exercise two synchronous Triples iterations and an order-2 discriminating collider",
+  "nodes": ["x", "q1", "q2", "b", "y"],
+  "shared_edges": [
+    ["x", "tail", "q1", "arrow"],
+    ["q1", "arrow", "q2", "arrow"],
+    ["q2", "arrow", "b", "arrow"],
+    ["q1", "tail", "b", "arrow"],
+    ["q1", "tail", "y", "arrow"],
+    ["q2", "tail", "y", "arrow"]
+  ],
+  "last_edges": {
+    "G_order2": ["b", "arrow", "y", "arrow"],
+    "G_noncollider": ["b", "tail", "y", "arrow"]
+  },
+  "ci_witness": {
+    "left": "x",
+    "right": "y",
+    "given": ["q1", "q2"],
+    "G_order2_separated": true,
+    "G_noncollider_separated": false
+  }
+}

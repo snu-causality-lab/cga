@@ -1,0 +1,37 @@
+{
+  "citation": "Richardson and Spirtes (2002), Ancestral Graph Markov Models, Figure 9",
+  "doi": "10.1214/aos/1031689015",
+  "source_url": "https://www.cmu.edu/dietrich/philosophy/docs/spirtes/annals2002.pdf",
+  "page": 979,
+  "figure": "9(a)",
+  "reported_claim": "gamma and delta are m-connected given every subset of alpha and beta",
+  "adjudicated_claim": "confirmed independently by edge-path, canonical-DAG, all-conditioning-sets, and simple inducing-path oracles",
+  "errata_url": "https://sites.stat.washington.edu/tsr/website/documents/2002/annals-2002-errata.txt",
+  "erratum_status": "not amended by the official errata",
+  "nodes": ["α", "β", "γ", "δ"],
+  "edges": [
+    ["α", "arrow", "β", "arrow"],
+    ["β", "arrow", "γ", "arrow"],
+    ["α", "arrow", "δ", "arrow"],
+    ["α", "tail", "γ", "arrow"],
+    ["β", "tail", "δ", "arrow"]
+  ],
+  "primitive_inducing_path": ["γ", "β", "α", "δ"],
+  "primitive_inducing_path_source_page": 984,
+  "maximal_extension": {
+    "figure": "9(b)",
+    "source_page": 979,
+    "reported_claim": "an extension with the same (trivial) independence model",
+    "adjudicated_claim": "adding gamma bidirected delta is the unique maximal ancestral extension",
+    "transcription_status": "the added edge was independently read from the drawn figure; the caption alone does not specify its endpoints or marks",
+    "added_edges": [
+      ["γ", "arrow", "δ", "arrow"]
+    ]
+  },
+  "queries": [
+    {"left": "γ", "right": "δ", "given": []},
+    {"left": "γ", "right": "δ", "given": ["α"]},
+    {"left": "γ", "right": "δ", "given": ["β"]},
+    {"left": "γ", "right": "δ", "given": ["α", "β"]}
+  ]
+}

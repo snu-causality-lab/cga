@@ -1,0 +1,53 @@
+{
+  "citation": "Zhang (2008), On the Completeness of Orientation Rules for Causal Discovery in the Presence of Latent Confounders and Selection Bias, Figure 4 and rules R5-R6",
+  "doi": "10.1016/j.artint.2008.08.001",
+  "source_url": "https://www.sciencedirect.com/science/article/pii/S0004370208001008",
+  "local_pdf_sha256": "29a7a704f8d19d6d6baca22a1f36c8503a08bf7dbc8c571c270bda523892fcc4",
+  "journal_page": 1881,
+  "pdf_page": 9,
+  "figure": "4",
+  "reported_claim": "R5 turns the qualifying uncovered circle cycle into undirected edges; R6 removes an incident circle at a vertex on an undirected edge",
+  "fixture_status": "the two MAG examples below are independently constructed regressions tied to the R5-R6 schematics, not literal MAGs reported in Figure 4",
+  "erratum_status": "no figure-specific correction located",
+  "undirected_c4": {
+    "nodes": ["A", "B", "C", "D"],
+    "skeleton": [["A", "B"], ["B", "C"], ["C", "D"], ["A", "D"]],
+    "seed_mag": [
+      ["A", "tail", "B", "tail"],
+      ["B", "tail", "C", "tail"],
+      ["C", "tail", "D", "tail"],
+      ["A", "tail", "D", "tail"]
+    ],
+    "expected_full_pag": [
+      ["A", "tail", "B", "tail"],
+      ["A", "tail", "D", "tail"],
+      ["B", "tail", "C", "tail"],
+      ["C", "tail", "D", "tail"]
+    ],
+    "adjudicated_class_size": 1
+  },
+  "r5_then_r6_tail_circle": {
+    "nodes": ["A", "B", "C", "D", "E"],
+    "skeleton": [["A", "B"], ["A", "C"], ["A", "D"], ["B", "E"], ["C", "E"]],
+    "seed_mag": [
+      ["A", "tail", "B", "tail"],
+      ["A", "tail", "C", "tail"],
+      ["A", "tail", "D", "tail"],
+      ["B", "tail", "E", "tail"],
+      ["C", "tail", "E", "tail"]
+    ],
+    "expected_full_pag": [
+      ["A", "tail", "B", "tail"],
+      ["A", "tail", "C", "tail"],
+      ["A", "tail", "D", "circle"],
+      ["B", "tail", "E", "tail"],
+      ["C", "tail", "E", "tail"]
+    ],
+    "adjudicated_fixed_skeleton_candidates": 1024,
+    "adjudicated_class_size": 2,
+    "adjudicated_members": [
+      [["A", "tail", "B", "tail"], ["A", "tail", "C", "tail"], ["A", "tail", "D", "tail"], ["B", "tail", "E", "tail"], ["C", "tail", "E", "tail"]],
+      [["A", "tail", "B", "tail"], ["A", "tail", "C", "tail"], ["A", "tail", "D", "arrow"], ["B", "tail", "E", "tail"], ["C", "tail", "E", "tail"]]
+    ]
+  }
+}

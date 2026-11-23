@@ -1,0 +1,27 @@
+{
+  "citation": "Zhang (2008), On the Completeness of Orientation Rules for Causal Discovery in the Presence of Latent Confounders and Selection Bias, Artificial Intelligence 172(16-17), Figure 6",
+  "doi": "10.1016/j.artint.2008.08.001",
+  "source_url": "https://www.sciencedirect.com/science/article/pii/S0004370208001008",
+  "local_pdf_sha256": "29a7a704f8d19d6d6baca22a1f36c8503a08bf7dbc8c571c270bda523892fcc4",
+  "journal_page": 1882,
+  "pdf_page": 10,
+  "figure": "6",
+  "reported_claim": "panel (a) is the causal MAG; R0-R4 give panel (b), and applying R9 twice gives panel (c), including invariant tails B->D and C->D",
+  "reported_class_size_status": "the paper does not report the equivalence-class size",
+  "adjudicated_claim": "fixed-skeleton literal all-conditioning-subset enumeration gives exactly eight MAGs and endpoint intersection equal to panel (c)",
+  "erratum_status": "no figure-specific correction located",
+  "node_order_status": "repository order follows the drawing labels; the paper does not define serialization order",
+  "nodes": ["A", "B", "C", "D"],
+  "seed_mag": [
+    ["A", "arrow", "B", "arrow"],
+    ["A", "tail", "C", "arrow"],
+    ["B", "tail", "D", "arrow"],
+    ["C", "tail", "D", "arrow"]
+  ],
+  "expected_full_pag": [
+    ["A", "circle", "B", "circle"],
+    ["A", "circle", "C", "circle"],
+    ["B", "tail", "D", "arrow"],
+    ["C", "tail", "D", "arrow"]
+  ]
+}

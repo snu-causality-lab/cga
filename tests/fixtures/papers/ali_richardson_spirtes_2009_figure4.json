@@ -1,0 +1,37 @@
+{
+  "citation": "Ali, Richardson, and Spirtes (2009), Markov Equivalence for Ancestral Graphs, Figure 4 and Section 3.2",
+  "doi": "10.1214/08-AOS626",
+  "source_url": "https://www.cmu.edu/dietrich/philosophy/docs/spirtes/AOS626.pdf",
+  "journal_page": 2815,
+  "reprint_page": 9,
+  "pagination_status": "the cited electronic reprint explicitly differs from the journal pagination",
+  "figure": "4",
+  "reported_claim": "G1, G2, and G3 have the same adjacencies and unshielded colliders; G1 and G2 are Markov equivalent, while G1 and G3 are not",
+  "reported_ci_witness": "x is m-separated from y given q in G1 but m-connected given q in G3",
+  "adjudicated_claim": "confirmed independently by complete all-conditioning-subset m-separation signatures",
+  "erratum_status": "no figure-specific correction located",
+  "node_order_status": "repository serialization order follows the displayed discriminating path; the paper does not define a vertex order",
+  "nodes": ["x", "q", "b", "y"],
+  "shared_skeleton": [["x", "q"], ["q", "b"], ["q", "y"], ["b", "y"]],
+  "shared_unshielded_colliders": [["x", "q", "b"]],
+  "graphs": {
+    "G1": [
+      ["x", "arrow", "q", "arrow"],
+      ["q", "arrow", "b", "arrow"],
+      ["q", "tail", "y", "arrow"],
+      ["b", "arrow", "y", "arrow"]
+    ],
+    "G2": [
+      ["x", "tail", "q", "arrow"],
+      ["q", "arrow", "b", "arrow"],
+      ["q", "tail", "y", "arrow"],
+      ["b", "arrow", "y", "arrow"]
+    ],
+    "G3": [
+      ["x", "tail", "q", "arrow"],
+      ["q", "arrow", "b", "tail"],
+      ["q", "tail", "y", "arrow"],
+      ["b", "tail", "y", "arrow"]
+    ]
+  }
+}

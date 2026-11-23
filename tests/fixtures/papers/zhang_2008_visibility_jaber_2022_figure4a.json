@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "visibility_source": {
+    "citation": "Zhang, J. (2008). Causal Reasoning with Ancestral Graphs. Journal of Machine Learning Research 9:1437-1474.",
+    "url": "https://jmlr.org/papers/volume9/zhang08a/zhang08a.pdf",
+    "sha256": "a2523cccc64b51f26d7295af21c66e65dea8b22a726e9ac5059c0a0aa1f83d33",
+    "definition": "Definition 8, journal page 1448",
+    "endpoint_clarification": "The proof of Lemma 9 on journal page 1466 explicitly applies the parent condition to every non-endpoint vertex on the collider path.",
+    "erratum_check": "A targeted check of the official JMLR article page on 2026-08-24 found no linked Erratum or Correction; this does not assert that none exists."
+  },
+  "orientation_source": {
+    "citation": "Zhang, J. (2008). On the completeness of orientation rules for causal discovery in the presence of latent confounders and selection bias. Artificial Intelligence 172(16-17):1873-1896.",
+    "url": "https://doi.org/10.1016/j.artint.2008.08.001",
+    "adjudicated_no_selection_scope": "R0 followed by R1-R4 and R8-R10; R5-R7 are not used in the no-selection construction."
+  },
+  "paper_fixture": {
+    "citation": "Jaber, A., Ribeiro, A. H., Zhang, J., and Bareinboim, E. (2022). Causal Identification under Markov equivalence: Calculus, Algorithm, and Completeness. Technical Report R-86.",
+    "url": "https://causalai.net/r86.pdf",
+    "sha256": "768cfc03e8a01abd3c99406f96ab896a7d6b2ea14620cebecebdc3727e777fca",
+    "figure": "4(a)",
+    "pdf_page": 8,
+    "source_reported": {
+      "visible_directed_edge": ["B", "C"],
+      "plain_directed_edge": ["D", "C"],
+      "class_size_or_canonical_witness": "not reported"
+    },
+    "independent_adjudication": {
+      "nodes": ["A", "B", "C", "D"],
+      "seed_mag": [
+        ["A", "tail", "B", "arrow"],
+        ["B", "tail", "C", "arrow"],
+        ["B", "arrow", "D", "tail"],
+        ["C", "arrow", "D", "tail"]
+      ],
+      "expected_causal_pag": [
+        ["A", "circle", "B", "arrow"],
+        ["B", "tail", "C", "arrow"],
+        ["B", "arrow", "D", "circle"],
+        ["C", "arrow", "D", "tail"]
+      ],
+      "class_size": 4,
+      "queries": [
+        {
+          "source": "B",
+          "target": "C",
+          "candidate_paths": [["A", "B"]],
+          "canonical_path": ["A", "B"],
+          "visible_member_count": 4,
+          "invisible_member_count": 0
+        },
+        {
+          "source": "D",
+          "target": "C",
+          "candidate_paths": [],
+          "canonical_path": null,
+          "visible_member_count": 2,
+          "invisible_member_count": 2
+        }
+      ]
+    },
+    "erratum_check": "A targeted check of the report's official landing source on 2026-08-24 found no linked Erratum or Correction; this does not assert that none exists."
+  },
+  "constructed_cases": [
+    {
+      "name": "direct_declared_order_tie",
+      "nodes": ["A", "B", "C", "D"],
+      "seed_mag": [
+        ["A", "tail", "B", "arrow"],
+        ["A", "arrow", "C", "tail"],
+        ["A", "arrow", "D", "tail"]
+      ],
+      "expected_causal_pag": [
+        ["A", "tail", "B", "arrow"],
+        ["A", "arrow", "C", "circle"],
+        ["A", "arrow", "D", "circle"]
+      ],
+      "class_size": 4,
+      "source": "A",
+      "target": "B",
+      "candidate_paths": [["C", "A"], ["D", "A"]],
+      "canonical_path": ["C", "A"],
+      "visible_member_count": 4,
+      "invisible_member_count": 0
+    },
+    {
+      "name": "circle_is_not_an_arrowhead",
+      "nodes": ["A", "B", "C", "D"],
+      "seed_mag": [
+        ["A", "tail", "B", "arrow"],
+        ["A", "arrow", "C", "tail"],
+        ["A", "arrow", "D", "tail"],
+        ["B", "arrow", "C", "tail"]
+      ],
+      "expected_causal_pag": [
+        ["A", "tail", "B", "arrow"],
+        ["A", "arrow", "C", "circle"],
+        ["A", "arrow", "D", "circle"],
+        ["B", "arrow", "C", "tail"]
+      ],
+      "class_size": 4,
+      "source": "C",
+      "target": "B",
+      "candidate_paths": [],
+      "canonical_path": null,
+      "visible_member_count": 2,
+      "invisible_member_count": 2
+    },
+    {
+      "name": "indirect_collider_parent_path",
+      "nodes": ["A", "B", "C", "D", "E"],
+      "seed_mag": [
+        ["A", "tail", "B", "arrow"],
+        ["A", "arrow", "C", "arrow"],
+        ["A", "arrow", "D", "tail"],
+        ["B", "arrow", "C", "tail"],
+        ["B", "arrow", "D", "tail"],
+        ["C", "arrow", "E", "tail"]
+      ],
+      "expected_causal_pag": [
+        ["A", "tail", "B", "arrow"],
+        ["A", "arrow", "C", "arrow"],
+        ["A", "arrow", "D", "circle"],
+        ["B", "arrow", "C", "tail"],
+        ["B", "arrow", "D", "tail"],
+        ["C", "arrow", "E", "circle"]
+      ],
+      "class_size": 4,
+      "source": "A",
+      "target": "B",
+      "candidate_paths": [["E", "C", "A"]],
+      "canonical_path": ["E", "C", "A"],
+      "visible_member_count": 4,
+      "invisible_member_count": 0
+    },
+    {
+      "name": "shortest_path_precedes_declared_order",
+      "nodes": ["A", "B", "C", "D", "E"],
+      "seed_mag": [
+        ["A", "arrow", "B", "arrow"],
+        ["A", "tail", "C", "arrow"],
+        ["A", "arrow", "D", "tail"],
+        ["B", "tail", "C", "arrow"],
+        ["B", "arrow", "E", "tail"]
+      ],
+      "expected_causal_pag": [
+        ["A", "arrow", "B", "arrow"],
+        ["A", "tail", "C", "arrow"],
+        ["A", "arrow", "D", "circle"],
+        ["B", "tail", "C", "arrow"],
+        ["B", "arrow", "E", "circle"]
+      ],
+      "class_size": 4,
+      "source": "A",
+      "target": "C",
+      "candidate_paths": [["D", "A"], ["E", "B", "A"]],
+      "canonical_path": ["D", "A"],
+      "visible_member_count": 4,
+      "invisible_member_count": 0
+    },
+    {
+      "name": "shielded_chorded_only_witness",
+      "nodes": ["E", "C", "D", "A", "B"],
+      "seed_mag": [
+        ["E", "tail", "C", "arrow"],
+        ["C", "arrow", "D", "arrow"],
+        ["C", "tail", "A", "arrow"],
+        ["C", "tail", "B", "arrow"],
+        ["D", "arrow", "A", "arrow"],
+        ["D", "tail", "B", "arrow"],
+        ["A", "tail", "B", "arrow"]
+      ],
+      "expected_causal_pag": [
+        ["E", "circle", "C", "arrow"],
+        ["C", "arrow", "D", "arrow"],
+        ["C", "tail", "A", "arrow"],
+        ["C", "tail", "B", "arrow"],
+        ["D", "arrow", "A", "arrow"],
+        ["D", "tail", "B", "arrow"],
+        ["A", "tail", "B", "arrow"]
+      ],
+      "class_size": 2,
+      "source": "A",
+      "target": "B",
+      "candidate_paths": [["E", "C", "D", "A"]],
+      "canonical_path": ["E", "C", "D", "A"],
+      "required_chord": ["C", "A"],
+      "visible_member_count": 2,
+      "invisible_member_count": 0
+    }
+  ]
+}

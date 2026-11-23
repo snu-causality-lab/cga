@@ -1,0 +1,49 @@
+{
+  "citation": "Ali, Richardson, and Spirtes (2009), Markov Equivalence for Ancestral Graphs, Figure 6 and Section 3.4",
+  "doi": "10.1214/08-AOS626",
+  "source_url": "https://www.cmu.edu/dietrich/philosophy/docs/spirtes/AOS626.pdf",
+  "journal_page": 2820,
+  "reprint_page": 14,
+  "pagination_status": "the cited electronic reprint explicitly differs from the journal pagination",
+  "figure": "6",
+  "reported_claim": "each panel shows Markov-equivalent maximal ancestral graphs in which <x,q,b,y> is discriminating in G1 but not G2",
+  "reported_panel_i_detail": "q is a collider on <x,q,b,y> only in G1, and <q,b,y> changes from noncollider in G1 to collider in G2",
+  "reported_panel_ii_detail": "<q,b,y> is a collider in both graphs even though the displayed path is discriminating only in G1",
+  "adjudicated_claim": "confirmed independently by complete all-conditioning-subset m-separation signatures",
+  "erratum_status": "no figure-specific correction located",
+  "nodes": ["x", "q", "b", "y"],
+  "panels": {
+    "i": {
+      "G1": [
+        ["b", "tail", "x", "arrow"],
+        ["x", "arrow", "q", "arrow"],
+        ["q", "arrow", "b", "arrow"],
+        ["q", "tail", "y", "arrow"],
+        ["b", "tail", "y", "arrow"]
+      ],
+      "G2": [
+        ["b", "tail", "x", "arrow"],
+        ["q", "tail", "x", "arrow"],
+        ["q", "tail", "b", "arrow"],
+        ["y", "tail", "q", "arrow"],
+        ["y", "tail", "b", "arrow"]
+      ]
+    },
+    "ii": {
+      "G1": [
+        ["x", "arrow", "b", "arrow"],
+        ["x", "arrow", "q", "arrow"],
+        ["q", "arrow", "b", "arrow"],
+        ["q", "tail", "y", "arrow"],
+        ["b", "arrow", "y", "arrow"]
+      ],
+      "G2": [
+        ["x", "arrow", "b", "arrow"],
+        ["q", "tail", "x", "arrow"],
+        ["q", "tail", "b", "arrow"],
+        ["q", "tail", "y", "arrow"],
+        ["b", "arrow", "y", "arrow"]
+      ]
+    }
+  }
+}
