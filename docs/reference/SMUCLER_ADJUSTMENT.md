@@ -190,5 +190,4 @@ oracle imports production graph traversal or reduction helpers.
 
 ```bash
 PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider tests/python/test_smucler_adjustment.py
-python -m mypy --strict --cache-dir /tmp/cga-smucler-mypy-cache python/src/causal_graph_algorithms/smucler_adjustment.py tests/python/smucler_oracles.py tests/python/test_smucler_adjustment.py
 ```

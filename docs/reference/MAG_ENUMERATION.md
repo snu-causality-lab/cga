@@ -70,7 +70,7 @@ The [oracle tests](../../tests/python/test_mag_enumeration_oracle.py) compare ex
 | Full, including undirected | 4 | 3,045 | 183 | 592 | 1,603 |
 | Full, including undirected | 5 | 379,052 | 3,867 | 17,617 | 66,512 |
 
-Run from the repository root after [installing the package and development requirements](../../README.md#development):
+Run from the repository root after [installing the package and development requirements](../../README.md#verification):
 
 ```console
 python -B -m pytest -p no:cacheprovider tests/python/test_mag_enumeration_contract.py tests/python/test_mag_enumeration_oracle.py -q

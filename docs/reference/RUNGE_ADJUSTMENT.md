@@ -361,7 +361,6 @@ PYTHONDONTWRITEBYTECODE=1 python -m pytest -p no:cacheprovider \
   tests/python/test_runge_adjustment.py tests/python/test_runge_sufficiency_defects.py \
   tests/python/test_runge_required_sets.py tests/python/test_runge_condition_i_search.py \
   tests/python/test_runge_condition_i_sparsify.py
-MYPYPATH=python/src python -m mypy --strict python/src/causal_graph_algorithms/runge_adjustment.py
 ```
 
 ## A defective sufficiency step and two qualified observations
