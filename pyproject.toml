@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77.0.3"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -7,12 +7,18 @@ name = "causal-graph-algorithms"
 version = "0.1.0a1"
 description = "Causal graph views, separation, adjustment and Markov equivalence"
 readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
 
 requires-python = ">=3.11"
 dependencies = ["lark>=1.3,<2"]
 
 [project.optional-dependencies]
 test = ["pytest==9.0.3"]
+
+[project.urls]
+Repository = "https://github.com/snu-causality-lab/cga"
+"Lean proof map" = "https://github.com/snu-causality-lab/open-causal-science/blob/main/docs/cga.md"
 
 [tool.setuptools]
 package-dir = {"" = "python/src"}

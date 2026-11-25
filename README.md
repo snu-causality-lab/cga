@@ -4,7 +4,7 @@ Causal Graph Algorithms provides graph representations and reference implementat
 
 ## Install and run
 
-Use Python 3.11 or later and run these commands from a checkout.
+Use Python 3.11 or later. The [GitHub release](https://github.com/snu-causality-lab/cga/releases/tag/v0.1.0a1) includes a wheel. To install from source and run the tests, use these commands from a checkout.
 
 ```sh
 python -m pip install -e '.[test]'
@@ -40,10 +40,14 @@ The separator reference follows the authors’ 2023 runtime correction. The Lean
 
 ## Lean and paper replays
 
-[Open Causal Science](https://github.com/snu-causality-lab/open-causal-science/blob/5a08ef6d08b757ba0f0689421721889ea5f20303/docs/cga.md) records the exact Lean statements corresponding to CGA graph operations. The tests include the original Verma–Pearl Figure 2 and two DAG cases for the forbidden-set construction. Each project builds independently.
+[Open Causal Science](https://github.com/snu-causality-lab/open-causal-science/blob/main/docs/cga.md) records the exact Lean statements corresponding to CGA graph operations. The tests include the original Verma–Pearl Figure 2 and two DAG cases for the forbidden-set construction. The [Lean revision used for this release](https://github.com/snu-causality-lab/open-causal-science/blob/5a08ef6d08b757ba0f0689421721889ea5f20303/docs/cga.md) fixes the reference inputs and checks. Each project builds independently.
 
 To compare the nine published mixed graphs, generate `m-separation.json` with the Lean command in that proof map. From this checkout with CGA installed, compare it against CGA's own paper fixtures.
 
 ```sh
 python tests/compare_lean_mseparation.py /path/to/m-separation.json
 ```
+
+## License
+
+Causal Graph Algorithms is available under the [MIT License](LICENSE).
