@@ -1,0 +1,21 @@
+{
+  "paper": "Kivva, Etesami, Kiyavash (UAI 2023), On Identifiability of Conditional Causal Effects",
+  "url": "https://proceedings.mlr.press/v216/kivva23a/kivva23a.pdf",
+  "sha256": "b2a8c542357b2b0b1a2e6828d118ebf8e21294e8164908a181c23b2979daad56",
+  "figure_2": {
+    "locator": "Figure 2 and unnumbered Example, printed pp.1080-1081, PDF pp.3-4",
+    "nodes": ["X1", "Y1", "Z1", "Z2", "W1"],
+    "directed": [["X1","Z1"],["Z2","Z1"],["W1","Z2"],["Y1","W1"]],
+    "bidirected": [["X1","Z1"],["Y1","W1"]],
+    "query": "P_x1(Y1 | Z1,Z2)",
+    "sources": ["P(V)"],
+    "reported": "Conditional query identified, both unreduced numerator P_x1(Y1,Z1,Z2) and denominator P_x1(Z1,Z2) nonidentified; Q[Z1] cancels.",
+    "adjudicated": "Same structural decisions from independent literal exchange-subset and exact local source-hedge oracle. Exact positive SCM formula evaluation is a separate finite check, not a proof."
+  },
+  "algorithm_1_line_5": {
+    "locator": "MaxBI line 5, printed p.1082, PDF p.5; visually checked",
+    "printed": "(Y independent bold Z | X,Z minus {Z}) in G with incoming X and outgoing Z minus {Z} deleted",
+    "implemented": "For each candidate z, (Y independent {z} | X,Z minus {z}) in G with incoming X and outgoing {z} deleted",
+    "adjudication": "Use the standard Rule 2 stated on printed p.1080 and Theorems 2-3. The printed line has a candidate/set inconsistency; under the charitable singleton reading its complement-edge cut rejects the exchange in Z->Y with singleton condition Z. This does not refute Theorem 3."
+  }
+}

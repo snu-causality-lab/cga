@@ -1,0 +1,16 @@
+{
+  "paper": "Richardson, Evans, Robins, Shpitser (2023), Nested Markov Properties for Acyclic Directed Mixed Graphs",
+  "version": "arXiv:1701.06686v6",
+  "url": "https://arxiv.org/pdf/1701.06686v6",
+  "sha256": "029922595ad1304095ebb72e3d973eee4aa85c5ed6a79e7657f802d1734a0250",
+  "figure_3": {
+    "locator": "Figure 3, printed p.342, PDF p.9",
+    "nodes": ["1","2","3","4"],
+    "directed": [["1","2"],["2","3"],["3","4"],["1","3"]],
+    "bidirected": [["2","4"]],
+    "reported_initial_fixable": ["1","3","4"],
+    "valid_sequences": [["1","3","2"],["3","1","2"],["3","2","1"]],
+    "reported": "All listed sequences yield random set {4}, fixed {1,2,3}, retained edge 3->4 and q4(x4|x3); fixing 2 before 3 is invalid.",
+    "adjudicated": "Graph transitions agree with literal independent sequence enumeration; fixing-kernel formulas are evaluated against direct positive finite latent-SCM interventions. No discrepancy in this figure or Definitions 17,19,26,33 was found."
+  }
+}

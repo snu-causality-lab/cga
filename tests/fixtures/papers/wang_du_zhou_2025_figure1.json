@@ -1,0 +1,37 @@
+{
+  "citation": "Wang, Du, and Zhou (2025), Polynomial-Delay MAG Listing with Novel Locally Complete Orientation Rules, Proceedings of the 42nd International Conference on Machine Learning, PMLR 267",
+  "figure": "1(b)-1(d)",
+  "pdf_page": 1,
+  "fixture_status": "The MAG, PAG, and singleton-background-knowledge implication are transcribed from Figure 1; the class counts are independent literal fixed-skeleton adjudications and are not reported by the paper.",
+  "reported_implication": "An arrowhead at B on A o-o B implies B -> C.",
+  "reported_class_size_status": "The paper does not report the equivalence-class size or the number of members satisfying this singleton background knowledge.",
+  "adjudicated_fixed_skeleton_candidates": 1024,
+  "adjudicated_class_size": 30,
+  "adjudicated_bk_member_count": 10,
+  "erratum": "No erratum is needed for the Figure 1 implication; the two counts are test-oracle results, not paper claims.",
+  "nodes": ["A", "B", "C", "D"],
+  "seed_mag": [
+    ["A", "tail", "B", "tail"],
+    ["A", "tail", "D", "arrow"],
+    ["B", "tail", "C", "arrow"],
+    ["B", "tail", "D", "arrow"],
+    ["C", "arrow", "D", "arrow"]
+  ],
+  "expected_full_pag": [
+    ["A", "circle", "B", "circle"],
+    ["A", "circle", "D", "arrow"],
+    ["B", "circle", "C", "circle"],
+    ["B", "circle", "D", "arrow"],
+    ["C", "circle", "D", "arrow"]
+  ],
+  "singleton_background_knowledge": {
+    "edge": ["A", "B"],
+    "endpoint": "B",
+    "mark": "arrow"
+  },
+  "implied_mark": {
+    "edge": ["B", "C"],
+    "endpoint_at_B": "tail",
+    "endpoint_at_C": "arrow"
+  }
+}

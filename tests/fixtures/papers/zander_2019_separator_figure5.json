@@ -1,0 +1,12 @@
+{
+  "citation": "van der Zander, Liskiewicz and Textor (2019), Separators and Adjustment Sets in Causal Graphs",
+  "source_url": "https://arxiv.org/pdf/1803.00116v3",
+  "source_sha256": "75c5eff1bd1522c345b73954015316866e2f756d865ef5ecc6fa066a64a533a1",
+  "location": "Figure 5, PDF page 13 (arXiv v3)",
+  "transcription": "Graph read from the rendered figure, not inferred from its caption.",
+  "graph": "V1 --> X; Z1 --> X; Z2 --> Z1; Z2 --> Y; X --> V2; Y --> V2",
+  "reported_minimal_sets": [["Z1"], ["Z2"]],
+  "adjudicated_minimal_sets": [["Z1"], ["Z2"]],
+  "adjudication": "Independent original-graph simple-path enumeration agrees. Conditioning on V2 opens the collider X -> V2 <- Y and is invalid. With V1 mandatory, {V1,Z1} and {V1,Z2} are I-minimal but not strongly minimal.",
+  "erratum": "No discrepancy found in this figure. The 2023 corrigendum changes augmented-graph and related runtime claims, not these expectations."
+}

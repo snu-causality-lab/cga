@@ -1,0 +1,30 @@
+{
+  "citation": "Shpitser (2023), When does the ID algorithm fail?, arXiv:2307.03750v1, Figure 1(b-c), Section 3, and Proposition 1",
+  "source_url": "https://arxiv.org/pdf/2307.03750v1",
+  "source_sha256": "feb3af8b08c2565a6e13cfb106d23b52b0f57cedc63fb11a2a4a7445c648ef7d",
+  "arxiv_version": "v1",
+  "pdf_pages": [3, 7],
+  "figure": "1(c)",
+  "reported_claim": "p(Y|do(a1,a2)) is identified although the strict subquery p(Y|do(a2)) has a hedge",
+  "adjudicated_claim": "the full query has intrinsic district {Y}; the subquery has inner district {W,Y} and reachable closure {W,A2,Y}",
+  "nodes": ["A1", "W", "A2", "Y"],
+  "directed": [["W", "A1"], ["A1", "Y"], ["A2", "Y"]],
+  "bidirected": [["W", "A2"], ["W", "Y"]],
+  "full_query": {
+    "outcomes": ["Y"],
+    "interventions": ["A1", "A2"],
+    "expected_status": "identified",
+    "reported_formula": "sum_C P(y,a2|a1,C)P(C) / sum_C P(a2|a1,C)P(C)",
+    "reported_formula_status": "the paper prints C although Figure 1(c) labels the corresponding observed vertex W",
+    "adjudicated_formula": "sum_w P(y,a2|a1,w)P(w) / sum_w P(a2|a1,w)P(w)"
+  },
+  "strict_subquery": {
+    "outcomes": ["Y"],
+    "interventions": ["A2"],
+    "expected_status": "not identified",
+    "expected_inner_vertices": ["W", "Y"],
+    "expected_outer_vertices": ["W", "A2", "Y"],
+    "expected_roots": ["W", "Y"],
+    "expected_fixing_sequence": ["A1"]
+  }
+}

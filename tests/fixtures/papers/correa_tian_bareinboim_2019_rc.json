@@ -1,0 +1,14 @@
+{
+  "source": "Correa, Tian and Bareinboim, AAAI 2019; R-38, Algorithm 1, Theorem 2 and Appendix B",
+  "source_pdf": "https://causalai.net/r38.pdf",
+  "source_sha256": "035d09019e49a061a2e1a2e4279bde2745ebc79dced42f0ba341225d8be75a60",
+  "graph_origin": "Independent counterexample; not a figure reported by the authors",
+  "nodes": ["W", "X", "Y", "A", "B", "S"],
+  "directed": [["W", "X"], ["X", "Y"], ["A", "S"], ["B", "S"]],
+  "bidirected": [["W", "Y"], ["W", "A"], ["X", "B"]],
+  "interventions": ["X"],
+  "outcomes": ["Y"],
+  "fixed_event": {"S": 1},
+  "published_claim": "Recoverability implies successful RC recovery of the target districts",
+  "adjudicated_result": "RC fails at line 3, while the selected-only adjustment formula with Z={W,A}, ZT={} recovers P_x(y)"
+}

@@ -1,0 +1,148 @@
+{
+  "citation": "Zhang and Spirtes (2005), A Transformational Characterization of Markov Equivalence for Directed Acyclic Graphs with Latent Variables, UAI, Figures 4 and 5",
+  "source_url": "https://arxiv.org/pdf/1207.1419",
+  "source_version": "Eight-page UAI paper deposited as arXiv:1207.1419v1; reviewed local PDF has no printed page numbers",
+  "local_pdf_sha256": "fa23bc56637a5491e94ba4d3d0203324baa32418bdf33fea8f90e9ea69718bcc",
+  "pdf_pages": {"figure4": 4, "lemma2": 5, "theorem2": 6, "figure5": 7, "figure6": 8},
+  "reported_claim": "Figure 4: H1 is a LEG of G1 and H2 is a LEG of G2. Figure 5: all six displayed steps are equivalent DMAGs connected by legitimate single mark changes.",
+  "reported_count_status": "The paper reports neither the class size nor the number of class LEGs.",
+  "adjudicated_claim": "The six displayed graphs have the same complete pairwise m-separation signature. The class has six LEGs, given by the six total orders on the X1,X2,X3 triangle, with X2->X4, X3->X5 and X4<->X5 fixed.",
+  "adjudication_basis": "Direct transcription from rendered PDF figures, plus a handwritten all-path separation derivation recorded in docs/paper_reviews/leg.md. Automated replay status belongs to the linked regression and verification record, not this source fixture.",
+  "erratum_status": "No error was found in these figures or Lemma 2. The adjacent prose's spouse-set shorthand requires a graph-domain clarification, recorded separately in docs/paper_reviews/leg.md.",
+  "nodes": ["X1", "X2", "X3", "X4", "X5"],
+  "endpoint_encoding": "Each edge is [u, mark_at_u, v, mark_at_v]; node order is repository serialization, not a paper convention.",
+  "expected_causal_pag": [
+    ["X1", "circle", "X2", "circle"],
+    ["X1", "circle", "X3", "circle"],
+    ["X2", "circle", "X3", "circle"],
+    ["X2", "circle", "X4", "arrow"],
+    ["X3", "circle", "X5", "arrow"],
+    ["X4", "arrow", "X5", "arrow"]
+  ],
+  "graphs": {
+    "G1": {
+      "edges": [
+        ["X1", "arrow", "X2", "tail"],
+        ["X1", "arrow", "X3", "arrow"],
+        ["X2", "tail", "X3", "arrow"],
+        ["X2", "arrow", "X4", "arrow"],
+        ["X3", "tail", "X5", "arrow"],
+        ["X4", "arrow", "X5", "arrow"]
+      ],
+      "expected_is_class_leg": false
+    },
+    "step1": {
+      "edges": [
+        ["X1", "arrow", "X2", "tail"],
+        ["X1", "tail", "X3", "arrow"],
+        ["X2", "tail", "X3", "arrow"],
+        ["X2", "arrow", "X4", "arrow"],
+        ["X3", "tail", "X5", "arrow"],
+        ["X4", "arrow", "X5", "arrow"]
+      ],
+      "expected_is_class_leg": false
+    },
+    "H1": {
+      "edges": [
+        ["X1", "arrow", "X2", "tail"],
+        ["X1", "tail", "X3", "arrow"],
+        ["X2", "tail", "X3", "arrow"],
+        ["X2", "tail", "X4", "arrow"],
+        ["X3", "tail", "X5", "arrow"],
+        ["X4", "arrow", "X5", "arrow"]
+      ],
+      "expected_is_class_leg": true,
+      "expected_legitimate_reversals": [["X2", "X1"], ["X1", "X3"]]
+    },
+    "step3": {
+      "edges": [
+        ["X1", "arrow", "X2", "arrow"],
+        ["X1", "tail", "X3", "arrow"],
+        ["X2", "tail", "X3", "arrow"],
+        ["X2", "tail", "X4", "arrow"],
+        ["X3", "tail", "X5", "arrow"],
+        ["X4", "arrow", "X5", "arrow"]
+      ],
+      "expected_is_class_leg": false
+    },
+    "H2": {
+      "edges": [
+        ["X1", "tail", "X2", "arrow"],
+        ["X1", "tail", "X3", "arrow"],
+        ["X2", "tail", "X3", "arrow"],
+        ["X2", "tail", "X4", "arrow"],
+        ["X3", "tail", "X5", "arrow"],
+        ["X4", "arrow", "X5", "arrow"]
+      ],
+      "expected_is_class_leg": true,
+      "expected_legitimate_reversals": [["X1", "X2"], ["X2", "X3"]]
+    },
+    "G2": {
+      "edges": [
+        ["X1", "tail", "X2", "arrow"],
+        ["X1", "tail", "X3", "arrow"],
+        ["X2", "arrow", "X3", "arrow"],
+        ["X2", "tail", "X4", "arrow"],
+        ["X3", "tail", "X5", "arrow"],
+        ["X4", "arrow", "X5", "arrow"]
+      ],
+      "expected_is_class_leg": false
+    }
+  },
+  "figure5_order": ["G1", "step1", "H1", "step3", "H2", "G2"],
+  "source_specific_loyalty": [
+    {"source": "G1", "candidate": "H1", "expected": true},
+    {"source": "G2", "candidate": "H2", "expected": true},
+    {"source": "G1", "candidate": "H2", "expected": false},
+    {"source": "G2", "candidate": "H1", "expected": false}
+  ],
+  "expected_class_leg_count": 6,
+  "expected_class_legs": [
+    {"topological_order": ["X1", "X2", "X3"], "edges": [
+      ["X1", "tail", "X2", "arrow"], ["X1", "tail", "X3", "arrow"], ["X2", "tail", "X3", "arrow"],
+      ["X2", "tail", "X4", "arrow"], ["X3", "tail", "X5", "arrow"], ["X4", "arrow", "X5", "arrow"]]},
+    {"topological_order": ["X1", "X3", "X2"], "edges": [
+      ["X1", "tail", "X2", "arrow"], ["X1", "tail", "X3", "arrow"], ["X2", "arrow", "X3", "tail"],
+      ["X2", "tail", "X4", "arrow"], ["X3", "tail", "X5", "arrow"], ["X4", "arrow", "X5", "arrow"]]},
+    {"topological_order": ["X2", "X1", "X3"], "edges": [
+      ["X1", "arrow", "X2", "tail"], ["X1", "tail", "X3", "arrow"], ["X2", "tail", "X3", "arrow"],
+      ["X2", "tail", "X4", "arrow"], ["X3", "tail", "X5", "arrow"], ["X4", "arrow", "X5", "arrow"]]},
+    {"topological_order": ["X2", "X3", "X1"], "edges": [
+      ["X1", "arrow", "X2", "tail"], ["X1", "arrow", "X3", "tail"], ["X2", "tail", "X3", "arrow"],
+      ["X2", "tail", "X4", "arrow"], ["X3", "tail", "X5", "arrow"], ["X4", "arrow", "X5", "arrow"]]},
+    {"topological_order": ["X3", "X1", "X2"], "edges": [
+      ["X1", "tail", "X2", "arrow"], ["X1", "arrow", "X3", "tail"], ["X2", "arrow", "X3", "tail"],
+      ["X2", "tail", "X4", "arrow"], ["X3", "tail", "X5", "arrow"], ["X4", "arrow", "X5", "arrow"]]},
+    {"topological_order": ["X3", "X2", "X1"], "edges": [
+      ["X1", "arrow", "X2", "tail"], ["X1", "arrow", "X3", "tail"], ["X2", "arrow", "X3", "tail"],
+      ["X2", "tail", "X4", "arrow"], ["X3", "tail", "X5", "arrow"], ["X4", "arrow", "X5", "arrow"]]}
+  ],
+  "expected_separations": [
+    {"pair": ["X1", "X4"], "conditioning": ["X2"]},
+    {"pair": ["X1", "X4"], "conditioning": ["X2", "X3"]},
+    {"pair": ["X1", "X4"], "conditioning": ["X2", "X3", "X5"]},
+    {"pair": ["X1", "X5"], "conditioning": ["X3"]},
+    {"pair": ["X1", "X5"], "conditioning": ["X2", "X3"]},
+    {"pair": ["X1", "X5"], "conditioning": ["X2", "X3", "X4"]},
+    {"pair": ["X2", "X5"], "conditioning": ["X3"]},
+    {"pair": ["X2", "X5"], "conditioning": ["X1", "X3"]},
+    {"pair": ["X3", "X4"], "conditioning": ["X2"]},
+    {"pair": ["X3", "X4"], "conditioning": ["X1", "X2"]}
+  ],
+  "figure6_scope_counterexample": {
+    "nodes": ["A", "B", "C"],
+    "M1": [["A", "tail", "B", "tail"], ["A", "tail", "C", "tail"], ["B", "tail", "C", "tail"]],
+    "M2": [["A", "arrow", "B", "tail"], ["A", "arrow", "C", "tail"], ["B", "arrow", "C", "arrow"]],
+    "expected_markov_equivalent": true,
+    "expected_single_mark_changes_from_M1_preserving_ancestrality": 0,
+    "independent_reason": "Both skeletons are complete and both graphs are ancestral, so both are maximal with no separation. Every vertex of M1 retains another incident undirected edge after one arrowhead addition, violating the ancestral undirected-endpoint condition. M1 is outside the no-selection LEG API domain."
+  },
+  "bidirected_spouse_shorthand_control": {
+    "nodes": ["A", "B"],
+    "bidirected": [["A", "arrow", "B", "arrow"]],
+    "orientations": [[["A", "tail", "B", "arrow"]], [["A", "arrow", "B", "tail"]]],
+    "expected_all_markov_equivalent": true,
+    "expected_original_spouse_sets_equal": false,
+    "interpretation": "In the original bidirected graph Sp(A)={B} and Sp(B)={A}. The prose shorthand after Lemma 2 is valid only after removing the mutual endpoints or after orienting the candidate edge. Lemma 2 itself starts with A->B."
+  }
+}

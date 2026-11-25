@@ -1,0 +1,32 @@
+{
+  "citation": "Shpitser and Pearl (2006), Identification of Joint Interventional Distributions in Recursive Semi-Markovian Causal Models, AAAI-06, Figure 1 and the worked example on page 1224",
+  "source_url": "https://cdn.aaai.org/AAAI/2006/AAAI06-191.pdf",
+  "source_sha256": "33b1faab38522381de79c8a92cbdcd03f25336bd43ba917cb1677634062929bc",
+  "proceedings_pages": [1219, 1226],
+  "figure": "1",
+  "node_order_status": "repository order follows the displayed upper path before the lower path; the paper fixes a topological order only for formula derivation, not serialization",
+  "nodes": ["W1", "X", "Y1", "W2", "Y2"],
+  "bidirected": [["W1", "Y1"], ["W1", "W2"], ["W1", "Y2"], ["X", "W2"]],
+  "query": {
+    "outcomes": ["Y1", "Y2"],
+    "interventions": ["X"]
+  },
+  "panels": {
+    "a": {
+      "directed": [["W1", "X"], ["X", "Y1"], ["W2", "Y2"]],
+      "reported_status": "identified",
+      "reported_formula": "sum_w2 P(y2|w2)P(w2) sum_w1 P(y1|x,w1)P(w1)",
+      "adjudicated_status": "confirmed by the classical ID recursion and an independent finite semi-Markovian SCM evaluation"
+    },
+    "b": {
+      "directed": [["W1", "X"], ["X", "Y1"], ["W1", "W2"], ["W2", "Y2"]],
+      "reported_status": "not identified",
+      "reported_hedge": "remove W1->X from the outer edge subgraph, then remove X for the inner forest",
+      "expected_inner_vertices": ["W1", "Y1", "W2", "Y2"],
+      "expected_outer_vertices": ["W1", "X", "Y1", "W2", "Y2"],
+      "expected_roots": ["Y1", "Y2"],
+      "expected_fixing_sequence": [],
+      "adjudicated_status": "confirmed by the exact-query reachable-closure characterization"
+    }
+  }
+}

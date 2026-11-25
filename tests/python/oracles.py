@@ -980,3 +980,87 @@ def directed_edge_visibility_witness_by_simple_paths(
 
     paths = directed_edge_visibility_paths_by_simple_paths(nodes, edges, source, target)
     return paths[0] if paths else None
+
+
+def latent_projection_by_simple_edge_paths(
+    nodes: tuple[str, ...],
+    edges: tuple[MixedEdgeAtom, ...],
+    retained: Iterable[str],
+) -> tuple[
+    tuple[str, ...],
+    frozenset[tuple[str, str]],
+    frozenset[tuple[str, str]],
+]:
+    """Literal Definition A.2 oracle over vertex-simple edge-atom paths."""
+
+    retained_set = frozenset(retained)
+    retained_nodes = tuple(node for node in nodes if node in retained_set)
+    latent = frozenset(nodes) - retained_set
+    positions = {node: index for index, node in enumerate(nodes)}
+    adjacency: dict[str, list[tuple[str, bool, bool]]] = {
+        node: [] for node in nodes
+    }
+    for first, arrow_first, second, arrow_second in edges:
+        adjacency[first].append((second, arrow_first, arrow_second))
+        adjacency[second].append((first, arrow_second, arrow_first))
+
+    def has_directed_path(source: str, target: str) -> bool:
+        def visit(current: str, seen: frozenset[str]) -> bool:
+            for neighbor, arrow_current, arrow_neighbor in adjacency[current]:
+                if arrow_current or not arrow_neighbor or neighbor in seen:
+                    continue
+                if neighbor == target:
+                    return True
+                if neighbor in latent and visit(
+                    neighbor, seen | frozenset({neighbor})
+                ):
+                    return True
+            return False
+
+        return visit(source, frozenset({source}))
+
+    def has_bidirected_path(left: str, right: str) -> bool:
+        def visit(
+            current: str,
+            incoming_arrow: bool | None,
+            seen: frozenset[str],
+        ) -> bool:
+            for neighbor, arrow_current, arrow_neighbor in adjacency[current]:
+                if neighbor in seen:
+                    continue
+                if incoming_arrow is None:
+                    if not arrow_current:
+                        continue
+                elif incoming_arrow and arrow_current:
+                    continue
+                if neighbor == right:
+                    if arrow_neighbor:
+                        return True
+                    continue
+                if neighbor in latent and visit(
+                    neighbor,
+                    arrow_neighbor,
+                    seen | frozenset({neighbor}),
+                ):
+                    return True
+            return False
+
+        return visit(left, None, frozenset({left}))
+
+    directed = frozenset(
+        (source, target)
+        for source in retained_nodes
+        for target in retained_nodes
+        if source != target and has_directed_path(source, target)
+    )
+    bidirected = frozenset(
+        (left, right)
+        for left, right in itertools.combinations(retained_nodes, 2)
+        if has_bidirected_path(left, right)
+    )
+    return retained_nodes, directed, frozenset(
+        (left, right)
+        if positions[left] < positions[right]
+        else (right, left)
+        for left, right in bidirected
+    )

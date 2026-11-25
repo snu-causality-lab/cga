@@ -1,0 +1,128 @@
+{
+  "source": {
+    "title": "Unified Covariate Adjustment for Causal Inference",
+    "authors": [
+      "Yonghan Jung",
+      "Jin Tian",
+      "Elias Bareinboim"
+    ],
+    "venue": "NeurIPS 2024",
+    "doi": "10.52202/079017-0208",
+    "official_pdf": "https://proceedings.neurips.cc/paper_files/paper/2024/file/0c4bc137edaf0eb7f66a87275a8be706-Paper-Conference.pdf",
+    "official_pdf_sha256": "1c9bc6f603047b80443d4eff421810a19390cf152d68fd97ad507f3eec5e81ab",
+    "relevant_locations": [
+      "Definition 1 and Equation (1), page 4",
+      "Examples 1 and 2, pages 4-5",
+      "Algorithm 1, Equation (4), and Proposition 1, page 5"
+    ]
+  },
+  "scope": {
+    "operation": "corrected singleton Tian-to-UCA representation",
+    "criterion": "ch_G(X) intersect district_G(X) is empty",
+    "not_claimed": [
+      "a general ID-to-UCA compiler",
+      "a UCA estimator",
+      "automatic nuisance learning",
+      "double robustness or confidence intervals"
+    ]
+  },
+  "paper_reported": {
+    "algorithm_1_line_4_5_branch": "choose the next outside/inside-S_X sequence from whether C_(i-1) is a subset of S_X",
+    "algorithm_1_line_8": "m <- i",
+    "example_1_number_of_pre_outcome_blocks": 2,
+    "example_2_number_of_pre_outcome_blocks": 3
+  },
+  "independent_adjudication": {
+    "status": "paper pseudocode requires correction",
+    "line_8_correction": "m <- i - 1",
+    "block_correction": "after the prefix-through-X block and its immediately following S_X run, partition the remaining pre-Y vertices into maximal consecutive runs by S_X membership",
+    "line_8_reason": "i starts at 2 and is incremented after every newly assigned C_i, so it is one past the last pre-outcome block when the loop exits",
+    "branch_reason": "C_1 may mix predecessors outside S_X with X and successors inside S_X; testing C_1 subset S_X can therefore select the wrong next run",
+    "literal_printed_status": "nontermination_on_front_door",
+    "front_door_line8_only_m_after_branch_correction": 3,
+    "front_door_corrected_m": 2,
+    "verma_line8_only_m": 4,
+    "verma_corrected_m": 3
+  },
+  "cases": [
+    {
+      "name": "front_door_figure_1a",
+      "nodes": ["C", "X", "Z", "Y"],
+      "directed": [
+        ["C", "X"],
+        ["C", "Z"],
+        ["C", "Y"],
+        ["X", "Z"],
+        ["Z", "Y"]
+      ],
+      "bidirected": [["X", "Y"]],
+      "treatment": "X",
+      "outcome": "Y",
+      "variable_order": ["C", "X", "Z", "Y"],
+      "treatment_district": ["X", "Y"],
+      "expected_factors": [
+        {
+          "variables": ["C", "X"],
+          "conditioned_on": [],
+          "fixed_conditioning": []
+        },
+        {
+          "variables": ["Z"],
+          "conditioned_on": ["C"],
+          "fixed_conditioning": ["X"]
+        },
+        {
+          "variables": ["Y"],
+          "conditioned_on": ["C", "X", "Z"],
+          "fixed_conditioning": []
+        }
+      ],
+      "paper_branch_mutant": {
+        "C1_subset_S_X": false,
+        "printed_next_membership": "inside_S_X",
+        "literal_effect": "no unassigned inside-S_X vertex remains before Y, so the printed loop cannot advance",
+        "correct_next_vertex": "Z",
+        "correct_next_membership": "outside_S_X"
+      }
+    },
+    {
+      "name": "verma_figure_1b",
+      "nodes": ["X", "A", "B", "Y"],
+      "directed": [
+        ["X", "A"],
+        ["A", "B"],
+        ["B", "Y"]
+      ],
+      "bidirected": [
+        ["X", "B"],
+        ["A", "Y"]
+      ],
+      "treatment": "X",
+      "outcome": "Y",
+      "variable_order": ["X", "A", "B", "Y"],
+      "treatment_district": ["X", "B"],
+      "expected_factors": [
+        {
+          "variables": ["X"],
+          "conditioned_on": [],
+          "fixed_conditioning": []
+        },
+        {
+          "variables": ["A"],
+          "conditioned_on": [],
+          "fixed_conditioning": ["X"]
+        },
+        {
+          "variables": ["B"],
+          "conditioned_on": ["X", "A"],
+          "fixed_conditioning": []
+        },
+        {
+          "variables": ["Y"],
+          "conditioned_on": ["A", "B"],
+          "fixed_conditioning": ["X"]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "paper": "Correa, Tian and Bareinboim, Generalized Adjustment Under Confounding and Selection Biases, AAAI 2018",
+  "source": "https://causalai.net/r29.pdf",
+  "source_sha256": "289dc901e60bbdf927d3bb76bc9f5fcf4869cdc128c4f83500062771f077e61f",
+  "location": "Technical report PDF page 4, Figure 2 and Equation (5)",
+  "nodes": ["X1", "X2", "Z1", "Z2", "Z3", "Y", "S"],
+  "directed": [["X2", "Z3"], ["Z3", "Z2"], ["Z2", "S"], ["X2", "Y"], ["Z1", "X1"], ["X1", "Y"]],
+  "bidirected": [["Z2", "Y"], ["Z1", "S"], ["Z1", "Y"]],
+  "reported": {"adjustment": ["Z1", "Z2", "Z3"], "population_adjustment": ["Z2"]},
+  "adjudication": "Definition 9 checked using literal paths and positive binary SCM factor-deletion truth; the bidirected Z1-S edge was read from the PDF raster. The reported pair is valid.",
+  "errata": "Algorithm 1 recursive-call arguments are corrected separately; printed Definition 8(b) needs proper noncausal paths for joint interventions."
+}

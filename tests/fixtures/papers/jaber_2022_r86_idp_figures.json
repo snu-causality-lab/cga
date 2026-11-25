@@ -1,0 +1,147 @@
+{
+  "citation": "Jaber, A., Ribeiro, A. H., Zhang, J., and Bareinboim, E. (2022). Causal Identification under Markov Equivalence: Calculus, Algorithm, and Completeness. Technical Report R-86, Algorithm 1.",
+  "primary_source": {
+    "sha256": "768cfc03e8a01abd3c99406f96ab896a7d6b2ea14620cebecebdc3727e777fca",
+    "page_count": 35,
+    "independently_read_pages": [4, 5, 6, 7, 8, 29, 30]
+  },
+  "related_primary_source": {
+    "citation": "Jaber, A., Zhang, J., and Bareinboim, E. (2019). Causal Identification under Markov Equivalence: Completeness Results. ICML 2019.",
+    "sha256": "a8b1e9121b148ec27c406f13ba996ac6272379e7608a18db70b94fa311bbcb6e",
+    "adjudication_note": "The 2019 Algorithm 1 uses possible children and proves termination by strict decreases at its lines 8 and 10; R-86 Algorithm 1 replaces that elimination rule with Proposition 2's possible descendants."
+  },
+  "figures": {
+    "2": {
+      "pdf_page": 4,
+      "nodes": ["X", "Y", "Z1", "Z2"],
+      "edges": [
+        ["X", "circle", "Z1", "circle"],
+        ["X", "circle", "Z2", "circle"],
+        ["Y", "circle", "Z1", "circle"],
+        ["Y", "circle", "Z2", "circle"],
+        ["Z1", "circle", "Z2", "circle"]
+      ],
+      "seed_mag": [
+        ["X", "tail", "Z1", "arrow"],
+        ["X", "tail", "Z2", "arrow"],
+        ["Y", "arrow", "Z1", "tail"],
+        ["Y", "arrow", "Z2", "tail"],
+        ["Z1", "tail", "Z2", "arrow"]
+      ],
+      "visible_directed_edges": [],
+      "rendered_image_edge_check": "The rendered figure has exactly five circle-circle adjacencies: X-Z1, X-Z2, Y-Z1, Y-Z2, and Z1-Z2; X-Y is absent.",
+      "queries": [
+        {
+          "outcomes": ["Y", "Z1", "Z2"],
+          "interventions": ["X"],
+          "reported_claim": "Observation 3 reports that the marginal effect P_x(y,z1,z2) is not identifiable by IDP.",
+          "independent_status": "not_identified"
+        }
+      ]
+    },
+    "3a": {
+      "pdf_page": 4,
+      "nodes": ["A", "X1", "X2", "W", "Z", "Y"],
+      "edges": [
+        ["A", "circle", "X1", "arrow"],
+        ["A", "circle", "W", "arrow"],
+        ["A", "tail", "Y", "arrow"],
+        ["X1", "arrow", "X2", "circle"],
+        ["X1", "circle", "W", "circle"],
+        ["X2", "circle", "W", "arrow"],
+        ["W", "tail", "Z", "arrow"],
+        ["Z", "tail", "Y", "arrow"]
+      ],
+      "seed_mag": [
+        ["A", "tail", "X1", "arrow"],
+        ["A", "tail", "W", "arrow"],
+        ["A", "tail", "Y", "arrow"],
+        ["X1", "arrow", "X2", "tail"],
+        ["X1", "tail", "W", "arrow"],
+        ["X2", "tail", "W", "arrow"],
+        ["W", "tail", "Z", "arrow"],
+        ["Z", "tail", "Y", "arrow"]
+      ],
+      "visible_directed_edges": [["W", "Z"], ["Z", "Y"]],
+      "rendered_image_edge_check": "The v glyphs occur only on W->Z and Z->Y. The long A->Y edge is directed but has no v glyph; X1-W is circle-circle.",
+      "queries": [
+        {
+          "outcomes": ["A", "Z", "Y"],
+          "interventions": ["X1", "X2", "W"],
+          "reported_claim": "Example 3 identifies P_{x1,x2,w}(y,z,a), simplified in the source to P(a) P(y,z|w,a).",
+          "independent_status": "identified"
+        }
+      ]
+    },
+    "4a": {
+      "pdf_page": 8,
+      "nodes": ["A", "B", "C", "D"],
+      "edges": [
+        ["A", "circle", "B", "arrow"],
+        ["B", "tail", "C", "arrow"],
+        ["B", "arrow", "D", "circle"],
+        ["C", "arrow", "D", "tail"]
+      ],
+      "seed_mag": [
+        ["A", "tail", "B", "arrow"],
+        ["B", "tail", "C", "arrow"],
+        ["B", "arrow", "D", "tail"],
+        ["C", "arrow", "D", "tail"]
+      ],
+      "visible_directed_edges": [["B", "C"]],
+      "rendered_image_edge_check": "The rendered panel is A o-> B <-o D with B->C marked v and D->C drawn with a plain tail at D and no v glyph.",
+      "queries": [
+        {
+          "outcomes": ["A", "C", "D"],
+          "interventions": ["B"],
+          "reported_claim": "Observation 1 identifies P_b(a,c,d), simplified in the source to P(a,d) P(c|b,d).",
+          "independent_status": "identified"
+        },
+        {
+          "outcomes": ["B", "C", "D"],
+          "interventions": ["A"],
+          "reported_claim": "Observation 2 reports that the marginal effect P_a(b,c,d) is not identifiable by IDP.",
+          "independent_status": "not_identified"
+        }
+      ]
+    },
+    "9": {
+      "pdf_page": 29,
+      "nodes": ["W", "X", "A", "B", "C", "Y"],
+      "edges": [
+        ["W", "circle", "X", "arrow"],
+        ["X", "tail", "A", "arrow"],
+        ["X", "arrow", "B", "arrow"],
+        ["A", "tail", "C", "arrow"],
+        ["B", "arrow", "C", "arrow"],
+        ["B", "tail", "Y", "arrow"],
+        ["C", "tail", "Y", "arrow"]
+      ],
+      "seed_mag": [
+        ["W", "tail", "X", "arrow"],
+        ["X", "tail", "A", "arrow"],
+        ["X", "arrow", "B", "arrow"],
+        ["A", "tail", "C", "arrow"],
+        ["B", "arrow", "C", "arrow"],
+        ["B", "tail", "Y", "arrow"],
+        ["C", "tail", "Y", "arrow"]
+      ],
+      "visible_directed_edges": [["X", "A"], ["A", "C"], ["B", "Y"], ["C", "Y"]],
+      "rendered_image_edge_check": "The rendered figure has W o-> X, X<->B, B<->C, and four v-marked directed edges X->A, A->C, B->Y, and C->Y.",
+      "queries": [
+        {
+          "outcomes": ["Y"],
+          "interventions": ["X"],
+          "reported_claim": "Appendix F applies R-86 Algorithm 1 to P_x(y), first stalls on line 6, then decomposes at line 9, and identifies the effect.",
+          "independent_status": "identified",
+          "required_first_region": {
+            "bucket": ["A"],
+            "left": ["A"],
+            "right": ["B", "C", "Y"],
+            "intersection": []
+          }
+        }
+      ]
+    }
+  }
+}

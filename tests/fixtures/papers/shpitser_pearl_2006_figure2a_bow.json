@@ -1,0 +1,20 @@
+{
+  "citation": "Shpitser and Pearl (2006), Identification of Joint Interventional Distributions in Recursive Semi-Markovian Causal Models, AAAI-06, Figure 2(a) and Theorem 2",
+  "source_url": "https://cdn.aaai.org/AAAI/2006/AAAI06-191.pdf",
+  "source_sha256": "33b1faab38522381de79c8a92cbdcd03f25336bd43ba917cb1677634062929bc",
+  "proceedings_page": 1221,
+  "figure": "2(a)",
+  "reported_claim": "P_x(Y) is not identifiable in the bow-arc graph",
+  "adjudicated_claim": "the inner district {Y} has reachable closure {X,Y}, giving an exact-query hedge rooted at Y",
+  "nodes": ["X", "Y"],
+  "directed": [["X", "Y"]],
+  "bidirected": [["X", "Y"]],
+  "query": {
+    "outcomes": ["Y"],
+    "interventions": ["X"]
+  },
+  "expected_inner_vertices": ["Y"],
+  "expected_outer_vertices": ["X", "Y"],
+  "expected_roots": ["Y"],
+  "expected_fixing_sequence": []
+}

@@ -1,0 +1,162 @@
+{
+  "citation": "Lee, Correa, and Bareinboim (2019/2020), General Identifiability with Arbitrary Surrogate Experiments, UAI, Figures 1 and 2",
+  "primary_source": {
+    "url": "https://proceedings.mlr.press/v115/lee20b/lee20b.pdf",
+    "sha256": "75d665fd7ee983159f4b62bb3e5bf285e362a3a6abcf6c0bf3370b022c7b0466",
+    "pdf_pages": [2, 3],
+    "finite_domain_assumption_pdf_page": 3
+  },
+  "revised_technical_report": {
+    "url": "https://causalai.net/r46.pdf",
+    "sha256": "e769d6419fb06c7448f0b652b68d127cf0570661c860f71c7b2c08c3e3ed2237"
+  },
+  "official_erratum": {
+    "url": "https://causalai.net/r46e.pdf",
+    "sha256": "1e3ccb69123c7648032a605f0c70c7ed482b8d2063f47244aa043bcfa7f830b7",
+    "scope": "The one-page R-46e erratum makes positivity of each available distribution explicit in Definition 4 and changes the thicket model construction; it does not mention or resolve the Figure 2 prose-caption conflict.",
+    "figure_2_correction_found": false,
+    "search_scope": "The official R-46e text and the revised R-46 report were searched for Figure 2, individual effects, caption, and correction language."
+  },
+  "fixture_scope": "Reported claims are provenance only. Adjudicated statuses use the strict-positive exact-local criterion of Kivva et al. (2022), not the original thicket construction.",
+  "figure_1": {
+    "pdf_page": 2,
+    "nodes": ["X1", "W", "X2", "Y"],
+    "common_directed": [["X1", "W"], ["W", "Y"], ["X2", "Y"]],
+    "common_bidirected": [["X1", "W"], ["X1", "X2"], ["X2", "Y"]],
+    "experiment_interventions": [["X1"], ["X2"]],
+    "query": {
+      "outcomes": ["Y"],
+      "interventions": ["X1", "X2"]
+    },
+    "reported_formula": "sum_w P_x2(y|w) P_x1(w)",
+    "adjudicated_kernel_formula": "sum_w P_x2(y|x1,w) P_x1(w)",
+    "formula_adjudication": "The repository preserves the full preceding-variable conditioning produced by the classical ID kernel. In this graph the reported expression is an equivalent simplification because Y is independent of X1 given W in the source graph under do(X2).",
+    "panels": {
+      "a": {
+        "added_bidirected": [],
+        "reported_status": "identified",
+        "adjudicated_status": "identified"
+      },
+      "b": {
+        "added_bidirected": [["W", "X2"]],
+        "reported_status": "identified",
+        "adjudicated_status": "identified"
+      },
+      "c": {
+        "added_bidirected": [["W", "Y"]],
+        "reported_status": "not_identified",
+        "adjudicated_status": "not_identified",
+        "expected_target_vertices": ["W", "Y"],
+        "expected_unresolved_district": ["W", "Y"],
+        "expected_failed_sources": [["X1"], ["X2"]]
+      },
+      "d": {
+        "added_bidirected": [["X1", "Y"]],
+        "reported_status": "not_identified",
+        "adjudicated_status": "not_identified",
+        "expected_target_vertices": ["W", "Y"],
+        "expected_unresolved_district": ["Y"],
+        "expected_failed_sources": [["X1"], ["X2"]]
+      }
+    }
+  },
+  "figure_2": {
+    "pdf_pages": [2, 3],
+    "nodes": ["X1", "X2", "Y1", "Y2"],
+    "common_directed": [["X1", "Y1"], ["X2", "Y2"]],
+    "common_bidirected": [
+      ["X1", "X2"],
+      ["X1", "Y1"],
+      ["X1", "Y2"],
+      ["X2", "Y1"],
+      ["X2", "Y2"],
+      ["Y1", "Y2"]
+    ],
+    "experiment_interventions": [["X1", "X2"]],
+    "reported_prose": {
+      "a": {
+        "P_x1(Y1)": "identified",
+        "P_x2(Y2)": "identified"
+      },
+      "b": {
+        "P_x1(Y1)": "not_identified",
+        "P_x2(Y2)": "not_identified"
+      },
+      "c": {
+        "P_x1(Y1)": "not_identified",
+        "P_x2(Y2)": "not_identified"
+      },
+      "wording": "The prose says the individual effects are not identifiable in panels b and c."
+    },
+    "reported_caption": {
+      "a": {
+        "P_x1(Y1)": "identified",
+        "P_x2(Y2)": "identified",
+        "P_x1(Y2)": "not_identified",
+        "P_x2(Y1)": "not_identified"
+      },
+      "b": {
+        "P_x1(Y1)": "identified",
+        "P_x2(Y2)": "not_identified",
+        "P_x1(Y2)": "not_identified",
+        "P_x2(Y1)": "not_identified"
+      },
+      "c": {
+        "P_x1(Y1)": "identified",
+        "P_x2(Y2)": "not_identified",
+        "P_x1(Y2)": "not_identified",
+        "P_x2(Y1)": "not_identified"
+      }
+    },
+    "panels": {
+      "a": {
+        "added_directed": []
+      },
+      "b": {
+        "added_directed": [["Y1", "Y2"]]
+      },
+      "c": {
+        "added_directed": [["X1", "Y2"]]
+      }
+    },
+    "queries": {
+      "P_x1(Y1)": {
+        "outcomes": ["Y1"],
+        "interventions": ["X1"],
+        "adjudicated_status": {
+          "a": "identified",
+          "b": "identified",
+          "c": "identified"
+        }
+      },
+      "P_x2(Y2)": {
+        "outcomes": ["Y2"],
+        "interventions": ["X2"],
+        "adjudicated_status": {
+          "a": "identified",
+          "b": "not_identified",
+          "c": "not_identified"
+        }
+      },
+      "P_x1(Y2)": {
+        "outcomes": ["Y2"],
+        "interventions": ["X1"],
+        "adjudicated_status": {
+          "a": "not_identified",
+          "b": "not_identified",
+          "c": "not_identified"
+        }
+      },
+      "P_x2(Y1)": {
+        "outcomes": ["Y1"],
+        "interventions": ["X2"],
+        "adjudicated_status": {
+          "a": "not_identified",
+          "b": "not_identified",
+          "c": "not_identified"
+        }
+      }
+    },
+    "independent_resolution": "The exact-local oracle agrees with the caption: P_x1(Y1) remains identified in panels b and c."
+  }
+}

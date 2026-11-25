@@ -1,0 +1,506 @@
+{
+  "sources": {
+    "laplante2024": {
+      "url": "https://proceedings.mlr.press/v238/laplante24a/laplante24a.pdf",
+      "pdf_sha256": "6c33fed89a57c7e1ef0d4fa5f031c63c099a49dc0037249d07846c5353423b96",
+      "source": "PMLR 238 proceedings PDF including supplement",
+      "reviewed": "Definitions 1,2,7; Theorems 3,5(a),9,10; Examples 1-4,6"
+    },
+    "perkovic2020": {
+      "url": "https://proceedings.mlr.press/v124/perkovic20a/perkovic20a.pdf",
+      "pdf_sha256": "1681bb9f4712bca5df2e77ab1a01e2e9e6671d644186eb8b2a2a5be8c3b565a5",
+      "source": "PMLR 124 proceedings PDF",
+      "reviewed": "Proposition 3.2; PCO Algorithm 1; Theorem 3.6; Examples 3.8 and 3.9"
+    },
+    "guo2021": {
+      "url": "https://proceedings.mlr.press/v130/guo21c/guo21c.pdf",
+      "pdf_sha256": "f1b8e4363617e68b173c228c9c1ad4ff6649c07ec5b32005182c0cd7f4e213bc",
+      "source": "PMLR 130 proceedings PDF",
+      "reviewed": "Theorems 1-4; Algorithm 1; Example 1, Figure 2"
+    },
+    "guo2021_supp": {
+      "url": "https://proceedings.mlr.press/v130/guo21c/guo21c-supp.pdf",
+      "pdf_sha256": "acaa25585cb6aa4fd20c8d63995ddda4b4cca75bbe19aca92a68f6015db272b2",
+      "source": "PMLR supplementary PDF",
+      "reviewed": "Bucket definitions; MPDAG Algorithm 1; proof strategy of Theorem 2"
+    }
+  },
+  "fixtures": {
+    "laplante_fig2a": {
+      "source": "laplante2024",
+      "figure": "2a",
+      "pdf_page": 6,
+      "nodes": [
+        "X",
+        "Y",
+        "V1",
+        "V2",
+        "V3",
+        "V4"
+      ],
+      "directed": [
+        [
+          "V3",
+          "X"
+        ],
+        [
+          "V1",
+          "X"
+        ],
+        [
+          "V1",
+          "Y"
+        ],
+        [
+          "V2",
+          "X"
+        ],
+        [
+          "V2",
+          "Y"
+        ],
+        [
+          "V4",
+          "Y"
+        ],
+        [
+          "X",
+          "Y"
+        ]
+      ],
+      "undirected": [
+        [
+          "V3",
+          "V1"
+        ],
+        [
+          "V1",
+          "V2"
+        ]
+      ],
+      "reported": [
+        {
+          "example": 1,
+          "x": [
+            "X"
+          ],
+          "y": [
+            "Y"
+          ],
+          "z": [
+            "V1",
+            "V2"
+          ],
+          "s": [],
+          "valid": true
+        },
+        {
+          "example": 2,
+          "x": [
+            "X"
+          ],
+          "y": [
+            "Y"
+          ],
+          "z": [
+            "V1"
+          ],
+          "s": [],
+          "valid": false
+        },
+        {
+          "example": 2,
+          "x": [
+            "X"
+          ],
+          "y": [
+            "Y"
+          ],
+          "z": [
+            "V1"
+          ],
+          "s": [
+            "V2"
+          ],
+          "valid": true
+        }
+      ]
+    },
+    "laplante_fig2b": {
+      "source": "laplante2024",
+      "figure": "2b",
+      "pdf_page": 6,
+      "nodes": [
+        "X1",
+        "W",
+        "S",
+        "X2",
+        "Y",
+        "Z",
+        "L"
+      ],
+      "directed": [
+        [
+          "Z",
+          "X1"
+        ],
+        [
+          "X1",
+          "W"
+        ],
+        [
+          "W",
+          "S"
+        ],
+        [
+          "S",
+          "X2"
+        ],
+        [
+          "X2",
+          "Y"
+        ],
+        [
+          "X1",
+          "Y"
+        ],
+        [
+          "L",
+          "S"
+        ],
+        [
+          "L",
+          "Y"
+        ]
+      ],
+      "undirected": [],
+      "reported": [
+        {
+          "example": 3,
+          "x": [
+            "X1",
+            "X2"
+          ],
+          "y": [
+            "Y"
+          ],
+          "z": [
+            "Z"
+          ],
+          "s": [
+            "S",
+            "W"
+          ],
+          "valid": true
+        }
+      ]
+    },
+    "laplante_fig2c": {
+      "source": "laplante2024",
+      "figure": "2c",
+      "pdf_page": 6,
+      "nodes": [
+        "X",
+        "V1",
+        "V2",
+        "V3",
+        "Y"
+      ],
+      "directed": [
+        [
+          "X",
+          "Y"
+        ],
+        [
+          "V1",
+          "V2"
+        ],
+        [
+          "V3",
+          "V2"
+        ],
+        [
+          "V2",
+          "Y"
+        ]
+      ],
+      "undirected": [
+        [
+          "X",
+          "V1"
+        ]
+      ],
+      "reported": [
+        {
+          "example": 4,
+          "x": [
+            "X"
+          ],
+          "y": [
+            "Y"
+          ],
+          "z": [
+            "V3"
+          ],
+          "no_adjustment": true
+        }
+      ]
+    },
+    "perkovic_fig4a": {
+      "source": "perkovic2020",
+      "figure": "4a",
+      "pdf_page": 5,
+      "nodes": [
+        "X",
+        "V1",
+        "Y1",
+        "Y2"
+      ],
+      "directed": [
+        [
+          "Y1",
+          "X"
+        ],
+        [
+          "X",
+          "Y2"
+        ],
+        [
+          "Y1",
+          "Y2"
+        ]
+      ],
+      "undirected": [
+        [
+          "V1",
+          "X"
+        ],
+        [
+          "V1",
+          "Y1"
+        ]
+      ],
+      "reported": {
+        "example": "3.8",
+        "x": [
+          "X"
+        ],
+        "y": [
+          "Y1",
+          "Y2"
+        ],
+        "identified": true,
+        "buckets": [
+          [
+            "Y1"
+          ],
+          [
+            "Y2"
+          ]
+        ],
+        "kernels": [
+          {
+            "variables": [
+              "Y1"
+            ],
+            "given": []
+          },
+          {
+            "variables": [
+              "Y2"
+            ],
+            "given": [
+              "X",
+              "Y1"
+            ]
+          }
+        ]
+      }
+    },
+    "guo_fig2a": {
+      "source": "guo2021",
+      "figure": "2a-d",
+      "pdf_page": 2,
+      "nodes": [
+        "A",
+        "Y",
+        "V1",
+        "V2"
+      ],
+      "directed": [
+        [
+          "A",
+          "Y"
+        ]
+      ],
+      "undirected": [
+        [
+          "V2",
+          "V1"
+        ],
+        [
+          "V2",
+          "A"
+        ],
+        [
+          "A",
+          "V1"
+        ],
+        [
+          "V1",
+          "Y"
+        ]
+      ],
+      "reported": {
+        "example": 1,
+        "x": [
+          "A"
+        ],
+        "y": [
+          "Y"
+        ],
+        "dag_count": 7,
+        "distinct_effect_count": 3
+      }
+    },
+    "laplante_fig3": {
+      "source": "laplante2024",
+      "figure": "3",
+      "pdf_page": 8,
+      "nodes": [
+        "X",
+        "Y",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5"
+      ],
+      "endpoint_edges": [
+        [
+          "X",
+          "tail",
+          "Y",
+          "arrow"
+        ],
+        [
+          "V1",
+          "tail",
+          "Y",
+          "arrow"
+        ],
+        [
+          "V2",
+          "tail",
+          "Y",
+          "arrow"
+        ],
+        [
+          "V4",
+          "circle",
+          "Y",
+          "arrow"
+        ],
+        [
+          "V1",
+          "circle",
+          "X",
+          "arrow"
+        ],
+        [
+          "V2",
+          "circle",
+          "X",
+          "arrow"
+        ],
+        [
+          "V1",
+          "circle",
+          "V2",
+          "circle"
+        ],
+        [
+          "V3",
+          "arrow",
+          "X",
+          "arrow"
+        ],
+        [
+          "V1",
+          "circle",
+          "V3",
+          "arrow"
+        ],
+        [
+          "V5",
+          "circle",
+          "V3",
+          "arrow"
+        ]
+      ],
+      "representative_directed": [
+        [
+          "X",
+          "Y"
+        ],
+        [
+          "V1",
+          "Y"
+        ],
+        [
+          "V2",
+          "Y"
+        ],
+        [
+          "V4",
+          "Y"
+        ],
+        [
+          "V1",
+          "X"
+        ],
+        [
+          "V2",
+          "X"
+        ],
+        [
+          "V1",
+          "V2"
+        ],
+        [
+          "V1",
+          "V3"
+        ],
+        [
+          "V5",
+          "V3"
+        ]
+      ],
+      "representative_bidirected": [
+        [
+          "V3",
+          "X"
+        ]
+      ],
+      "reported": {
+        "example": 6,
+        "x": [
+          "X"
+        ],
+        "y": [
+          "Y"
+        ],
+        "z": [
+          "V1"
+        ],
+        "s": [
+          "V2",
+          "V4"
+        ],
+        "valid": true
+      },
+      "transcription_notes": "Visually read pinned Figure 3 at 300dpi on 2026-11-17 KST. V1->Y and V2->Y have tails, not circles; source circles occur separately at V1/V2 on the X edges and on V1--V2. Proof view must be built by public MAG validation and CausalPAG.from_mag, with exact endpoint roundtrip."
+    }
+  },
+  "transcription": "Graphs transcribed from rendered pinned PDF pages on 2026-11-17 KST; reported expectations kept separate from independent DAG and rational controls."
+}

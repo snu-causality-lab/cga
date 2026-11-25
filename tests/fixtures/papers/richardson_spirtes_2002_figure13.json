@@ -1,0 +1,27 @@
+{
+  "citation": "Richardson and Spirtes (2002), Ancestral Graph Markov Models, Figure 13",
+  "doi": "10.1214/aos/1031689015",
+  "source_url": "https://www.cmu.edu/dietrich/philosophy/docs/spirtes/annals2002.pdf",
+  "page": 994,
+  "figure": "13",
+  "reported_claim": "panel (i) is a nonmaximal ancestral graph and panel (ii) is its maximal extension",
+  "adjudicated_claim": "the drawn panels were independently transcribed and checked against the all-conditioning-sets oracle",
+  "errata_url": "https://sites.stat.washington.edu/tsr/website/documents/2002/annals-2002-errata.txt",
+  "erratum_status": "not amended by the official errata",
+  "nodes": ["a", "b", "c", "d", "e", "f"],
+  "edges": [
+    ["a", "tail", "c", "arrow"],
+    ["b", "tail", "d", "arrow"],
+    ["c", "tail", "e", "arrow"],
+    ["d", "tail", "f", "arrow"],
+    ["a", "arrow", "b", "arrow"],
+    ["a", "arrow", "d", "arrow"],
+    ["b", "arrow", "c", "arrow"],
+    ["c", "arrow", "f", "arrow"],
+    ["d", "arrow", "e", "arrow"]
+  ],
+  "maximal_extension_added_edges": [
+    ["c", "arrow", "d", "arrow"],
+    ["e", "arrow", "f", "arrow"]
+  ]
+}

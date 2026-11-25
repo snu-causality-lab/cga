@@ -1,0 +1,43 @@
+{
+  "citation": "Zheng Li et al. (2025). Local Learning for Covariate Selection in Nonparametric Causal Effect Estimation with Latent Variables. NeurIPS 38.",
+  "source_url": "https://proceedings.neurips.cc/paper_files/paper/2025/file/b43a0e8a35b1c044b18cd843b9771915-Paper-Conference.pdf",
+  "source_sha256": "cc011f2e5855e590e71d50b23288cffb592ba3b8ebc6bd4d6eeeb981464c1fa1",
+  "upstream_commit": "213c04d69136f171c8fb6c8323bf8e205e4c1d3a",
+  "upstream_replay_basis": "Separate 2026-09-29 server review, Slurm job 89889; upstream code is not executed by these library tests.",
+  "status": "Repository-proposed corrections, not a publisher-issued erratum. Graphs below are review counterexamples, not figures from the paper.",
+  "cases": [
+    {
+      "name": "empty_witness_set",
+      "source_location": "Theorems 3-5, printed pp.6-7; Algorithm 1 witness loop",
+      "nodes": ["X", "W", "Y"],
+      "directed": [["W", "Y"]],
+      "bidirected": [],
+      "printed_rules_apply": false,
+      "upstream_outcome": "zero",
+      "corrected_status": "zero",
+      "adjudication": "Printed R2(i) unnecessarily requires a witness in MB(X); the upstream implementation separately handles this case."
+    },
+    {
+      "name": "empty_adjustment_set",
+      "source_location": "Upstream LSAS.py lines 189-212, conset_size starts at 1",
+      "nodes": ["S", "X", "Y"],
+      "directed": [["S", "X"], ["X", "Y"]],
+      "bidirected": [],
+      "printed_rules_apply": true,
+      "upstream_outcome": "unresolved",
+      "corrected_status": "adjustment",
+      "adjudication": "R1 accepts the empty adjustment set, which the upstream implementation never searches."
+    },
+    {
+      "name": "compelled_shielded_collider_without_discriminating_path",
+      "source_location": "Appendix D.4 Scenario 2 Case 2, printed p.22",
+      "nodes": ["S", "B", "X", "Y"],
+      "directed": [["S", "B"], ["B", "X"]],
+      "bidirected": [["B", "Y"], ["X", "Y"]],
+      "printed_rules_apply": true,
+      "upstream_outcome": "not_replayed_here",
+      "corrected_status": "zero",
+      "adjudication": "R2(ii) succeeds. The false proof intermediate assertion is not a counterexample to the corrected selection rules."
+    }
+  ]
+}

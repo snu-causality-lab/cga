@@ -1,0 +1,31 @@
+{
+  "source": "https://causalai.net/r38.pdf",
+  "sha256": "035d09019e49a061a2e1a2e4279bde2745ebc79dced42f0ba341225d8be75a60",
+  "version": "Technical Report R-38, November 2018, AAAI 2019 paper and appendices",
+  "figures": {
+    "2a": {
+      "nodes": ["R", "Z", "W", "X", "Y", "S"],
+      "directed": [["R", "Z"], ["Z", "W"], ["Z", "X"], ["Z", "Y"], ["W", "S"], ["X", "Y"]],
+      "bidirected": [["Z", "S"]],
+      "population": ["Z"],
+      "reported": "Equation (9): sum_z P(y|x,z,S=1) P(z)",
+      "adjudication": "Positive formula checked against independent finite SCMs; individual Q[R] and Q[Z] need not be recovered."
+    },
+    "2b": {
+      "nodes": ["W2", "W1", "X", "Y", "S"],
+      "directed": [["W1", "W2"], ["W2", "X"], ["W2", "S"], ["X", "Y"]],
+      "bidirected": [["W1", "X"], ["W1", "Y"]],
+      "population": ["W2"],
+      "reported": "Recoverable with P(W2) or P(W1), beyond adjustment; Equation (23).",
+      "adjudication": "Solid W1->W2->X confirmed from a high-resolution rendering. Both external sources checked separately; absence of adjustment follows a literal-path oracle, not IDSB failure."
+    },
+    "3a": {
+      "nodes": ["V4", "V3", "V5", "V6", "V1", "V2", "X", "Y", "S"],
+      "directed": [["V4", "V3"], ["V3", "X"], ["V5", "V6"], ["V6", "Y"], ["V1", "V2"], ["V2", "X"], ["V2", "S"], ["X", "Y"]],
+      "bidirected": [["V4", "V5"], ["V5", "V6"], ["V3", "Y"], ["V3", "S"], ["V1", "X"], ["V1", "Y"]],
+      "population": ["V2", "V3", "V6"],
+      "reported": "Figures 3/4, Equations (15)-(22): RCE recovers Q[Y], external projection supplies P(V6).",
+      "adjudication": "Transcribed from rendered Figure 3(a), including solid V1->V2 and both bidirected V3--Y and V3--S. Exact replay is a server verification task."
+    }
+  }
+}

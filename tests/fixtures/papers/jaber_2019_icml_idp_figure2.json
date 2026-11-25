@@ -1,0 +1,43 @@
+{
+  "citation": "Jaber, A., Zhang, J., and Bareinboim, E. (2019). Causal Identification under Markov Equivalence: Completeness Results. ICML 2019, Figure 2 and Algorithm 1.",
+  "primary_source": {
+    "sha256": "a8b1e9121b148ec27c406f13ba996ac6272379e7608a18db70b94fa311bbcb6e",
+    "independently_read_pages": [4, 5, 6, 7]
+  },
+  "nodes": ["X1", "X2", "Y1", "Y2", "Y3", "Y4", "Y5"],
+  "edges": [
+    ["X1", "arrow", "X2", "arrow"],
+    ["X1", "tail", "Y1", "arrow"],
+    ["X1", "arrow", "Y3", "arrow"],
+    ["X2", "arrow", "Y1", "arrow"],
+    ["X2", "tail", "Y2", "arrow"],
+    ["Y1", "arrow", "Y5", "circle"],
+    ["Y2", "arrow", "Y3", "arrow"],
+    ["Y3", "arrow", "Y4", "circle"],
+    ["Y4", "circle", "Y5", "circle"]
+  ],
+  "seed_mag": [
+    ["X1", "arrow", "X2", "arrow"],
+    ["X1", "tail", "Y1", "arrow"],
+    ["X1", "arrow", "Y3", "arrow"],
+    ["X2", "arrow", "Y1", "arrow"],
+    ["X2", "tail", "Y2", "arrow"],
+    ["Y1", "arrow", "Y5", "tail"],
+    ["Y2", "arrow", "Y3", "arrow"],
+    ["Y3", "arrow", "Y4", "tail"],
+    ["Y4", "tail", "Y5", "arrow"]
+  ],
+  "rendered_image_edge_check": "The lower chain is Y3 <-o Y4 o-o Y5 o-> Y1; X1->Y1 and X2->Y2 are the two visibly directed edges.",
+  "query": {
+    "outcomes": ["Y1", "Y2", "Y3", "Y4", "Y5"],
+    "interventions": ["X1", "X2"],
+    "reported_claim": "The Figure 2 marginal is identified by Algorithm 1.",
+    "independent_status": "identified",
+    "required_first_region": {
+      "bucket": ["Y1"],
+      "left": ["Y1", "Y4", "Y5"],
+      "right": ["Y2", "Y3", "Y4", "Y5"],
+      "intersection": ["Y4", "Y5"]
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "sources": {
+    "henckel": {"url": "https://arxiv.org/abs/1907.02435v2", "sha256": "052ee8dc002973edba7cf552d9bb5f784ecfefd8d1beab7bf36172c0e0451961", "version": "arXiv v2, December 2020; not the 2022 journal pagination"},
+    "witte": {"url": "https://jmlr.org/papers/volume21/20-175/20-175.pdf", "sha256": "76b259d4937132f22b76899a81cdbd0a37299276eaddc05453b9b62adc160733", "survey_copy_sha256": "e57d3a8bfce9bcdbeb0331e5dec42a190892a2f27fae015c8ad6cb1eaddc2f79", "version": "JMLR 21(246), 2020; both copies visually inspected"}
+  },
+  "transcription": "Edges and boxed sets transcribed from rendered primary PDF pages, not production output. Disputed printed claims are retained separately below.",
+  "henckel_figures": [
+    {"figure": "1", "page": 4, "nodes": ["V1", "V2", "V3", "V4", "V5", "V6"], "edges": [["V1", "V2"], ["V1", "V4"], ["V2", "V5"], ["V3", "V5"], ["V4", "V5"], ["V5", "V6"], ["V4", "V6"]], "x": "V4", "y": "V6", "o_set": ["V2", "V3"]},
+    {"figure": "2a", "page": 8, "nodes": ["A", "B", "C", "D", "X", "Y"], "edges": [["A", "X"], ["B", "X"], ["B", "Y"], ["C", "Y"], ["X", "D"], ["X", "Y"]], "x": "X", "y": "Y", "o_set": ["B", "C"]},
+    {"figure": "2b", "page": 8, "nodes": ["A", "B", "C", "D", "X", "Y"], "edges": [["A", "B"], ["C", "B"], ["A", "X"], ["D", "X"], ["C", "Y"], ["X", "Y"]], "x": "X", "y": "Y", "o_set": ["C"]},
+    {"figure": "5", "page": 19, "nodes": ["P", "O", "X", "M", "Y"], "edges": [["P", "X"], ["P", "M"], ["O", "M"], ["O", "Y"], ["X", "M"], ["M", "Y"]], "x": "X", "y": "Y", "o_set": ["P", "O"]},
+    {"figure": "7", "page": 29, "nodes": ["V", "A1", "A2", "R", "X", "M", "Y", "D", "B1", "B2", "F"], "edges": [["V", "X"], ["A1", "X"], ["A1", "A2"], ["A2", "Y"], ["R", "Y"], ["X", "M"], ["M", "Y"], ["X", "D"], ["B1", "X"], ["B2", "B1"], ["B2", "Y"], ["Y", "F"]], "x": "X", "y": "Y", "o_set": ["A2", "R", "B2"], "o_set_basis": "Definition 3.12 applied to visually transcribed graph; Example A.6 gives validity restrictions, not this O-set explicitly"}
+  ],
+  "witte_figure2": [
+    {"panel": "A", "nodes": ["V1", "V2", "X", "Y"], "edges": [["V1", "X"], ["V2", "X"], ["V2", "Y"], ["X", "Y"]], "x": ["X"], "y": ["Y"], "o_set": ["V2"], "retained": ["V1", "V2", "X", "Y"], "projected_directed": [["V1", "X"], ["V2", "X"], ["V2", "Y"], ["X", "Y"]], "projected_bidirected": []},
+    {"panel": "B", "nodes": ["X1", "X2", "V1", "V2", "Y"], "edges": [["X1", "V1"], ["V2", "V1"], ["V2", "Y"], ["Y", "X2"]], "x": ["X1", "X2"], "y": ["Y"], "reason": "outcomes_not_descendants", "printed_boxed_o_set": ["V2"], "printed_page9_claim": "valid adjustment sets exist in all panels except F", "adjudicated": "B also has no valid adjustment set: direct noncausal path X2 <- Y cannot be blocked; the descendant assumption of Proposition 6 fails.", "retained": ["X1", "X2", "V1", "V2", "Y"], "projected_directed": [["X1", "V1"], ["V2", "V1"], ["V2", "Y"], ["Y", "X2"]], "projected_bidirected": []},
+    {"panel": "C", "nodes": ["V1", "V2", "V3", "V4", "X", "Y"], "edges": [["V1", "X"], ["V2", "X"], ["V2", "V3"], ["X", "V3"], ["V3", "Y"], ["V4", "Y"]], "x": ["X"], "y": ["Y"], "o_set": ["V2", "V4"], "retained": ["V1", "V2", "V4", "X", "Y"], "projected_directed": [["V1", "X"], ["V2", "X"], ["V2", "Y"], ["X", "Y"], ["V4", "Y"]], "projected_bidirected": []},
+    {"panel": "D", "nodes": ["V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "X", "Y"], "edges": [["V1", "X"], ["V2", "X"], ["V2", "Y"], ["V4", "V5"], ["X", "V5"], ["V5", "Y"], ["V7", "Y"], ["X", "V3"], ["V5", "V6"], ["Y", "V8"]], "x": ["X"], "y": ["Y"], "o_set": ["V2", "V4", "V7"], "retained": ["V1", "V2", "V3", "V4", "V7", "X", "Y"], "projected_directed": [["V1", "X"], ["V2", "X"], ["V2", "Y"], ["V4", "Y"], ["X", "Y"], ["V7", "Y"], ["X", "V3"]], "projected_bidirected": []},
+    {"panel": "E", "nodes": ["X", "VE", "Y1", "Y2"], "edges": [["X", "VE"], ["VE", "Y1"], ["VE", "Y2"]], "x": ["X"], "y": ["Y1", "Y2"], "o_set": [], "retained": ["X", "Y1", "Y2"], "projected_directed": [["X", "Y1"], ["X", "Y2"]], "projected_bidirected": [["Y1", "Y2"]]},
+    {"panel": "F", "nodes": ["V1", "X1", "V2", "X2", "Y"], "edges": [["V1", "X1"], ["X1", "V2"], ["X1", "X2"], ["V2", "X2"], ["V2", "Y"], ["X2", "Y"]], "x": ["X1", "X2"], "y": ["Y"], "reason": "no_valid_adjustment_set", "printed_boxed_o_set": ["V1"], "printed_extra_projected_edges": [["V1", "X2"], ["V1", "Y"]], "adjudicated": "Retain X1: paths through it cannot create projected arrows from V1 to X2 or Y. O is empty by Definition 1, although no valid adjustment set exists. The printed nonadjustability conclusion remains correct.", "retained": ["V1", "X1", "X2", "Y"], "projected_directed": [["V1", "X1"], ["X1", "X2"], ["X1", "Y"], ["X2", "Y"]], "projected_bidirected": [["X2", "Y"]]}
+  ],
+  "witte_figures1_and3": {
+    "nodes": ["AFF", "CDR", "SAN", "AIS", "APA", "ALN", "PER", "DET", "SUS", "FTW", "HOS", "EGC"],
+    "edges": [["AFF", "CDR"], ["SAN", "AFF"], ["AIS", "AFF"], ["SAN", "CDR"], ["SAN", "AIS"], ["AFF", "APA"], ["AFF", "ALN"], ["SAN", "APA"], ["SAN", "ALN"], ["ALN", "APA"], ["CDR", "DET"], ["ALN", "PER"], ["PER", "DET"], ["ALN", "DET"], ["ALN", "SUS"], ["ALN", "FTW"], ["AIS", "SUS"], ["AIS", "EGC"], ["SUS", "FTW"], ["FTW", "DET"], ["SUS", "HOS"], ["SUS", "EGC"], ["FTW", "EGC"], ["EGC", "HOS"]],
+    "o_set": ["AIS", "CDR"],
+    "retained": ["AFF", "CDR", "SAN", "AIS", "APA", "ALN", "DET"],
+    "projected_directed": [["AFF", "CDR"], ["SAN", "AFF"], ["AIS", "AFF"], ["SAN", "CDR"], ["SAN", "AIS"], ["AFF", "APA"], ["AFF", "ALN"], ["SAN", "APA"], ["SAN", "ALN"], ["ALN", "APA"], ["CDR", "DET"], ["ALN", "DET"], ["AIS", "DET"]]
+  }
+}

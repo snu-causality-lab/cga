@@ -1,0 +1,278 @@
+{
+  "source": {
+    "title": "Necessary and sufficient graphical conditions for optimal adjustment sets in causal graphical models with hidden variables",
+    "authors": "Jakob Runge",
+    "arxiv_version": "2102.10324v4",
+    "url": "https://arxiv.org/abs/2102.10324v4",
+    "location": "Supplement Appendix B.10, pp. 18-21, proof of Theorem 3, sufficiency (\"if\") half; both examined passages sit on p. 19. Pagination is that of the 41-page arXiv v4 PDF. Line numbers refer to the arXiv v4 LaTeX source Runge_Optimal_adjustment_sets_v5_neurips.tex, whose lines 1156-1267 are that subsection.",
+    "transcription": "Graphs constructed here, not transcribed from the paper. Case 1 refutes a published proof step with its hypotheses in force; case 2 refutes only a hypothesis-free reading; case 3 refutes an attempted repair, not a claim of the paper.",
+    "adjudication": "Each case was adjudicated against two independent implementations: this library for the O-set, Conditions (I) and (II) and the optimality verdict, and a separate definition-level implementation of m-separation and adjustment validity written from the published definitions. The two agree on every field recorded here.",
+    "scope": "These observations do not establish a counterexample to the statement of Theorem 3 or to the implementation. On every case the library verdict agrees with a separate evaluation of the graphical criterion; finite agreement does not prove its distributional equivalence. THE THREE CASES ARE NOT OF EQUAL FORCE: case 1 is a counterexample to a step with its hypotheses in force; case 2 refutes only a hypothesis-free reading of a step, since Condition (II) is false on that graph, and leaves open whether the step is complete on its own terms; case 3 refutes a repair one might attempt, not a claim of the paper."
+  },
+  "cases": [
+    {
+      "case": "condition-I-step",
+      "claim_status": "in_hypothesis_counterexample",
+      "defective_claim_lines": "1187-1190",
+      "reported": "In the branch where N-nodes exist, term (iii') = I(R;Y|BX) is said to be non-zero only if Z' contains a descendant of an N-node together with all nodes of one of its collider paths; the step concludes at line 1190 that term (iii') is zero.",
+      "adjudicated": "False as written. With Z = {U, U2} a valid adjustment set, B = O intersect Z is empty, so the conditioning set of term (iii') is {X} alone, and the path U2 <- V -> Y is open: V is a non-collider lying in O but on the A-side, so it is not conditioned on. No N-node plays any role in this open path. The supporting lemmas the step relies on are stated for conditioning sets containing all of O.",
+      "nodes": [
+        "X",
+        "Y",
+        "U",
+        "U2",
+        "V",
+        "W"
+      ],
+      "directed": [
+        [
+          "X",
+          "Y"
+        ],
+        [
+          "X",
+          "U"
+        ],
+        [
+          "V",
+          "U2"
+        ],
+        [
+          "V",
+          "Y"
+        ]
+      ],
+      "bidirected": [
+        [
+          "U",
+          "W"
+        ],
+        [
+          "W",
+          "Y"
+        ]
+      ],
+      "interventions": [
+        "X"
+      ],
+      "outcomes": [
+        "Y"
+      ],
+      "conditioned_on": [],
+      "o_set": [
+        "V",
+        "W"
+      ],
+      "parents": [
+        "V"
+      ],
+      "colliders": [
+        "W"
+      ],
+      "collider_parents": [],
+      "valid_ancestors": [
+        "V"
+      ],
+      "criterion_i": true,
+      "criterion_ii": true,
+      "graphical_optimality": true,
+      "witness_adjustment_set": [
+        "U",
+        "U2"
+      ],
+      "witness_adjustment_set_is_valid": true,
+      "failing_separation": {
+        "left": [
+          "Y"
+        ],
+        "right": [
+          "U",
+          "U2"
+        ],
+        "given": [
+          "X"
+        ],
+        "m_separated": false
+      },
+      "conclusion_survives_via": "With the subset witness A' = {V} one has Y m-separated from {U,U2} given {X,V}, so I(R;Y|BX) <= I(A';Y|BX) <= I(A;Y|BX) by the chain rule and non-negativity of conditional mutual information. That step is not in the paper.",
+      "hypotheses_of_the_step_in_force": true
+    },
+    {
+      "case": "condition-II-step-hypothesis-free-reading",
+      "claim_status": "hypothesis_free_counterexample_only",
+      "defective_claim_lines": "1199-1210",
+      "reported": "Read without its Condition (II) hypothesis, the Case (2) passage asserts that a node E outside the valid ancestors satisfies E m-separated from X given O minus {E}, hence E is not one of the nodes the condition must cover.",
+      "adjudicated": "That hypothesis-free reading is false: P is not in the valid ancestors {Q}, yet X is m-connected to P given O minus {P} = {C}. IMPORTANT LIMIT OF THIS WITNESS: Case (2) treats nodes whose Condition (II) witnesses are all of type 2, i.e. leaving E by an ARROWHEAD. P has no bidirected edge at all, so it has no type-2 witness; its path P -> C <-> Y leaves P by a tail (type 1) and its collider C is not in the valid ancestors, so it is not an admissible Condition (II) witness either. Condition (II) is therefore FALSE here and the library returns graphical_optimality false. This graph does NOT meet the hypotheses of Case (2) and is NOT a direct counterexample to it. The source invokes Condition (II) at line 1195 to establish the witness typology inherited by Case (2), lines 1199-1210. The absence of another explicit invocation inside that case would not establish that the hypothesis is unused. Whether Case (2) is complete on its own terms is not settled here.",
+      "source_context": {
+        "condition_ii_invocation_line": 1195,
+        "case_2_lines": "1199-1210",
+        "published_case_2_completeness": "not_determined"
+      },
+      "nodes": [
+        "X",
+        "Y",
+        "P",
+        "C",
+        "Q"
+      ],
+      "directed": [
+        [
+          "P",
+          "C"
+        ],
+        [
+          "Q",
+          "P"
+        ],
+        [
+          "Q",
+          "X"
+        ],
+        [
+          "X",
+          "Y"
+        ]
+      ],
+      "bidirected": [
+        [
+          "C",
+          "Y"
+        ]
+      ],
+      "interventions": [
+        "X"
+      ],
+      "outcomes": [
+        "Y"
+      ],
+      "conditioned_on": [],
+      "o_set": [
+        "C",
+        "P"
+      ],
+      "parents": [],
+      "colliders": [
+        "C"
+      ],
+      "collider_parents": [
+        "P"
+      ],
+      "valid_ancestors": [
+        "Q"
+      ],
+      "criterion_i": true,
+      "criterion_ii": false,
+      "graphical_optimality": false,
+      "failing_separation": {
+        "left": [
+          "X"
+        ],
+        "right": [
+          "P"
+        ],
+        "given": [
+          "C"
+        ],
+        "m_separated": false
+      },
+      "conclusion_survives_via": "The repair target is the statement that actually spends the hypothesis: Condition (II), Z valid, E in the E-set and E not in Z imply X m-separated from E given Z. That is weaker than membership of E in Z.",
+      "hypotheses_of_the_step_in_force": false,
+      "witness_type": "type 1 only (tail at E); no type-2 witness exists in this graph"
+    },
+    {
+      "case": "e-set-not-forced-into-every-valid-set",
+      "claim_status": "attempted_repair_counterexample",
+      "defective_claim_lines": "not a claim of the paper; the stronger reading one might attempt as a repair",
+      "reported": "One natural repair of the Case (2) step would be that Condition (II) forces every E-set node into every valid adjustment set.",
+      "adjudicated": "False. Conditions (I) and (II) both hold and the O-set is {C, D} with E-set {C}, yet Z = {A} is a valid adjustment set omitting C. The weaker m-separation statement does hold here, X being m-separated from C given {A}.",
+      "nodes": [
+        "X",
+        "Y",
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "directed": [
+        [
+          "A",
+          "X"
+        ],
+        [
+          "X",
+          "B"
+        ],
+        [
+          "B",
+          "Y"
+        ],
+        [
+          "C",
+          "D"
+        ],
+        [
+          "D",
+          "Y"
+        ]
+      ],
+      "bidirected": [
+        [
+          "A",
+          "C"
+        ],
+        [
+          "B",
+          "D"
+        ]
+      ],
+      "interventions": [
+        "X"
+      ],
+      "outcomes": [
+        "Y"
+      ],
+      "conditioned_on": [],
+      "o_set": [
+        "C",
+        "D"
+      ],
+      "valid_ancestors": [
+        "A",
+        "C",
+        "D"
+      ],
+      "parents": [
+        "D"
+      ],
+      "colliders": [
+        "D"
+      ],
+      "collider_parents": [
+        "C"
+      ],
+      "criterion_i": true,
+      "criterion_ii": true,
+      "graphical_optimality": true,
+      "witness_adjustment_set": [
+        "A"
+      ],
+      "witness_adjustment_set_is_valid": true,
+      "e_set": [
+        "C"
+      ],
+      "failing_separation": {
+        "left": [
+          "X"
+        ],
+        "right": [
+          "C"
+        ],
+        "given": [
+          "A"
+        ],
+        "m_separated": true
+      },
+      "hypotheses_of_the_step_in_force": false
+    }
+  ]
+}

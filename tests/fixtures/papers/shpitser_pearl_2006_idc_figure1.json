@@ -1,0 +1,79 @@
+{
+  "citation": "Shpitser and Pearl (2006), Identification of Conditional Interventional Distributions, UAI-06, Figure 1, Sections 5-6, Figure 3, and Theorems 6-8",
+  "sources": {
+    "ucla_technical_report": {
+      "report": "R-329 UAI proceedings version",
+      "url": "https://ftp.cs.ucla.edu/pub/stat_ser/r329-uai.pdf",
+      "sha256": "098b12e5792305495533b9b037ced23b87b429223a993ee9f6fd992213bf9caa"
+    },
+    "author_arxiv_copy": {
+      "url": "https://arxiv.org/pdf/1206.6876v1",
+      "sha256": "c148ca71be8aab1b90c0f8088ce3d121d8d22ead90f770cd88736d1d6da8717c"
+    }
+  },
+  "transcription_source": "ucla_technical_report",
+  "figure_pdf_page": 2,
+  "figure_proceedings_page": 438,
+  "figure": "1",
+  "paper_status_note": "Figure 3 IDC is the operative algorithm. Theorem 3 and Corollary 2 repeat the arbitrary-subquery hedge criterion later corrected by Shpitser (2023); they are not used as status tests.",
+  "panels": {
+    "a": {
+      "nodes": ["X", "Z", "Y"],
+      "directed": [["X", "Z"], ["Z", "Y"]],
+      "bidirected": [["X", "Z"]],
+      "query": {
+        "outcomes": ["Y"],
+        "interventions": ["X"],
+        "conditioned_on": ["Z"]
+      },
+      "reported_claim": "P_x(Y) is not identifiable, while P_x(Y|Z) is identifiable because Rule 2 exchanges observation of Z for intervention on Z",
+      "adjudicated_claim": "Rule 2 moves Z and exact ID of P_{x,z}(Y) succeeds; the strict-subquery hedge for P_x(Y) must not be promoted to a failure of the requested conditional query",
+      "expected_status": "identified",
+      "expected_rule_two_interventions": ["Z"]
+    },
+    "b": {
+      "nodes": ["X", "Z", "Y"],
+      "directed": [["X", "Z"], ["Y", "Z"]],
+      "bidirected": [["X", "Z"]],
+      "query": {
+        "outcomes": ["Y"],
+        "interventions": ["X"],
+        "conditioned_on": ["Z"]
+      },
+      "reported_claim": "P_x(Y) is identifiable and equal to P(Y), while conditioning on Z makes P_x(Y|Z) nonidentifiable",
+      "adjudicated_claim": "The incoming edge Y -> Z is retained by G_{bar X, underline Z}, so Z is not moved; exact ID of P_x(Y,Z) returns a hedge",
+      "expected_status": "not_identified",
+      "expected_rule_two_interventions": [],
+      "expected_joint_witness": {
+        "outcomes": ["Z", "Y"],
+        "interventions": ["X"],
+        "inner_vertices": ["Z"],
+        "outer_vertices": ["X", "Z"],
+        "roots": ["Z"],
+        "fixing_sequence": ["Y"]
+      }
+    },
+    "c": {
+      "nodes": ["X", "Z", "Y", "W"],
+      "directed": [["X", "Z"], ["Y", "Z"], ["W", "Y"]],
+      "bidirected": [["X", "Z"]],
+      "query": {
+        "outcomes": ["W"],
+        "interventions": ["X"],
+        "conditioned_on": ["Z"]
+      },
+      "reported_claim": "P_x(W|Z) is nonidentifiable and is a counterexample to the soundness of Tian's conditional-effect algorithm",
+      "adjudicated_claim": "Z remains observed and exact ID of P_x(W,Z) returns the X-Z hedge",
+      "expected_status": "not_identified",
+      "expected_rule_two_interventions": [],
+      "expected_joint_witness": {
+        "outcomes": ["Z", "W"],
+        "interventions": ["X"],
+        "inner_vertices": ["Z"],
+        "outer_vertices": ["X", "Z"],
+        "roots": ["Z"],
+        "fixing_sequence": ["Y", "W"]
+      }
+    }
+  }
+}

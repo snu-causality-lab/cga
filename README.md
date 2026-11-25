@@ -1,15 +1,6 @@
 # Causal Graph Algorithms
 
-Causal Graph Algorithms provides graph representations and reference implementations for separation, covariate adjustment, and Markov equivalence. It includes exact tests of examples from the original papers.
-
-## Install and run
-
-Use Python 3.11 or later. The [GitHub release](https://github.com/snu-causality-lab/cga/releases/tag/v0.1.0a1) includes a wheel. To install from source and run the tests, use these commands from a checkout.
-
-```sh
-python -m pip install -e '.[test]'
-python -m pytest
-```
+Causal Graph Algorithms implements published methods for causal graphs in Python and provides a C11 library for selected bounded graph operations. It includes paper examples and regression tests for specific changes to the published procedures.
 
 ```python
 from causal_graph_algorithms import DAG, d_separated, find_adjustment_set
@@ -19,33 +10,53 @@ assert not d_separated(graph, "X", "Y", given="Z")
 assert find_adjustment_set(graph, interventions="X", outcomes="Y").vertices == ("Z",)
 ```
 
-## Supported results
+## Install
 
-| Operation | Scope and references |
+Use Python 3.11 or later. Download the wheel from the [GitHub release](https://github.com/snu-causality-lab/cga/releases) or install from a checkout.
+
+```sh
+python -m pip install .
+```
+
+## Algorithms and references
+
+| Topic | Operations and contracts |
 | --- | --- |
-| d- and m-separation | Validated DAGs, acyclic directed-bidirected graphs, and ancestral graphs. The tests include [Richardson and Spirtes (2002), Figure 9](https://doi.org/10.1214/aos/1031689015). |
-| Constrained separators | A separator or an inclusion-minimal separator containing the required vertices and using only the allowed vertices. [Van der Zander, Liśkiewicz and Textor (2019)](https://doi.org/10.1016/j.artint.2018.12.006) · [Authors’ 2023 corrigendum](https://doi.org/10.1016/j.artint.2023.103938) · [FindMinSep, Proposition 5.2](https://proceedings.mlr.press/v115/van-der-zander20a.html) |
-| General adjustment | Check, construct, or minimize an adjustment set for a total effect in a DAG, a known acyclic directed-bidirected graph, a CPDAG, or a MAG/PAG in the no-selection class. Each operation uses the graphical and causal premises of its input domain. [Perković et al. (2018)](https://jmlr.org/papers/v18/16-319.html) |
-| Markov equivalence and partial orientations | DAG and MAG equivalence, CPDAG construction and consistent extension, and PAG construction from a known MAG. The PAG constructors use either the full MAG universe or the no-selection universe. [Verma and Pearl](https://ftp.cs.ucla.edu/tech-report/1991-reports/910020.pdf), [Ali, Richardson and Spirtes (2009)](https://doi.org/10.1214/08-AOS626), [Zhang (2008)](https://doi.org/10.1016/j.artint.2008.08.001) |
-| MAG equivalence class listing | `list_mag_equivalence_class(pag, max_members=...)` returns all MAGs represented by a `ClosedPAG`, including members with undirected edges. The required `max_members` is a nonnegative integer. If the class exceeds that limit, the call raises `MAGListingResourceLimitError` without returning a partial list. [Wang, Du and Zhou (2025)](https://proceedings.mlr.press/v267/wang25y.html) |
+| Graphs, equivalence and CI | Graph views, d- and m-separation, latent projection, ancestral marginalization and selection, maximal extension, CPDAG/MPDAG construction, DAG and MAG equivalence, and conditional independence. [Graph operations](docs/reference/GRAPH_OPERATIONS.md) · [MAG and PAG construction and listing](docs/reference/MAG_ENUMERATION.md) |
+| Constrained separators | Construct, minimize or enumerate separators with required, allowed or weighted vertices. [Separator search and the authors’ 2023 corrigendum](docs/reference/SEPARATOR_SEARCH.md) |
+| Adjustment | General adjustment, efficient DAG and optimal mixed-graph sets, conditional and sequential adjustment, and local sufficient selection rules. [DAG and O-set](docs/reference/DAG_ADJUSTMENT.md) · [Runge](docs/reference/RUNGE_ADJUSTMENT.md) · [Smucler et al.](docs/reference/SMUCLER_ADJUSTMENT.md) · [Conditional](docs/reference/CONDITIONAL_ADJUSTMENT.md) · [Sequential](docs/reference/SEQUENTIAL_ADJUSTMENT.md) · [Local selection](docs/reference/LSAS_SELECTION.md) |
+| Identification and recovery | ID, IDC, gID, c-gID, marginal PAG and MPDAG identification, Tian adjustment, CADMG and kernel fixing, and selection recovery with optional external data. [Identification and recovery](docs/reference/PUBLISHED_IDENTIFICATION.md) |
+| Counterfactuals | Single-world reductions and applicability checks for three rules of counterfactual calculus. [Identification](docs/reference/PUBLISHED_IDENTIFICATION.md#counterfactuals) · [Calculus](docs/reference/COUNTERFACTUAL_CALCULUS.md) |
+| C11 library | Separation, projection, ancestral graph checks, MAG equivalence, loyal equivalent graph enumeration, and DAG adjustment validity. [Native API and bounds](docs/native.md) |
 
-An adjustment search returns a set or an `AdjustmentNotFound` result for the specified graph and query. An empty `AdjustmentSet` is a valid result when no covariates need conditioning. Graph and query validation errors are raised separately. The library returns graph-theoretic results, with the causal interpretation and support conditions supplied by the caller.
+Results retain the assumptions and failure meanings of their operation. An empty adjustment set can be a successful result. Identification returns symbolic expressions with their declared probability sources. The caller supplies the distributions and causal premises needed to interpret a result.
 
-The [paper fixtures](tests/fixtures/papers/) record source examples and regressions derived from published definitions. The suite also checks selected small graphs against independent path or equivalence enumeration.
+## Verification
 
-The ordinary-adjustment tests replay [Witte et al. (2020), Figures 2B and 2F](https://jmlr.org/papers/v21/20-175.html).
-The [Lean checks for Figure 2B](https://github.com/snu-causality-lab/open-causal-science/blob/5a08ef6d08b757ba0f0689421721889ea5f20303/docs/paper-checks.md#witte-et-al-2020-figure-2b) and [Figure 2F](https://github.com/snu-causality-lab/open-causal-science/blob/5a08ef6d08b757ba0f0689421721889ea5f20303/docs/paper-checks.md#witte-et-al-2020-figure-2f) formalize the path and projection calculations used in those examples.
+The [paper fixtures](tests/fixtures/papers/) reproduce published examples and record regression cases. The [Open Causal Science proof map](https://github.com/snu-causality-lab/open-causal-science/blob/main/docs/cga.md) identifies the exact Lean statements related to CGA. Both projects build independently.
 
-The separator reference follows the authors’ 2023 runtime correction. The Lean proof counts parent-pair checks in the specified augmentation loop. [Proof scope](https://github.com/snu-causality-lab/open-causal-science/blob/5a08ef6d08b757ba0f0689421721889ea5f20303/OpenCausalScience/Papers/VanDerZanderEtAl2023/AugmentationParentPairs.lean)
+```sh
+python -m pip install -e '.[test]'
+python -m pytest
+```
 
-## Lean and paper replays
+Pytest includes the paper fixtures. With Make and a C11 compiler that supports ASan and UBSan, `make test` also runs the C contracts and differential checks.
 
-[Open Causal Science](https://github.com/snu-causality-lab/open-causal-science/blob/main/docs/cga.md) records the exact Lean statements corresponding to CGA graph operations. The tests include the original Verma–Pearl Figure 2 and two DAG cases for the forbidden-set construction. The [Lean revision used for this release](https://github.com/snu-causality-lab/open-causal-science/blob/5a08ef6d08b757ba0f0689421721889ea5f20303/docs/cga.md) fixes the reference inputs and checks. Each project builds independently.
+### Lean replays
 
-To compare the nine published mixed graphs, generate `m-separation.json` with the Lean command in that proof map. From this checkout with CGA installed, compare it against CGA's own paper fixtures.
+In a checkout of the [matching Lean revision](https://github.com/snu-causality-lab/open-causal-science/tree/fb92293741a2aac754c07193eb369d995d28745b), use the pinned toolchain to export the verdicts.
+
+```sh
+lake build
+lake env lean replay/MSeparation.lean > m-separation.json
+lake env lean replay/DSeparation.lean > d-separation.json
+```
+
+In this CGA checkout with the Python package installed, compare the 432 queries from the nine published mixed graphs and the 7,040 queries on four-vertex DAGs.
 
 ```sh
 python tests/compare_lean_mseparation.py /path/to/m-separation.json
+python tests/compare_lean_dseparation.py /path/to/d-separation.json
 ```
 
 ## License

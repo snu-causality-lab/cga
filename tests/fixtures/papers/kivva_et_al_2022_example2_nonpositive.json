@@ -1,0 +1,50 @@
+{
+  "citation": "Kivva, Mokhtarian, Etesami, and Kiyavash (2022), Revisiting the General Identifiability Problem, UAI, Example 2",
+  "source_url": "https://proceedings.mlr.press/v180/kivva22a/kivva22a.pdf",
+  "source_sha256": "8e677c27d3f725e404b97123b7068e16ebf6f7c9be067241e41e0ac3763bb2ea",
+  "pdf_pages": [4, 5],
+  "nodes": ["X1", "X2", "Y1", "Y2"],
+  "directed": [["X1", "Y1"], ["X2", "Y2"]],
+  "bidirected": [["X1", "X2"], ["Y1", "Y2"]],
+  "query": {
+    "outcomes": ["Y1", "Y2"],
+    "interventions": ["X1", "X2"],
+    "values": {
+      "X1": 0,
+      "X2": 1,
+      "Y1": 0,
+      "Y2": 0
+    }
+  },
+  "models": {
+    "common": {
+      "variables_are_binary": true,
+      "P(U1=0)": "1/2",
+      "P(U1=1)": "1/2",
+      "P(U2=0)": "1/2",
+      "P(U2=1)": "1/2",
+      "X1": "U1",
+      "X2": "U1"
+    },
+    "M1": {
+      "P(Y1=y1|U2=u2,X1=x1)": "1/3 if y1=u2, otherwise 2/3",
+      "P(Y2=y2|U2=u2,X2=x2)": "1/3 if y2=(u2 xor x2), otherwise 2/3",
+      "reported_target_probability": "4/9",
+      "adjudicated_target_probability": "2/9"
+    },
+    "M2": {
+      "P(Y1=y1|U2=u2,X1=x1)": "2/3 if y1=(u2 xor x1), otherwise 1/3",
+      "P(Y2=y2|U2=u2,X2=x2)": "2/3 if y2=u2, otherwise 1/3",
+      "reported_target_probability": "5/9",
+      "adjudicated_target_probability": "5/18"
+    }
+  },
+  "reported_observational_relation": "M1 and M2 induce the same observational distribution.",
+  "zero_support_cell": "P(X1=0,X2=1,Y1=y1,Y2=y2)=0 for every y1,y2.",
+  "reported_conclusion_without_positivity": "The target is 4/9 in M1 and 5/9 in M2 although the observational distributions agree.",
+  "independent_numeric_adjudication": "Directly summing the displayed conditional probabilities over U2~Bernoulli(1/2) gives 2/9 in M1 and 5/18 in M2. The printed values omit the factor 1/2 and are exactly twice these probabilities. The two values still differ, so the counterexample's qualitative conclusion survives.",
+  "official_numeric_erratum_found": false,
+  "numeric_erratum_search_scope": "The official PMLR paper page, supplement, arXiv record, and targeted searches for the title with 4/9, 5/9, and erratum were checked.",
+  "phase12_adjudication": "outside_domain",
+  "phase12_reason": "Both models violate the full-observational strict-positivity assumption M+(G) required by Definition 5 and the Phase 12 API. This fixture must not flip an in-domain structural status."
+}

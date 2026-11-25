@@ -1,0 +1,35 @@
+{
+  "citation": "Yonghan Jung, Min Woo Park, Sanghack Lee (2024). Complete Graphical Criterion for Sequential Covariate Adjustment in Causal Inference. NeurIPS 37.",
+  "source_url": "https://proceedings.neurips.cc/paper_files/paper/2024/file/233ff375b9795cd890f78a1f64459b8d-Paper-Conference.pdf",
+  "source_sha256": "6251529dafaff5bc152ce5069089a54eb60c58fadda5b037d76669221caecf76",
+  "source_locations": ["Definition 7, equation (11), printed page 6", "Algorithm 1 and Definition 9, printed pages 8-9", "Lemma S.2, printed pages 15-16"],
+  "status": "Repository correction reviewed 2026-09-19; not a publisher-issued erratum. Counterexamples below were constructed for the correction, not printed as paper examples.",
+  "cases": [
+    {
+      "name": "future_intervention_chain",
+      "nodes": ["X1", "Z", "X2", "Y"],
+      "directed": [["X1", "Z"], ["Z", "X2"], ["X2", "Y"]],
+      "bidirected": [],
+      "treatment_order": ["X1", "X2"],
+      "outcomes": ["Y"],
+      "covariate_blocks": [["Z"], []],
+      "printed_criterion_accepts": false,
+      "corrected_criterion_accepts": true,
+      "adjudication": "The supplied functional is sum_z p(z)p(y|x1,x2,z)=p(y|x2), the joint-intervention distribution in every positive compatible model."
+    },
+    {
+      "name": "stale_history_pruning",
+      "nodes": ["X1", "C", "X2", "Y"],
+      "directed": [["X1", "X2"], ["C", "X2"], ["C", "Y"], ["X2", "Y"]],
+      "bidirected": [],
+      "treatment_order": ["X1", "X2"],
+      "outcomes": ["Y"],
+      "covariate_blocks": [[], []],
+      "printed_criterion_accepts": false,
+      "corrected_criterion_accepts": false,
+      "printed_algorithm_result": [[], []],
+      "repaired_constructor_result": [[], ["C"]],
+      "adjudication": "Pruning C from the first canonical block requires recomputing the next history; otherwise X2<-C->Y becomes open. This defect is independent of the forbidden-set correction."
+    }
+  ]
+}

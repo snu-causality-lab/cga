@@ -1,0 +1,16 @@
+{
+  "citation": "Robin J. Evans, Dependency in DAG Models with Hidden Variables, UAI 2021, PMLR 161:813-822",
+  "url": "https://proceedings.mlr.press/v161/evans21a.html",
+  "source_figure": "Figure 1(a)",
+  "result_figure": "Figure 1(b)",
+  "page": 813,
+  "reported_claim": "Figure 1(b) is the latent projection of the instrumental-variable DAG in Figure 1(a).",
+  "adjudicated_claim": "Marginalizing h preserves b->c and adds b<->c, so the projected graph contains a bow.",
+  "erratum_status": "No correction is noted on the consulted PMLR proceedings page.",
+  "nodes": ["h", "a", "b", "c"],
+  "directed": [["a", "b"], ["b", "c"], ["h", "b"], ["h", "c"]],
+  "bidirected": [],
+  "retained": ["a", "b", "c"],
+  "projected_directed": [["a", "b"], ["b", "c"]],
+  "projected_bidirected": [["b", "c"]]
+}

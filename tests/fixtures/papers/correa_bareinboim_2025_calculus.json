@@ -1,0 +1,2212 @@
+{
+  "record": "R115-CALCULUS",
+  "citation": "Correa and Bareinboim, Counterfactual Graphical Models: Constraints and Inference. Technical Report R-115 (first version Aug 2024, last version Jul 2025, 20 pp.); ICML 2025, PMLR 267:11245-11254",
+  "source_sha256": {
+    "r115_technical_report": "64dbee95584b97e4bd55f36bf528777d829ed5f710216bac3ac5adbf1699e7ba",
+    "pmlr_267_proceedings": "199b2d4a509874f4d0942cb582d4fcc0a52bf3622f9f895465e3ded402d1b092"
+  },
+  "page_convention": "TR printed pages. TR pp. 1-8 as a whole match PMLR pp. 1-8 (11245-11252) word for word, although some page breaks differ; Appendices A-E (TR pp. 11-20), with the proofs on TR pp. 11-14 and 18-19, exist only in the TR.",
+  "model_convention": "A model entry names an exact finite SCM built by tests/python/test_counterfactual_calculus.py. Kind generic is a seeded independent-root model from tests/python/calculus_oracles.py with binary domains unless domains says otherwise; a vertex has all its response tables when they number at most max_tables (default 16), and otherwise that many seeded tables. Every model that witnesses a dependence is asserted strictly positive in its observational law and every hard-intervention kernel.",
+  "term_notation": "A term is [variable, {clamped variable: state}]. States are opaque labels; the paper's x and x' are written 1 and 0 unless a case says otherwise.",
+  "graphs": {
+    "x_to_y": {
+      "nodes": [
+        "X",
+        "Y"
+      ],
+      "directed": [
+        [
+          "X",
+          "Y"
+        ]
+      ],
+      "bidirected": []
+    },
+    "bow": {
+      "nodes": [
+        "X",
+        "Y"
+      ],
+      "directed": [
+        [
+          "X",
+          "Y"
+        ]
+      ],
+      "bidirected": [
+        [
+          "X",
+          "Y"
+        ]
+      ]
+    },
+    "chain_xyz": {
+      "nodes": [
+        "X",
+        "Y",
+        "Z"
+      ],
+      "directed": [
+        [
+          "X",
+          "Y"
+        ],
+        [
+          "Y",
+          "Z"
+        ]
+      ],
+      "bidirected": []
+    },
+    "front_door": {
+      "nodes": [
+        "X",
+        "M",
+        "Y"
+      ],
+      "directed": [
+        [
+          "X",
+          "M"
+        ],
+        [
+          "M",
+          "Y"
+        ]
+      ],
+      "bidirected": [
+        [
+          "X",
+          "Y"
+        ]
+      ]
+    },
+    "z_to_x_to_y": {
+      "nodes": [
+        "Z",
+        "X",
+        "Y"
+      ],
+      "directed": [
+        [
+          "Z",
+          "X"
+        ],
+        [
+          "X",
+          "Y"
+        ]
+      ],
+      "bidirected": []
+    },
+    "r115_figure1": {
+      "nodes": [
+        "Z",
+        "X",
+        "Y"
+      ],
+      "directed": [
+        [
+          "Z",
+          "X"
+        ],
+        [
+          "Z",
+          "Y"
+        ],
+        [
+          "X",
+          "Y"
+        ]
+      ],
+      "bidirected": [],
+      "source": "TR p.1, Figure 1 (age Z, treatment X, survival Y)"
+    },
+    "r115_figure4a": {
+      "nodes": [
+        "X",
+        "Z",
+        "Y"
+      ],
+      "directed": [
+        [
+          "X",
+          "Z"
+        ],
+        [
+          "Z",
+          "Y"
+        ]
+      ],
+      "bidirected": [],
+      "source": "TR p.5, Figure 4(a)"
+    },
+    "r115_figure4b": {
+      "nodes": [
+        "Z",
+        "X",
+        "W",
+        "Y"
+      ],
+      "directed": [
+        [
+          "Z",
+          "X"
+        ],
+        [
+          "Z",
+          "Y"
+        ],
+        [
+          "X",
+          "W"
+        ],
+        [
+          "W",
+          "Y"
+        ]
+      ],
+      "bidirected": [],
+      "source": "TR p.5, Figure 4(b); orientation confirmed by An(X) = {X, Z} and the path X <- Z <- U_z -> Z_xw -> Y_xw on p.5"
+    },
+    "r115_figure6a": {
+      "nodes": [
+        "W",
+        "Z",
+        "X",
+        "Y"
+      ],
+      "directed": [
+        [
+          "W",
+          "Z"
+        ],
+        [
+          "Z",
+          "Y"
+        ],
+        [
+          "Z",
+          "X"
+        ],
+        [
+          "X",
+          "Y"
+        ]
+      ],
+      "bidirected": [
+        [
+          "Z",
+          "X"
+        ]
+      ],
+      "source": "TR p.6, Figure 6(a)"
+    },
+    "r115_figure7b": {
+      "nodes": [
+        "X",
+        "W",
+        "Y"
+      ],
+      "directed": [
+        [
+          "X",
+          "W"
+        ],
+        [
+          "W",
+          "Y"
+        ],
+        [
+          "X",
+          "Y"
+        ]
+      ],
+      "bidirected": [
+        [
+          "X",
+          "W"
+        ]
+      ],
+      "source": "TR p.8, Figure 7(b) (Example 2, mediator W)"
+    },
+    "y_to_x_confounded": {
+      "nodes": [
+        "Y",
+        "X"
+      ],
+      "directed": [
+        [
+          "Y",
+          "X"
+        ]
+      ],
+      "bidirected": [
+        [
+          "Y",
+          "X"
+        ]
+      ]
+    }
+  },
+  "errata": [
+    {
+      "location": "TR p.12, proof of Lemma B.5 (before Eq. 50)",
+      "printed": "no variable in two distinct ancestral components could be in the same c-component in G[V(A*)]",
+      "adjudicated": "Under Definition A.1, copies of Y in different worlds can fall in distinct ancestral components even when they share the exogenous root of Y. In X -> Y, the cross-world distribution for Y_x0 and Y_x1 therefore need not factorize as in Eq. 48."
+    },
+    {
+      "location": "TR p.13, soundness proof of Theorem 2.5",
+      "printed": "Consider the ancestral factorization Theorem B.5 of W* = {Y_r, X_t} union Z* given Z* ...",
+      "adjudicated": "Invalid: the argument never uses G_A or the d-separation hypothesis, and with its implicit premise it would also prove Y_x0 _||_ Y_x1 in X -> Y. The soundness statement is re-derived in docs/reference/COUNTERFACTUAL_CALCULUS.md from the global Markov property of the merged parallel-worlds DAG."
+    },
+    {
+      "location": "TR p.6 Theorem 2.5 'Moreover' clause and text; p.1 abstract; p.2 contribution 1; p.7 Table 1; p.9 conclusions; proof pp.13-14",
+      "printed": "if an independence relationship cannot be inferred with the criterion, there exist at least two models inducing the graphical model where the independence does not hold",
+      "adjudicated": "False on fixed binary domains: case binary_domain_gap holds in every model with binary X but is not d-separated in G_A. The p.13 construction is binary, so it cannot witness the dependence; the AMWN criterion is implemented as sound only."
+    },
+    {
+      "location": "TR p.11, proof of Lemma B.2",
+      "printed": "does not depend on any X in Z \\ X",
+      "adjudicated": "Typo for X \\ Z; the exclusion lemma itself is re-derived and holds unit by unit."
+    },
+    {
+      "location": "TR p.6, walkthrough of Figure 6 after Algorithm 1",
+      "printed": "The corresponding AWMN is shown in Figure 6(b). The node Uz has been added and connected to Z and Zw (line 1) ... There is also the node Uzx, that is connected to Z, Zw and X due to the bidirected arrow Z <-> X in G (line 1). By the d-separation criterion, the path X <-> Zw -> Yxw is active given {Z, W}",
+      "adjudicated": "Harmless slips. Algorithm 1 adds U_z at line 3 and U_zx at line 6, not at line 1; AWMN is a typo for AMWN; and in G_A the printed X <-> Z_w stands for X <- U_zx -> Z_w. The stated dependence holds: case r115_fig6_dependence executes it and network case r115_figure6b reproduces the figure."
+    }
+  ],
+  "independence_cases": [
+    {
+      "id": "r115_fig5_separation",
+      "source": "TR p.5 (Section 2.3, Figures 4(b) and 5): Z_x' = ||Z_x'|| = Z and 'the separation holds'; Figure 5(c), p.6",
+      "graph": "r115_figure4b",
+      "left": [
+        [
+          "Y",
+          {
+            "X": "1",
+            "W": "1"
+          }
+        ],
+        [
+          "W",
+          {
+            "X": "0"
+          }
+        ]
+      ],
+      "right": [
+        [
+          "X",
+          {}
+        ]
+      ],
+      "given": [
+        [
+          "Z",
+          {
+            "X": "0"
+          }
+        ]
+      ],
+      "reported": "independent",
+      "adjudicated": {
+        "amwn": "claimed",
+        "oracle": "independent"
+      },
+      "models": [
+        {
+          "kind": "generic",
+          "seed": 51
+        },
+        {
+          "kind": "generic",
+          "seed": 52
+        }
+      ]
+    },
+    {
+      "id": "r115_fig6_dependence",
+      "source": "TR p.6, Figure 6: the path X <-> Z_w -> Y_xw is active given {Z, W}, so (Y_xw not independent of X | Z, W)",
+      "graph": "r115_figure6a",
+      "left": [
+        [
+          "Y",
+          {
+            "X": "1",
+            "W": "1"
+          }
+        ]
+      ],
+      "right": [
+        [
+          "X",
+          {}
+        ]
+      ],
+      "given": [
+        [
+          "Z",
+          {}
+        ],
+        [
+          "W",
+          {}
+        ]
+      ],
+      "reported": "dependent",
+      "adjudicated": {
+        "amwn": "not_claimed",
+        "oracle": "dependent"
+      },
+      "models": [
+        {
+          "kind": "generic",
+          "seed": 61,
+          "max_tables": 6
+        }
+      ]
+    },
+    {
+      "id": "r115_example1_eq22",
+      "source": "TR p.7, Example 1, Eq. (22): R2 with (X _||_ Y_xz | Z) in G_A, Figure 7(a) p.8",
+      "graph": "r115_figure1",
+      "left": [
+        [
+          "X",
+          {}
+        ]
+      ],
+      "right": [
+        [
+          "Y",
+          {
+            "X": "1",
+            "Z": "1"
+          }
+        ]
+      ],
+      "given": [
+        [
+          "Z",
+          {}
+        ]
+      ],
+      "reported": "Rule 2 applies",
+      "adjudicated": {
+        "amwn": "claimed",
+        "oracle": "independent"
+      },
+      "models": [
+        {
+          "kind": "generic",
+          "seed": 71
+        },
+        {
+          "kind": "generic",
+          "seed": 72
+        }
+      ]
+    },
+    {
+      "id": "r115_example2_eq27",
+      "source": "TR p.8, Example 2, Eq. (27): R2 with (Y_x'w _||_ W_x, W_x') in G_A, Figure 8(a)",
+      "graph": "r115_figure7b",
+      "left": [
+        [
+          "Y",
+          {
+            "X": "0",
+            "W": "1"
+          }
+        ]
+      ],
+      "right": [
+        [
+          "W",
+          {
+            "X": "1"
+          }
+        ],
+        [
+          "W",
+          {
+            "X": "0"
+          }
+        ]
+      ],
+      "given": [],
+      "reported": "Rule 2 applies",
+      "adjudicated": {
+        "amwn": "claimed",
+        "oracle": "independent"
+      },
+      "models": [
+        {
+          "kind": "generic",
+          "seed": 81
+        }
+      ]
+    },
+    {
+      "id": "r115_example2_eq28",
+      "source": "TR p.8, Example 2, Eq. (28): R2 with (Y_x'w _||_ X | W_x') in G_A, Figure 8(b)",
+      "graph": "r115_figure7b",
+      "left": [
+        [
+          "Y",
+          {
+            "X": "0",
+            "W": "1"
+          }
+        ]
+      ],
+      "right": [
+        [
+          "X",
+          {}
+        ]
+      ],
+      "given": [
+        [
+          "W",
+          {
+            "X": "0"
+          }
+        ]
+      ],
+      "reported": "Rule 2 applies",
+      "adjudicated": {
+        "amwn": "claimed",
+        "oracle": "independent"
+      },
+      "models": [
+        {
+          "kind": "generic",
+          "seed": 82
+        }
+      ]
+    },
+    {
+      "id": "r115_example2_eq32",
+      "source": "TR p.8, Example 2, Eq. (32): R2 with (Y_x _||_ X | W_x) in G_A, Figure 8(c)",
+      "graph": "r115_figure7b",
+      "left": [
+        [
+          "Y",
+          {
+            "X": "1"
+          }
+        ]
+      ],
+      "right": [
+        [
+          "X",
+          {}
+        ]
+      ],
+      "given": [
+        [
+          "W",
+          {
+            "X": "1"
+          }
+        ]
+      ],
+      "reported": "Rule 2 applies",
+      "adjudicated": {
+        "amwn": "claimed",
+        "oracle": "independent"
+      },
+      "models": [
+        {
+          "kind": "generic",
+          "seed": 83
+        }
+      ]
+    },
+    {
+      "id": "x_to_y_cross_world",
+      "source": "brief control; TR p.7 Theorem 3.1 Rule 2",
+      "graph": "x_to_y",
+      "left": [
+        [
+          "Y",
+          {
+            "X": "0"
+          }
+        ]
+      ],
+      "right": [
+        [
+          "X",
+          {}
+        ]
+      ],
+      "given": [],
+      "reported": "not stated",
+      "adjudicated": {
+        "amwn": "claimed",
+        "oracle": "independent"
+      },
+      "models": [
+        {
+          "kind": "generic",
+          "seed": 1
+        },
+        {
+          "kind": "generic",
+          "seed": 2
+        }
+      ]
+    },
+    {
+      "id": "chain_cross_world",
+      "source": "brief control",
+      "graph": "chain_xyz",
+      "left": [
+        [
+          "Z",
+          {
+            "X": "0"
+          }
+        ]
+      ],
+      "right": [
+        [
+          "X",
+          {}
+        ]
+      ],
+      "given": [],
+      "reported": "not stated",
+      "adjudicated": {
+        "amwn": "claimed",
+        "oracle": "independent"
+      },
+      "models": [
+        {
+          "kind": "generic",
+          "seed": 4
+        }
+      ]
+    },
+    {
+      "id": "chain_given_copy",
+      "source": "brief control",
+      "graph": "chain_xyz",
+      "left": [
+        [
+          "Z",
+          {
+            "X": "0"
+          }
+        ]
+      ],
+      "right": [
+        [
+          "Y",
+          {}
+        ]
+      ],
+      "given": [
+        [
+          "Y",
+          {
+            "X": "0"
+          }
+        ]
+      ],
+      "reported": "not stated",
+      "adjudicated": {
+        "amwn": "claimed",
+        "oracle": "independent"
+      },
+      "models": [
+        {
+          "kind": "generic",
+          "seed": 4
+        },
+        {
+          "kind": "generic",
+          "seed": 5
+        }
+      ]
+    },
+    {
+      "id": "chain_given_natural",
+      "source": "brief control",
+      "graph": "chain_xyz",
+      "left": [
+        [
+          "Z",
+          {
+            "X": "0"
+          }
+        ]
+      ],
+      "right": [
+        [
+          "X",
+          {}
+        ]
+      ],
+      "given": [
+        [
+          "Y",
+          {}
+        ]
+      ],
+      "reported": "not stated",
+      "adjudicated": {
+        "amwn": "not_claimed",
+        "oracle": "dependent"
+      },
+      "models": [
+        {
+          "kind": "generic",
+          "seed": 4
+        }
+      ]
+    },
+    {
+      "id": "front_door",
+      "source": "brief control",
+      "graph": "front_door",
+      "left": [
+        [
+          "Y",
+          {
+            "M": "0"
+          }
+        ]
+      ],
+      "right": [
+        [
+          "M",
+          {}
+        ]
+      ],
+      "given": [
+        [
+          "X",
+          {}
+        ]
+      ],
+      "reported": "not stated",
+      "adjudicated": {
+        "amwn": "claimed",
+        "oracle": "independent"
+      },
+      "models": [
+        {
+          "kind": "generic",
+          "seed": 6
+        }
+      ]
+    },
+    {
+      "id": "bow",
+      "source": "brief control",
+      "graph": "bow",
+      "left": [
+        [
+          "Y",
+          {
+            "X": "0"
+          }
+        ]
+      ],
+      "right": [
+        [
+          "X",
+          {}
+        ]
+      ],
+      "given": [],
+      "reported": "not stated",
+      "adjudicated": {
+        "amwn": "not_claimed",
+        "oracle": "dependent"
+      },
+      "models": [
+        {
+          "kind": "generic",
+          "seed": 7
+        }
+      ]
+    },
+    {
+      "id": "binary_domain_gap",
+      "source": "TR p.6, Theorem 2.5 'Moreover' clause (completeness), proof pp.13-14",
+      "graph": "x_to_y",
+      "left": [
+        [
+          "Y",
+          {
+            "X": "0"
+          }
+        ]
+      ],
+      "right": [
+        [
+          "Y",
+          {
+            "X": "1"
+          }
+        ]
+      ],
+      "given": [
+        [
+          "X",
+          {}
+        ],
+        [
+          "Y",
+          {}
+        ]
+      ],
+      "reported": "complete: every independence not inferred has a violating model",
+      "adjudicated": {
+        "amwn": "not_claimed",
+        "oracle": "independent in every model with binary X; dependent in a generic model with ternary X",
+        "proof": "Given X = x_i and Y = y, consistency forces Y_xi = y, so one of the two terms is constant on every conditioning cell when X is binary."
+      },
+      "models": [
+        {
+          "kind": "generic",
+          "seed": 9,
+          "expect": "independent"
+        },
+        {
+          "kind": "generic",
+          "seed": 10,
+          "expect": "independent"
+        },
+        {
+          "kind": "generic",
+          "seed": 11,
+          "domains": {
+            "X": [
+              "0",
+              "1",
+              "2"
+            ],
+            "Y": [
+              "0",
+              "1"
+            ]
+          },
+          "expect": "dependent"
+        }
+      ]
+    }
+  ],
+  "consistency_cases": [
+    {
+      "id": "r115_example1_eq20",
+      "graph": "r115_figure1",
+      "source": "TR p.7, Example 1, Eq. (20): R1 with (Z_x = z implies Y_x = Y_xz)",
+      "first": [
+        [
+          [
+            "Y",
+            {
+              "X": "1"
+            }
+          ],
+          "1"
+        ],
+        [
+          [
+            "Z",
+            {
+              "X": "1"
+            }
+          ],
+          "1"
+        ],
+        [
+          [
+            "X",
+            {}
+          ],
+          "0"
+        ]
+      ],
+      "second": [
+        [
+          [
+            "Y",
+            {
+              "X": "1",
+              "Z": "1"
+            }
+          ],
+          "1"
+        ],
+        [
+          [
+            "Z",
+            {
+              "X": "1"
+            }
+          ],
+          "1"
+        ],
+        [
+          [
+            "X",
+            {}
+          ],
+          "0"
+        ]
+      ],
+      "reported": "Rule 1",
+      "adjudicated": true
+    },
+    {
+      "id": "r115_example1_eq23",
+      "graph": "r115_figure1",
+      "source": "TR p.8, Example 1, Eq. (23): R1 with (Z = z, X = x implies Y_xz = Y)",
+      "first": [
+        [
+          [
+            "Y",
+            {
+              "X": "1",
+              "Z": "1"
+            }
+          ],
+          "1"
+        ],
+        [
+          [
+            "Z",
+            {}
+          ],
+          "1"
+        ],
+        [
+          [
+            "X",
+            {}
+          ],
+          "1"
+        ]
+      ],
+      "second": [
+        [
+          [
+            "Y",
+            {}
+          ],
+          "1"
+        ],
+        [
+          [
+            "Z",
+            {}
+          ],
+          "1"
+        ],
+        [
+          [
+            "X",
+            {}
+          ],
+          "1"
+        ]
+      ],
+      "reported": "Rule 1",
+      "adjudicated": true
+    },
+    {
+      "id": "r115_example2_eq29",
+      "graph": "r115_figure7b",
+      "source": "TR p.8, Example 2, Eq. (29): R1 with (X = x' implies W_x' = W)",
+      "first": [
+        [
+          [
+            "Y",
+            {
+              "X": "0",
+              "W": "1"
+            }
+          ],
+          "1"
+        ],
+        [
+          [
+            "W",
+            {
+              "X": "0"
+            }
+          ],
+          "1"
+        ],
+        [
+          [
+            "X",
+            {}
+          ],
+          "0"
+        ]
+      ],
+      "second": [
+        [
+          [
+            "Y",
+            {
+              "X": "0",
+              "W": "1"
+            }
+          ],
+          "1"
+        ],
+        [
+          [
+            "W",
+            {}
+          ],
+          "1"
+        ],
+        [
+          [
+            "X",
+            {}
+          ],
+          "0"
+        ]
+      ],
+      "reported": "Rule 1",
+      "adjudicated": true
+    },
+    {
+      "id": "r115_example2_eq30",
+      "graph": "r115_figure7b",
+      "source": "TR p.8, Example 2, Eq. (30): R1 with (W = w, X = x' implies Y_x'w = Y)",
+      "first": [
+        [
+          [
+            "Y",
+            {
+              "X": "0",
+              "W": "1"
+            }
+          ],
+          "1"
+        ],
+        [
+          [
+            "W",
+            {}
+          ],
+          "1"
+        ],
+        [
+          [
+            "X",
+            {}
+          ],
+          "0"
+        ]
+      ],
+      "second": [
+        [
+          [
+            "Y",
+            {}
+          ],
+          "1"
+        ],
+        [
+          [
+            "W",
+            {}
+          ],
+          "1"
+        ],
+        [
+          [
+            "X",
+            {}
+          ],
+          "0"
+        ]
+      ],
+      "reported": "Rule 1",
+      "adjudicated": true
+    },
+    {
+      "id": "r115_example2_eq33",
+      "graph": "r115_figure7b",
+      "source": "TR p.8, Example 2, Eq. (33): R1 with (X = x implies W_x = W, Y_x = Y), one step with two responses",
+      "first": [
+        [
+          [
+            "Y",
+            {
+              "X": "1"
+            }
+          ],
+          "1"
+        ],
+        [
+          [
+            "W",
+            {
+              "X": "1"
+            }
+          ],
+          "1"
+        ],
+        [
+          [
+            "X",
+            {}
+          ],
+          "1"
+        ]
+      ],
+      "second": [
+        [
+          [
+            "Y",
+            {}
+          ],
+          "1"
+        ],
+        [
+          [
+            "W",
+            {}
+          ],
+          "1"
+        ],
+        [
+          [
+            "X",
+            {}
+          ],
+          "1"
+        ]
+      ],
+      "reported": "Rule 1",
+      "adjudicated": true
+    },
+    {
+      "id": "absorbed_duplicate",
+      "graph": "x_to_y",
+      "source": "constructed: Rule 1 with w* = {Y = 1}; the rewritten atom merges with an existing one",
+      "first": [
+        [
+          [
+            "Y",
+            {
+              "X": "1"
+            }
+          ],
+          "1"
+        ],
+        [
+          [
+            "X",
+            {}
+          ],
+          "1"
+        ],
+        [
+          [
+            "Y",
+            {}
+          ],
+          "1"
+        ]
+      ],
+      "second": [
+        [
+          [
+            "Y",
+            {}
+          ],
+          "1"
+        ],
+        [
+          [
+            "X",
+            {}
+          ],
+          "1"
+        ]
+      ],
+      "reported": "not stated",
+      "adjudicated": true
+    },
+    {
+      "id": "missing_observation",
+      "graph": "x_to_y",
+      "source": "constructed negative",
+      "first": [
+        [
+          [
+            "Y",
+            {
+              "X": "1"
+            }
+          ],
+          "1"
+        ]
+      ],
+      "second": [
+        [
+          [
+            "Y",
+            {}
+          ],
+          "1"
+        ]
+      ],
+      "reported": "not stated",
+      "adjudicated": false
+    },
+    {
+      "id": "other_observed_value",
+      "graph": "x_to_y",
+      "source": "constructed negative",
+      "first": [
+        [
+          [
+            "Y",
+            {
+              "X": "1"
+            }
+          ],
+          "1"
+        ],
+        [
+          [
+            "X",
+            {}
+          ],
+          "0"
+        ]
+      ],
+      "second": [
+        [
+          [
+            "Y",
+            {}
+          ],
+          "1"
+        ],
+        [
+          [
+            "X",
+            {}
+          ],
+          "0"
+        ]
+      ],
+      "reported": "not stated",
+      "adjudicated": false
+    },
+    {
+      "id": "partial_observation",
+      "graph": "r115_figure7b",
+      "source": "constructed negative: Y_xw = Y needs both X = x and W = w observed, but only X = x is",
+      "first": [
+        [
+          [
+            "Y",
+            {
+              "X": "1",
+              "W": "1"
+            }
+          ],
+          "1"
+        ],
+        [
+          [
+            "X",
+            {}
+          ],
+          "1"
+        ]
+      ],
+      "second": [
+        [
+          [
+            "Y",
+            {}
+          ],
+          "1"
+        ],
+        [
+          [
+            "X",
+            {}
+          ],
+          "1"
+        ]
+      ],
+      "reported": "not stated",
+      "adjudicated": false
+    },
+    {
+      "id": "observation_in_other_world",
+      "graph": "z_to_x_to_y",
+      "source": "constructed negative: X_z = x does not license Y_x = Y",
+      "first": [
+        [
+          [
+            "Y",
+            {
+              "X": "1"
+            }
+          ],
+          "1"
+        ],
+        [
+          [
+            "X",
+            {
+              "Z": "0"
+            }
+          ],
+          "1"
+        ]
+      ],
+      "second": [
+        [
+          [
+            "Y",
+            {}
+          ],
+          "1"
+        ],
+        [
+          [
+            "X",
+            {
+              "Z": "0"
+            }
+          ],
+          "1"
+        ]
+      ],
+      "reported": "not stated",
+      "adjudicated": false
+    },
+    {
+      "id": "opposite_directions",
+      "graph": "r115_figure7b",
+      "source": "constructed: Y_x moves to the natural world while W moves to world x, so relating the events takes two Rule 1 applications, one per direction",
+      "first": [
+        [
+          [
+            "Y",
+            {
+              "X": "1"
+            }
+          ],
+          "0"
+        ],
+        [
+          [
+            "W",
+            {}
+          ],
+          "0"
+        ],
+        [
+          [
+            "X",
+            {}
+          ],
+          "1"
+        ]
+      ],
+      "second": [
+        [
+          [
+            "Y",
+            {}
+          ],
+          "0"
+        ],
+        [
+          [
+            "W",
+            {
+              "X": "1"
+            }
+          ],
+          "0"
+        ],
+        [
+          [
+            "X",
+            {}
+          ],
+          "1"
+        ]
+      ],
+      "reported": "not stated",
+      "adjudicated": false,
+      "same_units": true
+    },
+    {
+      "id": "changed_response_value",
+      "graph": "x_to_y",
+      "source": "constructed negative",
+      "first": [
+        [
+          [
+            "Y",
+            {
+              "X": "1"
+            }
+          ],
+          "1"
+        ],
+        [
+          [
+            "X",
+            {}
+          ],
+          "1"
+        ]
+      ],
+      "second": [
+        [
+          [
+            "Y",
+            {}
+          ],
+          "0"
+        ],
+        [
+          [
+            "X",
+            {}
+          ],
+          "1"
+        ]
+      ],
+      "reported": "not stated",
+      "adjudicated": false
+    },
+    {
+      "id": "identical_events",
+      "graph": "x_to_y",
+      "source": "constructed: identical events are not a rewriting step",
+      "first": [
+        [
+          [
+            "Y",
+            {}
+          ],
+          "1"
+        ],
+        [
+          [
+            "X",
+            {}
+          ],
+          "1"
+        ]
+      ],
+      "second": [
+        [
+          [
+            "X",
+            {}
+          ],
+          "1"
+        ],
+        [
+          [
+            "Y",
+            {}
+          ],
+          "1"
+        ]
+      ],
+      "reported": "not stated",
+      "adjudicated": false,
+      "same_units": true
+    }
+  ],
+  "exclusion_cases": [
+    {
+      "id": "r115_example1_eq19_eq21",
+      "source": "TR p.7, Example 1, Eqs. (19) and (21): R3 with {X} n An(Z) = empty",
+      "graph": "r115_figure1",
+      "term": [
+        "Z",
+        {
+          "X": "1"
+        }
+      ],
+      "removed": [
+        "X"
+      ],
+      "reported": "Rule 3 applies",
+      "adjudicated": true
+    },
+    {
+      "id": "r115_chain_section_2_2",
+      "source": "TR p.4, Section 2.2 and Eq. (13): Y_z and Y_zx coincide in X -> Z -> Y",
+      "graph": "r115_figure4a",
+      "term": [
+        "Y",
+        {
+          "X": "1",
+          "Z": "0"
+        }
+      ],
+      "removed": [
+        "X"
+      ],
+      "reported": "Y_zx = Y_z",
+      "adjudicated": true
+    },
+    {
+      "id": "r115_chain_keep_mediator",
+      "source": "constructed negative on TR Figure 4(a)",
+      "graph": "r115_figure4a",
+      "term": [
+        "Y",
+        {
+          "X": "1",
+          "Z": "0"
+        }
+      ],
+      "removed": [
+        "Z"
+      ],
+      "reported": "not stated",
+      "adjudicated": false
+    },
+    {
+      "id": "backdoor_direct_effect",
+      "source": "constructed negative on TR Figure 1",
+      "graph": "r115_figure1",
+      "term": [
+        "Y",
+        {
+          "X": "1",
+          "Z": "1"
+        }
+      ],
+      "removed": [
+        "X"
+      ],
+      "reported": "not stated",
+      "adjudicated": false
+    },
+    {
+      "id": "edges_into_retained_set",
+      "source": "constructed: Z reaches Y only through the retained clamp X",
+      "graph": "z_to_x_to_y",
+      "term": [
+        "Y",
+        {
+          "X": "1",
+          "Z": "0"
+        }
+      ],
+      "removed": [
+        "Z"
+      ],
+      "reported": "not stated",
+      "adjudicated": true
+    },
+    {
+      "id": "retained_set_does_not_cut",
+      "source": "constructed negative",
+      "graph": "z_to_x_to_y",
+      "term": [
+        "Y",
+        {
+          "X": "1",
+          "Z": "0"
+        }
+      ],
+      "removed": [
+        "X"
+      ],
+      "reported": "not stated",
+      "adjudicated": false
+    }
+  ],
+  "ancestor_cases": [
+    {
+      "id": "r115_fig4b_y",
+      "source": "TR p.5, after Definition 2.4",
+      "graph": "r115_figure4b",
+      "terms": [
+        [
+          "Y",
+          {
+            "X": "1",
+            "W": "1"
+          }
+        ]
+      ],
+      "reported": "An(Y_xw) = {Y_w, Z}",
+      "adjudicated": [
+        [
+          "Y",
+          {
+            "W": "1"
+          }
+        ],
+        [
+          "Z",
+          {}
+        ]
+      ]
+    },
+    {
+      "id": "r115_fig4b_w",
+      "source": "TR p.5, after Definition 2.4",
+      "graph": "r115_figure4b",
+      "terms": [
+        [
+          "W",
+          {
+            "X": "0"
+          }
+        ]
+      ],
+      "reported": "An(W_x') = {W_x'}",
+      "adjudicated": [
+        [
+          "W",
+          {
+            "X": "0"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "r115_fig4b_x",
+      "source": "TR p.5, after Definition 2.4",
+      "graph": "r115_figure4b",
+      "terms": [
+        [
+          "X",
+          {}
+        ]
+      ],
+      "reported": "An(X) = {X, Z}",
+      "adjudicated": [
+        [
+          "X",
+          {}
+        ],
+        [
+          "Z",
+          {}
+        ]
+      ]
+    },
+    {
+      "id": "r115_fig4a_yz",
+      "source": "TR p.5, after Definition 2.4",
+      "graph": "r115_figure4a",
+      "terms": [
+        [
+          "Y",
+          {
+            "Z": "1"
+          }
+        ]
+      ],
+      "reported": "X is an ancestor of Y but not a counterfactual ancestor of Y_z; the full set is not printed",
+      "adjudicated": [
+        [
+          "Y",
+          {
+            "Z": "1"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "r115_fig4a_yx",
+      "source": "TR p.5, after Definition 2.4",
+      "graph": "r115_figure4a",
+      "terms": [
+        [
+          "Y",
+          {
+            "X": "1"
+          }
+        ]
+      ],
+      "reported": "for Y_x a counterfactual ancestor is Z_x, not X or Z; the full set is not printed",
+      "adjudicated": [
+        [
+          "Y",
+          {
+            "X": "1"
+          }
+        ],
+        [
+          "Z",
+          {
+            "X": "1"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "r115_fig6",
+      "source": "TR p.6, Figure 6 walkthrough",
+      "graph": "r115_figure6a",
+      "terms": [
+        [
+          "Y",
+          {
+            "X": "1",
+            "W": "1"
+          }
+        ],
+        [
+          "X",
+          {}
+        ],
+        [
+          "Z",
+          {}
+        ],
+        [
+          "W",
+          {}
+        ]
+      ],
+      "reported": "An(Y_xw, X, Z, W) = {Y_xw, Z_w, X, Z, W}",
+      "adjudicated": [
+        [
+          "Y",
+          {
+            "X": "1",
+            "W": "1"
+          }
+        ],
+        [
+          "Z",
+          {
+            "W": "1"
+          }
+        ],
+        [
+          "X",
+          {}
+        ],
+        [
+          "Z",
+          {}
+        ],
+        [
+          "W",
+          {}
+        ]
+      ]
+    }
+  ],
+  "network_cases": [
+    {
+      "id": "r115_figure5c",
+      "source": "TR p.6, Figure 5(c)",
+      "graph": "r115_figure4b",
+      "terms": [
+        [
+          "Y",
+          {
+            "X": "1",
+            "W": "1"
+          }
+        ],
+        [
+          "W",
+          {
+            "X": "0"
+          }
+        ],
+        [
+          "X",
+          {}
+        ],
+        [
+          "Z",
+          {
+            "X": "0"
+          }
+        ]
+      ],
+      "reported": "nodes Z, X, W_x' and Y_w; arrows Z -> X and Z -> Y_w; no added roots",
+      "adjudicated": {
+        "nodes": [
+          [
+            "X",
+            {}
+          ],
+          [
+            "W",
+            {
+              "X": "0"
+            }
+          ],
+          [
+            "Y",
+            {
+              "W": "1"
+            }
+          ],
+          [
+            "Z",
+            {}
+          ]
+        ],
+        "edges": [
+          [
+            [
+              "Z",
+              {}
+            ],
+            [
+              "X",
+              {}
+            ]
+          ],
+          [
+            [
+              "Z",
+              {}
+            ],
+            [
+              "Y",
+              {
+                "W": "1"
+              }
+            ]
+          ]
+        ],
+        "exogenous": []
+      }
+    },
+    {
+      "id": "r115_figure6b",
+      "source": "TR p.6, Figure 6(b)",
+      "graph": "r115_figure6a",
+      "terms": [
+        [
+          "Y",
+          {
+            "X": "1",
+            "W": "1"
+          }
+        ],
+        [
+          "X",
+          {}
+        ],
+        [
+          "Z",
+          {}
+        ],
+        [
+          "W",
+          {}
+        ]
+      ],
+      "reported": "nodes W, Z, X, Z_w and Y_xw; arrows W -> Z, Z -> X and Z_w -> Y_xw; U_z feeds Z and Z_w, and U_zx feeds Z, Z_w and X",
+      "adjudicated": {
+        "nodes": [
+          [
+            "Y",
+            {
+              "X": "1",
+              "W": "1"
+            }
+          ],
+          [
+            "Z",
+            {
+              "W": "1"
+            }
+          ],
+          [
+            "X",
+            {}
+          ],
+          [
+            "Z",
+            {}
+          ],
+          [
+            "W",
+            {}
+          ]
+        ],
+        "edges": [
+          [
+            [
+              "W",
+              {}
+            ],
+            [
+              "Z",
+              {}
+            ]
+          ],
+          [
+            [
+              "Z",
+              {}
+            ],
+            [
+              "X",
+              {}
+            ]
+          ],
+          [
+            [
+              "Z",
+              {
+                "W": "1"
+              }
+            ],
+            [
+              "Y",
+              {
+                "X": "1",
+                "W": "1"
+              }
+            ]
+          ]
+        ],
+        "exogenous": [
+          {
+            "serves": [
+              "Z"
+            ],
+            "children": [
+              [
+                "Z",
+                {}
+              ],
+              [
+                "Z",
+                {
+                  "W": "1"
+                }
+              ]
+            ]
+          },
+          {
+            "serves": [
+              "Z",
+              "X"
+            ],
+            "children": [
+              [
+                "Z",
+                {}
+              ],
+              [
+                "Z",
+                {
+                  "W": "1"
+                }
+              ],
+              [
+                "X",
+                {}
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "r115_figure7a",
+      "source": "TR p.8, Figure 7(a)",
+      "graph": "r115_figure1",
+      "terms": [
+        [
+          "Y",
+          {
+            "X": "1",
+            "Z": "1"
+          }
+        ],
+        [
+          "X",
+          {}
+        ],
+        [
+          "Z",
+          {}
+        ]
+      ],
+      "reported": "nodes Z, X and Y_xz; arrow Z -> X; no added roots",
+      "adjudicated": {
+        "nodes": [
+          [
+            "Y",
+            {
+              "X": "1",
+              "Z": "1"
+            }
+          ],
+          [
+            "X",
+            {}
+          ],
+          [
+            "Z",
+            {}
+          ]
+        ],
+        "edges": [
+          [
+            [
+              "Z",
+              {}
+            ],
+            [
+              "X",
+              {}
+            ]
+          ]
+        ],
+        "exogenous": []
+      }
+    },
+    {
+      "id": "r115_figure8a",
+      "source": "TR p.8, Figure 8(a)",
+      "graph": "r115_figure7b",
+      "terms": [
+        [
+          "Y",
+          {
+            "X": "0",
+            "W": "1"
+          }
+        ],
+        [
+          "W",
+          {
+            "X": "1"
+          }
+        ],
+        [
+          "W",
+          {
+            "X": "0"
+          }
+        ]
+      ],
+      "reported": "nodes W_x, W_x' and Y_x'w; no arrows; a dashed bidirected arc W_x <-> W_x' draws the root U_W",
+      "adjudicated": {
+        "nodes": [
+          [
+            "Y",
+            {
+              "X": "0",
+              "W": "1"
+            }
+          ],
+          [
+            "W",
+            {
+              "X": "1"
+            }
+          ],
+          [
+            "W",
+            {
+              "X": "0"
+            }
+          ]
+        ],
+        "edges": [],
+        "exogenous": [
+          {
+            "serves": [
+              "W"
+            ],
+            "children": [
+              [
+                "W",
+                {
+                  "X": "1"
+                }
+              ],
+              [
+                "W",
+                {
+                  "X": "0"
+                }
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "r115_figure8b",
+      "source": "TR p.8, Figure 8(b)",
+      "graph": "r115_figure7b",
+      "terms": [
+        [
+          "Y",
+          {
+            "X": "0",
+            "W": "1"
+          }
+        ],
+        [
+          "X",
+          {}
+        ],
+        [
+          "W",
+          {
+            "X": "0"
+          }
+        ]
+      ],
+      "reported": "nodes W_x', X and Y_x'w; no arrows; a dashed bidirected arc W_x' <-> X draws the root U_XW",
+      "adjudicated": {
+        "nodes": [
+          [
+            "Y",
+            {
+              "X": "0",
+              "W": "1"
+            }
+          ],
+          [
+            "X",
+            {}
+          ],
+          [
+            "W",
+            {
+              "X": "0"
+            }
+          ]
+        ],
+        "edges": [],
+        "exogenous": [
+          {
+            "serves": [
+              "X",
+              "W"
+            ],
+            "children": [
+              [
+                "X",
+                {}
+              ],
+              [
+                "W",
+                {
+                  "X": "0"
+                }
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "r115_figure8c",
+      "source": "TR p.8, Figure 8(c)",
+      "graph": "r115_figure7b",
+      "terms": [
+        [
+          "Y",
+          {
+            "X": "1"
+          }
+        ],
+        [
+          "X",
+          {}
+        ],
+        [
+          "W",
+          {
+            "X": "1"
+          }
+        ]
+      ],
+      "reported": "nodes W_x, X and Y_x; arrow W_x -> Y_x; a dashed bidirected arc W_x <-> X draws the root U_XW",
+      "adjudicated": {
+        "nodes": [
+          [
+            "Y",
+            {
+              "X": "1"
+            }
+          ],
+          [
+            "X",
+            {}
+          ],
+          [
+            "W",
+            {
+              "X": "1"
+            }
+          ]
+        ],
+        "edges": [
+          [
+            [
+              "W",
+              {
+                "X": "1"
+              }
+            ],
+            [
+              "Y",
+              {
+                "X": "1"
+              }
+            ]
+          ]
+        ],
+        "exogenous": [
+          {
+            "serves": [
+              "X",
+              "W"
+            ],
+            "children": [
+              [
+                "X",
+                {}
+              ],
+              [
+                "W",
+                {
+                  "X": "1"
+                }
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "citation": "Richardson and Spirtes (2002), Ancestral Graph Markov Models, Figure 11 and Sections 4.2.2--4.2.3",
+  "doi": "10.1214/aos/1031689015",
+  "source_url": "https://www.cmu.edu/dietrich/philosophy/docs/spirtes/annals2002.pdf",
+  "page": 983,
+  "figure": "11",
+  "reported_claim": "panels (ii)--(iv) show conditioning on s, marginalizing l1 and l2, and performing both operations; a-l1-b-l2-c is an inducing path for the joint transform",
+  "adjudicated_claim": "all three panels and the reported inducing path are confirmed independently by the all-conditioning-sets and inducing-path oracles",
+  "errata_url": "https://sites.stat.washington.edu/tsr/website/documents/2002/annals-2002-errata.txt",
+  "erratum_status": "not amended by the official errata",
+  "transcription_status": "manually transcribed from the official PDF and independently replayed; the paper does not define a vertex order",
+  "nodes": ["a", "l1", "l2", "b", "s", "d", "c"],
+  "edges": [
+    ["a", "tail", "l1", "arrow"],
+    ["l1", "tail", "b", "arrow"],
+    ["l2", "tail", "b", "arrow"],
+    ["l2", "tail", "c", "arrow"],
+    ["b", "tail", "s", "arrow"],
+    ["s", "tail", "d", "arrow"],
+    ["d", "tail", "c", "arrow"]
+  ],
+  "reported_inducing_path": ["a", "l1", "b", "l2", "c"],
+  "transforms": [
+    {
+      "panel": "11(ii)",
+      "conditioned": ["s"],
+      "marginalized": [],
+      "nodes": ["a", "l1", "l2", "b", "d", "c"],
+      "edges": [
+        ["a", "tail", "l1", "tail"],
+        ["l1", "tail", "l2", "tail"],
+        ["l1", "tail", "b", "tail"],
+        ["l2", "tail", "b", "tail"],
+        ["l2", "tail", "c", "arrow"],
+        ["d", "tail", "c", "arrow"]
+      ]
+    },
+    {
+      "panel": "11(iii)",
+      "conditioned": [],
+      "marginalized": ["l1", "l2"],
+      "nodes": ["a", "b", "s", "d", "c"],
+      "edges": [
+        ["a", "tail", "b", "arrow"],
+        ["a", "tail", "c", "arrow"],
+        ["b", "tail", "s", "arrow"],
+        ["b", "tail", "c", "arrow"],
+        ["s", "tail", "d", "arrow"],
+        ["d", "tail", "c", "arrow"]
+      ]
+    },
+    {
+      "panel": "11(iv)",
+      "conditioned": ["s"],
+      "marginalized": ["l1", "l2"],
+      "nodes": ["a", "b", "d", "c"],
+      "edges": [
+        ["a", "tail", "b", "tail"],
+        ["a", "tail", "c", "arrow"],
+        ["b", "tail", "c", "arrow"],
+        ["d", "tail", "c", "arrow"]
+      ]
+    }
+  ]
+}

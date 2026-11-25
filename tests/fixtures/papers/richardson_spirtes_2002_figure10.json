@@ -1,0 +1,42 @@
+{
+  "citation": "Richardson and Spirtes (2002), Ancestral Graph Markov Models, Figure 10 and Section 4.2.2",
+  "doi": "10.1214/aos/1031689015",
+  "source_url": "https://www.cmu.edu/dietrich/philosophy/docs/spirtes/annals2002.pdf",
+  "page": 982,
+  "figure": "10",
+  "reported_claim": "marginalizing t produces panel (ii), while conditioning on t produces panel (iii)",
+  "adjudicated_claim": "both panels are confirmed independently by the all-conditioning-sets and inducing-path oracles",
+  "errata_url": "https://sites.stat.washington.edu/tsr/website/documents/2002/annals-2002-errata.txt",
+  "erratum_status": "not amended by the official errata",
+  "node_order_status": "repository serialization order follows the left-to-right layout; the paper does not define a vertex order",
+  "nodes": ["a", "x", "t", "y", "b"],
+  "edges": [
+    ["a", "tail", "x", "arrow"],
+    ["x", "arrow", "t", "tail"],
+    ["t", "tail", "y", "arrow"],
+    ["y", "arrow", "b", "tail"]
+  ],
+  "transforms": [
+    {
+      "panel": "10(ii)",
+      "conditioned": [],
+      "marginalized": ["t"],
+      "nodes": ["a", "x", "y", "b"],
+      "edges": [
+        ["a", "tail", "x", "arrow"],
+        ["x", "arrow", "y", "arrow"],
+        ["y", "arrow", "b", "tail"]
+      ]
+    },
+    {
+      "panel": "10(iii)",
+      "conditioned": ["t"],
+      "marginalized": [],
+      "nodes": ["a", "x", "y", "b"],
+      "edges": [
+        ["a", "tail", "x", "arrow"],
+        ["y", "arrow", "b", "tail"]
+      ]
+    }
+  ]
+}
