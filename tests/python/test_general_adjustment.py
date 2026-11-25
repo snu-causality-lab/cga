@@ -1,4 +1,6 @@
+import json
 from itertools import combinations
+from pathlib import Path
 
 import pytest
 
@@ -48,6 +50,30 @@ def test_constraints_total_sets_and_forbidden_required():
     with pytest.raises(AdjustmentDomainError):
         find_adjustment_set(graph, interventions="X", outcomes="Y", required="C", allowed=())
     assert not adjustment_set_is_valid(graph, interventions="X", outcomes="Y", adjustment="M")
+
+
+_WITTE_FIGURE_2 = json.loads(
+    (Path(__file__).parents[1] / "fixtures/papers/witte_2020_figure2.json").read_text(encoding="utf-8")
+)
+
+
+@pytest.mark.parametrize("case", _WITTE_FIGURE_2["cases"], ids=lambda case: case["panel"])
+def test_witte_figure_2_ordinary_adjustment(case):
+    nodes = case["nodes"]
+    graph = DAG.from_graph(DirectedBidirectedGraph(nodes=nodes, directed=case["edges"]))
+    x, y = set(case["treatments"]), set(case["outcomes"])
+    candidate_vertices = tuple(v for v in nodes if v not in x | y)
+    query = {"interventions": case["treatments"], "outcomes": case["outcomes"]}
+    edges = tuple((a, "tail", b, "arrow") for a, b in case["edges"])
+    valid = []
+    for z in subsets(candidate_vertices):
+        expected = literal_gac(nodes, edges, x, y, z, "dag")
+        assert adjustment_set_is_valid(graph, **query, adjustment=z) == expected
+        if expected:
+            valid.append(z)
+    assert bool(valid) == case["expected_adjustment_exists"]
+    for find in (find_adjustment_set, find_minimal_adjustment_set):
+        assert isinstance(find(graph, **query), AdjustmentNotFound) == (not valid)
 
 
 def test_every_four_vertex_cpdag_query_against_all_member_dags():

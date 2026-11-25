@@ -1,0 +1,28 @@
+{
+  "source": {
+    "citation": "Witte, Henckel, Maathuis, and Didelez (2020), On Efficient Adjustment in Causal Graphs",
+    "url": "https://jmlr.org/papers/volume21/20-175/20-175.pdf",
+    "sha256": "76b259d4937132f22b76899a81cdbd0a37299276eaddc05453b9b62adc160733",
+    "location": "Figure 2 and the paragraph following Proposition 6"
+  },
+  "cases": [
+    {
+      "panel": "2B",
+      "nodes": ["X1", "X2", "V1", "V2", "Y"],
+      "edges": [["X1", "V1"], ["V2", "V1"], ["V2", "Y"], ["Y", "X2"]],
+      "treatments": ["X1", "X2"],
+      "outcomes": ["Y"],
+      "source_reports_adjustment_exists": true,
+      "expected_adjustment_exists": false
+    },
+    {
+      "panel": "2F",
+      "nodes": ["V1", "X1", "V2", "X2", "Y"],
+      "edges": [["V1", "X1"], ["X1", "V2"], ["X1", "X2"], ["V2", "X2"], ["V2", "Y"], ["X2", "Y"]],
+      "treatments": ["X1", "X2"],
+      "outcomes": ["Y"],
+      "source_reports_adjustment_exists": false,
+      "expected_adjustment_exists": false
+    }
+  ]
+}
