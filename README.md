@@ -34,13 +34,13 @@ An adjustment search returns a set or an `AdjustmentNotFound` result for the spe
 The [paper fixtures](tests/fixtures/papers/) record source examples and regressions derived from published definitions. The suite also checks selected small graphs against independent path or equivalence enumeration.
 
 The ordinary-adjustment tests replay [Witte et al. (2020), Figures 2B and 2F](https://jmlr.org/papers/v21/20-175.html).
-The [Lean checks for Figure 2B](https://github.com/sanghack81/open-causal-science/blob/5a08ef6d08b757ba0f0689421721889ea5f20303/docs/paper-checks.md#witte-et-al-2020-figure-2b) and [Figure 2F](https://github.com/sanghack81/open-causal-science/blob/5a08ef6d08b757ba0f0689421721889ea5f20303/docs/paper-checks.md#witte-et-al-2020-figure-2f) formalize the path and projection calculations used in those examples.
+The [Lean checks for Figure 2B](https://github.com/snu-causality-lab/open-causal-science/blob/5a08ef6d08b757ba0f0689421721889ea5f20303/docs/paper-checks.md#witte-et-al-2020-figure-2b) and [Figure 2F](https://github.com/snu-causality-lab/open-causal-science/blob/5a08ef6d08b757ba0f0689421721889ea5f20303/docs/paper-checks.md#witte-et-al-2020-figure-2f) formalize the path and projection calculations used in those examples.
 
-The separator reference follows the authors’ 2023 runtime correction. The Lean proof counts parent-pair checks in the specified augmentation loop. [Proof scope](https://github.com/sanghack81/open-causal-science/blob/5a08ef6d08b757ba0f0689421721889ea5f20303/OpenCausalScience/Papers/VanDerZanderEtAl2023/AugmentationParentPairs.lean)
+The separator reference follows the authors’ 2023 runtime correction. The Lean proof counts parent-pair checks in the specified augmentation loop. [Proof scope](https://github.com/snu-causality-lab/open-causal-science/blob/5a08ef6d08b757ba0f0689421721889ea5f20303/OpenCausalScience/Papers/VanDerZanderEtAl2023/AugmentationParentPairs.lean)
 
 ## Lean and paper replays
 
-[Open Causal Science](https://github.com/sanghack81/open-causal-science/blob/5a08ef6d08b757ba0f0689421721889ea5f20303/docs/cga.md) records the exact Lean statements corresponding to CGA graph operations. The tests include the original Verma–Pearl Figure 2 and two DAG cases for the forbidden-set construction. Each project builds independently.
+[Open Causal Science](https://github.com/snu-causality-lab/open-causal-science/blob/5a08ef6d08b757ba0f0689421721889ea5f20303/docs/cga.md) records the exact Lean statements corresponding to CGA graph operations. The tests include the original Verma–Pearl Figure 2 and two DAG cases for the forbidden-set construction. Each project builds independently.
 
 To compare the nine published mixed graphs, generate `m-separation.json` with the Lean command in that proof map. From this checkout with CGA installed, compare it against CGA's own paper fixtures.
 
