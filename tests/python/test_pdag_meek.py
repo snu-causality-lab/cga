@@ -1,8 +1,8 @@
-from itertools import product
+from itertools import combinations, permutations, product
 
 import pytest
 
-from causal_graph_algorithms import DAG, DirectedBidirectedGraph, EndpointMarkedGraph, Mark
+from causal_graph_algorithms import DAG, DirectedBidirectedGraph, EndpointMarkedGraph, Mark, d_separated
 from causal_graph_algorithms.pdag import (
     CPDAG, MPDAG, PDAG, NoConsistentExtension, PDAGDomainError,
     find_consistent_dag_extension,
@@ -51,6 +51,38 @@ def test_consistent_extension_and_background_preserve_original_colliders():
         forbidden=(("A", "B"), ("B", "A")))), NoConsistentExtension)
     with pytest.raises(PDAGDomainError):
         meek_closure(cycle, knowledge=BackgroundKnowledge(required=(("missing", "A"),)))
+
+
+def test_verma_pearl_1990_figure_2():
+    # Figure 2 is unlabelled. T, L, R, M, B denote top, left, right, middle and bottom.
+    nodes = ("T", "L", "R", "M", "B")
+    common = (("L", "M"), ("R", "M"), ("M", "B"))
+
+    def orientation(to_left, to_right):
+        left = ("T", "L") if to_left else ("L", "T")
+        right = ("T", "R") if to_right else ("R", "T")
+        return DAG.from_graph(DirectedBidirectedGraph(nodes=nodes, directed=(*common, left, right)))
+
+    first, second, third = (orientation(*tail) for tail in ((True, True), (False, True), (True, False)))
+    for member in (first, second, third):
+        assert dag_markov_equivalent(first, member)
+        pattern = CPDAG.from_dag(member).topology
+        assert len(pattern.edges) == 5
+        assert directed(pattern) == frozenset(common)
+        assert pattern.edge("T", "L") == pattern.edge("T", "R") == (Mark.TAIL, Mark.TAIL)
+
+    for left, right in permutations(nodes, 2):
+        eligible = tuple(vertex for vertex in nodes if vertex not in (left, right))
+        for size in range(len(eligible) + 1):
+            for given in combinations(eligible, size):
+                answer = d_separated(first, left, right, given=given)
+                assert d_separated(second, left, right, given=given) == answer
+                assert d_separated(third, left, right, given=given) == answer
+
+    added_collider = orientation(False, False)
+    assert not dag_markov_equivalent(first, added_collider)
+    assert d_separated(first, "L", "R", given=("T",))
+    assert not d_separated(added_collider, "L", "R", given=("T",))
 
 
 def test_all_four_vertex_dag_classes_have_exact_compelled_orientations():

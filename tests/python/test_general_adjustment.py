@@ -76,6 +76,16 @@ def test_witte_figure_2_ordinary_adjustment(case):
         assert isinstance(find(graph, **query), AdjustmentNotFound) == (not valid)
 
 
+@pytest.mark.parametrize(("graph_text", "forbidden"), [
+    ("X1 --> A --> X2 --> Y --> C; A --> B", {"Y", "C"}),
+    ("X1 --> A --> Y; A --> X2 --> C", {"A", "Y", "X2", "C"}),
+])
+def test_dag_forbidden_set_avoids_treatments_only_on_proper_paths(graph_text, forbidden):
+    graph = DAG.from_text(graph_text)
+    result = find_adjustment_set(graph, interventions=("X1", "X2"), outcomes="Y")
+    assert set(result.forbidden_vertices) == forbidden
+
+
 def test_every_four_vertex_cpdag_query_against_all_member_dags():
     nodes = ("A", "B", "C", "D")
     for _, members in dag_classes(nodes).items():
