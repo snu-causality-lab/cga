@@ -59,6 +59,15 @@ python tests/compare_lean_mseparation.py /path/to/m-separation.json
 python tests/compare_lean_dseparation.py /path/to/d-separation.json
 ```
 
+The [mixed-graph worklist proof and replay](https://github.com/snu-causality-lab/open-causal-science/blob/main/docs/cga.md#compare-the-mixed-graph-arrival-search)
+also cover bow-capable ADMGs and ancestral graphs with undirected edges. Generate
+`mixed-separation.json` with the linked Lean exporter and replay it against CGA
+and the independent simple-edge-path oracle.
+
+```sh
+python tests/compare_lean_mixed_separation.py /path/to/mixed-separation.json
+```
+
 ## License
 
 Causal Graph Algorithms is available under the [MIT License](LICENSE).
