@@ -130,6 +130,12 @@ from .errors import (
     SeparationDomainError,
     TianAdjustmentDomainError,
 )
+from .experimental_design import (
+    MinimumCostIntervention,
+    dag_intervention_markov_equivalent,
+    find_minimum_cost_intervention,
+    hedge_hull,
+)
 from .external_selection_recovery import (
     ExternalRecoveryNotEstablished,
     ExternalRecoveryResult,
@@ -159,6 +165,7 @@ from .generalized_identification import (
     NonIdentifiedGeneralizedEffect,
     identify_generalized_causal_effect,
 )
+from .ida import ida_parent_sets, joint_ida_parent_counts, joint_ida_parent_sets
 from .identification import (
     HedgeWitness,
     IdentificationResult,
@@ -402,6 +409,7 @@ __all__ = [
     "MPDAGIdentificationResourceLimitError",
     "MPDAGIdentificationResult",
     "Mark",
+    "MinimumCostIntervention",
     "MarkovEquivalenceDomainError",
     "MaximalAncestralGraph",
     "MinimumCostAdjustment",
@@ -487,6 +495,7 @@ __all__ = [
     "d_separated_sets",
     "dag_adjustment_set_is_valid",
     "dag_forbidden_projection",
+    "dag_intervention_markov_equivalent",
     "dag_markov_equivalent",
     "dag_optimal_adjustment_set",
     "derive_ci_closure",
@@ -499,6 +508,7 @@ __all__ = [
     "find_conditional_adjustment_set",
     "find_consistent_dag_extension",
     "find_directed_edge_visibility_witness",
+    "find_minimum_cost_intervention",
     "find_fixing_sequence",
     "find_lsas_adjustment",
     "find_m_separator",
@@ -520,6 +530,8 @@ __all__ = [
     "graph_to_canonical_json",
     "graph_to_svg",
     "graph_to_text",
+    "hedge_hull",
+    "ida_parent_sets",
     "identify_causal_effect",
     "identify_conditional_causal_effect",
     "identify_conditional_counterfactual",
@@ -534,6 +546,8 @@ __all__ = [
     "iter_adjustment_sets",
     "iter_m_separators",
     "iter_selection_adjustment_pairs",
+    "joint_ida_parent_counts",
+    "joint_ida_parent_sets",
     "latent_projection",
     "list_mag_equivalence_class",
     "m_separated",
