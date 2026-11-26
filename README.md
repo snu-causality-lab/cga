@@ -27,7 +27,9 @@ python -m pip install .
 | Adjustment | General adjustment, efficient DAG and optimal mixed-graph sets, conditional and sequential adjustment, and local sufficient selection rules. [DAG and O-set](docs/reference/DAG_ADJUSTMENT.md) · [Runge](docs/reference/RUNGE_ADJUSTMENT.md) · [Smucler et al.](docs/reference/SMUCLER_ADJUSTMENT.md) · [Conditional](docs/reference/CONDITIONAL_ADJUSTMENT.md) · [Sequential](docs/reference/SEQUENTIAL_ADJUSTMENT.md) · [Local selection](docs/reference/LSAS_SELECTION.md) |
 | Identification and recovery | ID, IDC, gID, c-gID, marginal PAG and MPDAG identification, Tian adjustment, CADMG and kernel fixing, and selection recovery with optional external data. [Identification and recovery](docs/reference/PUBLISHED_IDENTIFICATION.md) |
 | IDA | Local and joint parent-set enumeration for CPDAGs. [IDA parent sets](docs/reference/IDA.md) |
-| Experimental design | Perfect-intervention DAG equivalence and minimum-cost intervention for a district kernel. [Experimental design](docs/reference/EXPERIMENTAL_DESIGN.md) |
+| Experimental design | Perfect-intervention DAG equivalence minimum-cost intervention for a district kernel, and proxy experiment design for adjustment. [Experimental design](docs/reference/EXPERIMENTAL_DESIGN.md) |
+| Soft interventions | Augmented MAGs and equivalence for controlled and unknown-target soft regimes. [Soft intervention graphs](docs/reference/SOFT_INTERVENTION.md) |
+| Missing data | Graphical target and full-law recovery criteria and direct testability. [Missing-data graphs](docs/reference/MISSINGNESS.md) |
 | Counterfactuals | Single-world reductions and applicability checks for three rules of counterfactual calculus. [Identification](docs/reference/PUBLISHED_IDENTIFICATION.md#counterfactuals) · [Calculus](docs/reference/COUNTERFACTUAL_CALCULUS.md) |
 | C11 library | Separation, projection, ancestral graph checks, MAG equivalence, loyal equivalent graph enumeration, and DAG adjustment validity. [Native API and bounds](docs/native.md) |
 

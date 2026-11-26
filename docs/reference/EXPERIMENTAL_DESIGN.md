@@ -52,3 +52,32 @@ same labels, empty or nonconservative collections raise
 In Figure 2, all three DAGs agree observationally. With the observational
 regime and intervention on vertex 4, only the first two are still equivalent.
 [Hauser and Bühlmann, JMLR 2012](https://www.jmlr.org/papers/v13/hauser12a.html)
+
+## Designing a proxy experiment for adjustment
+
+`find_minimum_cost_proxy_adjustment(graph, interventions, outcomes, costs=..., allowed=...)`
+returns one experiment and adjustment set meeting the graphical criterion of
+Elahi et al. (2024), §4. It drops irrelevant query treatments using Rule 3,
+restricts to the ancestors of the remaining query, and solves the resulting
+split-network cut with exact rational capacities. The result also gives the
+remaining query treatments and the total intervention cost. `None` denotes
+infeasibility for this adjustment criterion and these allowed intervention
+vertices. Other identification strategies may still be available.
+
+An omitted vertex cost defaults to one. Supply nonnegative integer or
+`Fraction` costs. `allowed` restricts intervention vertices. The cut
+protects both endpoint sets from adjustment and protects every member of
+the target ancestor set from intervention. The latter restriction preserves
+the target mechanisms used in the adjustment formula. The implementation
+also keeps descendants of query treatments out of the adjustment set,
+using their descendants before the proxy intervention. This sufficient
+restriction still permits intervening on such a covariate when it is
+outside the target ancestor set. Optimality is with respect to this
+protected cut problem.
+
+For example, on
+`X → Y` with a bidirected edge and a lower cost at `Y`, the printed
+cut can select `do(Y)`. The protected cut selects `do(X)` when allowed.
+Figure 2(a) gives a working proxy experiment on `v1` for the joint effect
+of `v2` and `v3` on `y`.
+[Elahi et al., Figure 2 and §4](https://papers.nips.cc/paper/2024/file/5bd9fbb3a5a985f80c16ddd0ec1dfc43-Paper-Conference.pdf)

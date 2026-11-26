@@ -200,6 +200,15 @@ from .meek import (
     BackgroundKnowledge,
     meek_closure,
 )
+from .missingness import (
+    MissingnessGraph,
+    MohanResponseFactor,
+    find_colluding_path,
+    missing_data_full_law_obstructions,
+    mohan_binary_independence_interval,
+    mohan_direct_test_witnesses,
+    mohan_joint_recovery_factors,
+)
 from .mpdag_identification import (
     IdentifiedMPDAGEffect,
     MPDAGIdentificationDomainError,
@@ -260,6 +269,7 @@ from .selection_recovery import (
     recover_conditional_distribution,
     selection_adjustment_pair_is_valid,
 )
+from .proxy_adjustment import ProxyAdjustmentDesign, find_minimum_cost_proxy_adjustment
 from .separation import (
     d_separated,
     d_separated_sets,
@@ -301,6 +311,12 @@ from .smucler_adjustment import (
     SmuclerObjective,
     SmuclerReduction,
     smucler_adjustment_set,
+)
+from .soft_intervention import (
+    controlled_soft_intervention_mag,
+    controlled_soft_intervention_markov_equivalent,
+    psi_markov_equivalent,
+    psi_soft_intervention_mag,
 )
 from .subgraph import induced_subgraph
 from .svg import graph_to_svg
@@ -410,6 +426,8 @@ __all__ = [
     "MPDAGIdentificationResult",
     "Mark",
     "MinimumCostIntervention",
+    "MissingnessGraph",
+    "MohanResponseFactor",
     "MarkovEquivalenceDomainError",
     "MaximalAncestralGraph",
     "MinimumCostAdjustment",
@@ -432,6 +450,7 @@ __all__ = [
     "ProbabilityExpressionValidationError",
     "Product",
     "ProjectionDomainError",
+    "ProxyAdjustmentDesign",
     "Ratio",
     "RecoveredDistribution",
     "RecoveredExternalEffect",
@@ -491,6 +510,8 @@ __all__ = [
     "counterfactual_d_separated",
     "counterfactual_event_to_tex",
     "counterfactual_exclusion",
+    "controlled_soft_intervention_mag",
+    "controlled_soft_intervention_markov_equivalent",
     "d_separated",
     "d_separated_sets",
     "dag_adjustment_set_is_valid",
@@ -509,7 +530,9 @@ __all__ = [
     "find_consistent_dag_extension",
     "find_directed_edge_visibility_witness",
     "find_minimum_cost_intervention",
+    "find_minimum_cost_proxy_adjustment",
     "find_fixing_sequence",
+    "find_colluding_path",
     "find_lsas_adjustment",
     "find_m_separator",
     "find_mag_directed_edge_visibility_witness",
@@ -551,6 +574,10 @@ __all__ = [
     "latent_projection",
     "list_mag_equivalence_class",
     "m_separated",
+    "missing_data_full_law_obstructions",
+    "mohan_binary_independence_interval",
+    "mohan_direct_test_witnesses",
+    "mohan_joint_recovery_factors",
     "m_separated_sets",
     "m_separator_is_minimal",
     "mag_markov_equivalent",
@@ -558,6 +585,8 @@ __all__ = [
     "meek_closure",
     "probability_expression_to_tex",
     "prune_dag_adjustment_set",
+    "psi_markov_equivalent",
+    "psi_soft_intervention_mag",
     "recover_causal_effect",
     "recover_causal_effect_with_external_data",
     "recover_conditional_distribution",
