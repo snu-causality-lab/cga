@@ -92,6 +92,7 @@ from .counterfactual_probability import (
     ValueSummation,
     value_expression_to_tex,
 )
+from .ctfidu_source import CTFIDUSource, find_ctfidu_source
 from .dag_adjustment import (
     DAGAdjustmentDomainError,
     DAGAdjustmentNotApplicable,
@@ -323,6 +324,7 @@ from .soft_intervention import (
 )
 from .subgraph import induced_subgraph
 from .svg import graph_to_svg
+from .swig import SWIGTemplate, SWIGVertex, swig_template
 from .text_io import (
     graph_from_text,
     graph_to_text,
@@ -363,6 +365,7 @@ __all__ = [
     "CIScope",
     "CIStatement",
     "CPDAG",
+    "CTFIDUSource",
     "CachedCIOracle",
     "CausalPAG",
     "ClosedPAG",
@@ -467,6 +470,8 @@ __all__ = [
     "RungeAdjustmentDomainError",
     "RungeAdjustmentResourceLimitError",
     "RungeAdjustmentResult",
+    "SWIGTemplate",
+    "SWIGVertex",
     "SchemaError",
     "SearchBudgetExceeded",
     "SelectionAdjustmentPair",
@@ -532,6 +537,7 @@ __all__ = [
     "exclusion_rule_applies",
     "find_adjustment_set",
     "find_conditional_adjustment_set",
+    "find_ctfidu_source",
     "find_consistent_dag_extension",
     "find_directed_edge_visibility_witness",
     "find_minimum_cost_intervention",
@@ -603,6 +609,7 @@ __all__ = [
     "selection_adjustment_pair_is_valid",
     "sequential_adjustment_is_valid",
     "smucler_adjustment_set",
+    "swig_template",
     "tian_adjustment_to_uca",
     "trek_separated",
     "unseparated_skeleton_edges",

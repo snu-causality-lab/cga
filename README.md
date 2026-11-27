@@ -32,7 +32,7 @@ python -m pip install .
 | Linear graphical models | Trek separation by given left and right blockers in a DAG. [Trek separation](docs/reference/TREK_SEPARATION.md) |
 | Soft interventions | Augmented MAGs and equivalence for controlled and unknown-target soft regimes. [Soft intervention graphs](docs/reference/SOFT_INTERVENTION.md) |
 | Missing data | Graphical target and full-law recovery criteria and direct testability. [Missing-data graphs](docs/reference/MISSINGNESS.md) |
-| Counterfactuals | Single-world reductions and applicability checks for three rules of counterfactual calculus. [Identification](docs/reference/PUBLISHED_IDENTIFICATION.md#counterfactuals) · [Calculus](docs/reference/COUNTERFACTUAL_CALCULUS.md) |
+| Counterfactuals | Single-world templates and identification, experiment source selection for given factors, and counterfactual rule checks. [SWIG](docs/reference/SWIG.md) · [Identification](docs/reference/PUBLISHED_IDENTIFICATION.md#counterfactuals) · [CTFIDU source selection](docs/reference/CTFIDU_SOURCE.md) · [Calculus](docs/reference/COUNTERFACTUAL_CALCULUS.md) |
 | C11 library | Separation, projection, ancestral graph checks, MAG equivalence, loyal equivalent graph enumeration, and DAG adjustment validity. [Native API and bounds](docs/native.md) |
 
 Results retain the assumptions and failure meanings of their operation. An empty adjustment set can be a successful result. Identification returns symbolic expressions with their declared probability sources. The caller supplies the distributions and causal premises needed to interpret a result.
