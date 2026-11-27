@@ -22,13 +22,14 @@ python -m pip install .
 
 | Topic | Operations and contracts |
 | --- | --- |
-| Graphs, equivalence and CI | Graph views, d- and m-separation, latent projection, ancestral marginalization and selection, maximal extension, CPDAG/MPDAG construction, DAG and MAG equivalence, and conditional independence. [Graph operations](docs/reference/GRAPH_OPERATIONS.md) · [MAG and PAG construction and listing](docs/reference/MAG_ENUMERATION.md) |
+| Graphs, equivalence and CI | Graph views, d- and m-separation, latent projection, ancestral marginalization and selection, maximal extension, CPDAG/MPDAG construction, GES operator validity, DAG and MAG equivalence, and conditional independence. [Graph operations](docs/reference/GRAPH_OPERATIONS.md) · [MAG and PAG construction and listing](docs/reference/MAG_ENUMERATION.md) |
 | Constrained separators | Construct, minimize or enumerate separators with required, allowed or weighted vertices. [Separator search and the authors’ 2023 corrigendum](docs/reference/SEPARATOR_SEARCH.md) |
 | Adjustment | General adjustment, efficient DAG and optimal mixed-graph sets, conditional and sequential adjustment, and local sufficient selection rules. [DAG and O-set](docs/reference/DAG_ADJUSTMENT.md) · [Runge](docs/reference/RUNGE_ADJUSTMENT.md) · [Smucler et al.](docs/reference/SMUCLER_ADJUSTMENT.md) · [Conditional](docs/reference/CONDITIONAL_ADJUSTMENT.md) · [Sequential](docs/reference/SEQUENTIAL_ADJUSTMENT.md) · [Local selection](docs/reference/LSAS_SELECTION.md) |
 | Identification and recovery | ID, IDC, gID, c-gID, marginal PAG and MPDAG identification, Tian adjustment, CADMG and kernel fixing, and selection recovery with optional external data. [Identification and recovery](docs/reference/PUBLISHED_IDENTIFICATION.md) |
 | Path-specific effects | Find a recanting district and its path witnesses in a DAG or ADMG. [Recanting districts](docs/reference/PUBLISHED_IDENTIFICATION.md#recanting-districts) |
 | IDA | Local and joint parent-set enumeration for CPDAGs. [IDA parent sets](docs/reference/IDA.md) |
-| Experimental design | Perfect-intervention DAG equivalence minimum-cost intervention for a district kernel, and proxy experiment design for adjustment. [Experimental design](docs/reference/EXPERIMENTAL_DESIGN.md) |
+| Experimental design | Perfect-intervention DAG equivalence, skeleton edge separation, minimum-cost intervention for a district kernel, and proxy experiment design for adjustment. [Experimental design](docs/reference/EXPERIMENTAL_DESIGN.md) |
+| Linear graphical models | Trek separation by given left and right blockers in a DAG. [Trek separation](docs/reference/TREK_SEPARATION.md) |
 | Soft interventions | Augmented MAGs and equivalence for controlled and unknown-target soft regimes. [Soft intervention graphs](docs/reference/SOFT_INTERVENTION.md) |
 | Missing data | Graphical target and full-law recovery criteria and direct testability. [Missing-data graphs](docs/reference/MISSINGNESS.md) |
 | Counterfactuals | Single-world reductions and applicability checks for three rules of counterfactual calculus. [Identification](docs/reference/PUBLISHED_IDENTIFICATION.md#counterfactuals) · [Calculus](docs/reference/COUNTERFACTUAL_CALCULUS.md) |

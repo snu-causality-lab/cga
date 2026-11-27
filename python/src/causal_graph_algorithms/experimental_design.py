@@ -10,6 +10,7 @@ from ._validation import node_positions, normalize_seeds, require_vertex
 from .directed_bidirected import AcyclicDirectedBidirectedGraph, DAG, DirectedBidirectedGraph
 from .equivalence import dag_markov_equivalent
 from .errors import GraphValidationError, MarkovEquivalenceDomainError
+from .pdag import CPDAG, PDAG
 from .subgraph import induced_subgraph
 
 
@@ -43,6 +44,50 @@ def dag_intervention_markov_equivalent(
         )
 
     return all(dag_markov_equivalent(cut(left, target), cut(right, target)) for target in regimes)
+
+
+def unseparated_skeleton_edges(
+    graph: DAG | PDAG | CPDAG,
+    *,
+    targets: Iterable[str | Iterable[str]],
+) -> tuple[tuple[str, str], ...]:
+    """Return edges whose endpoints have identical intervention memberships.
+
+    Only the skeleton is used. An empty result means the fixed known perfect
+    interventions distinguish every DAG with that skeleton, the criterion of
+    Kocaoglu, Dimakis and Vishwanath (2017), Theorem 1.
+    Endpoints and edges follow the declared vertex order.
+    """
+    adjacencies: Iterable[tuple[str, str]]
+    if isinstance(graph, DAG):
+        adjacencies = graph.topology.directed
+    elif isinstance(graph, (PDAG, CPDAG)):
+        adjacencies = (
+            (left, right) for left, _, right, _ in graph.topology.edges
+        )
+    else:
+        raise GraphValidationError("skeleton design requires a DAG, PDAG or CPDAG")
+
+    positions = node_positions(graph.topology.nodes)
+    if isinstance(targets, (str, bytes)):
+        raise GraphValidationError("supply a collection of intervention target sets")
+    try:
+        experiments = iter(targets)
+    except TypeError as error:
+        raise GraphValidationError("intervention target sets must be iterable") from error
+
+    membership: dict[str, set[int]] = {node: set() for node in positions}
+    for index, target in enumerate(experiments):
+        for node in normalize_seeds(positions, target):
+            membership[node].add(index)
+
+    unseparated = [
+        (left, right) if positions[left] < positions[right] else (right, left)
+        for left, right in adjacencies
+        if membership[left] == membership[right]
+    ]
+    unseparated.sort(key=lambda edge: (positions[edge[0]], positions[edge[1]]))
+    return tuple(unseparated)
 
 
 def _single_district(

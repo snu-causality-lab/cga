@@ -93,6 +93,38 @@ compares exact labels and ignores their declaration order. No DAG-class listing
 or discovery-from-data algorithm is added.
 Use `.topology` with existing text, JSON, and SVG adapters.
 
+## GES operator validity
+
+`ges_insert_is_valid` and `ges_delete_is_valid` test candidate Insert and Delete
+moves on a `CPDAG`. For vertices `X` and `Y`, let `N(Y,X)` be the undirected
+neighbors of `Y` adjacent to `X`. Insert requires nonadjacent endpoints and a
+set `tails` of undirected neighbors of `Y` nonadjacent to `X`. The union of
+`N(Y,X)` and `tails` must be a clique and meet every semidirected path from
+`Y` to `X`. Delete requires an undirected `X — Y` or directed `X → Y` edge
+and a subset `heads` of `N(Y,X)`. The nodes in `N(Y,X)` outside `heads`
+must form a clique.
+[Chickering (2002), Definitions 12–14 and Theorems 15 and 17](https://jmlr.org/papers/volume3/chickering02b/chickering02b.pdf#page=21)
+
+Each set argument accepts one label or an iterable of labels. A candidate with
+known vertices but incompatible edges or sets returns `False`. Unknown labels
+and inputs outside the `CPDAG` view raise `PDAGDomainError`. These predicates
+check whether editing one edge of a DAG representative realizes the operator's
+result. [Lean proof on essential graphs](https://github.com/snu-causality-lab/open-causal-science/blob/51af06a9f7e0691cbfcc7e9fee8f81c0be8d6f29/docs/papers/chickering-2002-greedy-equivalence-search.md#the-validity-tests-together)
+
+```python
+from causal_graph_algorithms import CPDAG, DAG, ges_delete_is_valid, ges_insert_is_valid
+
+chain = CPDAG.from_dag(DAG.from_text("X --> P --> Q --> Y"))
+assert not ges_insert_is_valid(chain, "X", "Y")
+assert ges_insert_is_valid(chain, "X", "Y", tails="Q")
+
+diamond = CPDAG.from_dag(
+    DAG.from_text("X --> Y; X --> P; X --> Q; Y --> P; Y --> Q")
+)
+assert not ges_delete_is_valid(diamond, "X", "Y")
+assert ges_delete_is_valid(diamond, "X", "Y", heads="P")
+```
+
 ## CI values, oracles, and graphoid deductions
 
 `CIStatement(left, right, given=())` uses sets, canonicalizes symmetry, and requires

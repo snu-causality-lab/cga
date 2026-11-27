@@ -53,6 +53,42 @@ In Figure 2, all three DAGs agree observationally. With the observational
 regime and intervention on vertex 4, only the first two are still equivalent.
 [Hauser and Bühlmann, JMLR 2012](https://www.jmlr.org/papers/v13/hauser12a.html)
 
+## Checking a design on a known skeleton
+
+`unseparated_skeleton_edges(graph, targets=...)` checks a fixed design of
+known perfect interventions. An experiment separates a skeleton edge when it
+targets exactly one endpoint. The function lists edges that no supplied
+experiment separates, with the endpoints and edges in graph vertex order.
+Pass a `DAG`, `PDAG`, or `CPDAG`. The check uses the underlying skeleton
+and considers every DAG orientation of that skeleton.
+
+An empty result means that the observational and intervention graphical
+signatures distinguish every DAG on the skeleton. A nonempty result gives
+edges that can be reversed in some indistinguishable pair of DAGs. Each
+entry in `targets` is a vertex label or an iterable of labels for one
+experiment. An empty design is allowed and each vertex label must be in
+the graph. [Kocaoglu, Dimakis and Vishwanath, Theorem 1](https://proceedings.mlr.press/v70/kocaoglu17a/kocaoglu17a.pdf#page=4)
+
+The two experiments in Figure 1's graph-separating design suffice. Using
+only its first experiment leaves two edges unseparated.
+
+```python
+from causal_graph_algorithms import EndpointMarkedGraph, PDAG, unseparated_skeleton_edges
+
+skeleton = PDAG(EndpointMarkedGraph.from_text(
+    "U1 --- U2; U1 --- U3; U1 --- U4; U1 --- U5; "
+    "U2 --- U3; U2 --- U5; U3 --- U4"
+))
+design = (("U1", "U3"), ("U2", "U3"))
+assert unseparated_skeleton_edges(skeleton, targets=design) == ()
+assert unseparated_skeleton_edges(skeleton, targets=design[:1]) == (
+    ("U1", "U3"), ("U2", "U5"),
+)
+```
+
+Open Causal Science proves the skeleton criterion and checks the two
+designs in Figure 1 in Lean. [Lean companion](https://github.com/snu-causality-lab/open-causal-science/blob/51af06a9f7e0691cbfcc7e9fee8f81c0be8d6f29/docs/papers/kocaoglu-et-al-2017-cost-optimal-graph-learning.md)
+
 ## Designing a proxy experiment for adjustment
 
 `find_minimum_cost_proxy_adjustment(graph, interventions, outcomes, costs=..., allowed=...)`

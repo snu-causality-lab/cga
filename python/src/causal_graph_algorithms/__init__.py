@@ -135,6 +135,7 @@ from .experimental_design import (
     dag_intervention_markov_equivalent,
     find_minimum_cost_intervention,
     hedge_hull,
+    unseparated_skeleton_edges,
 )
 from .external_selection_recovery import (
     ExternalRecoveryNotEstablished,
@@ -165,6 +166,7 @@ from .generalized_identification import (
     NonIdentifiedGeneralizedEffect,
     identify_generalized_causal_effect,
 )
+from .ges_operators import ges_delete_is_valid, ges_insert_is_valid
 from .ida import ida_parent_sets, joint_ida_parent_counts, joint_ida_parent_sets
 from .identification import (
     HedgeWitness,
@@ -332,6 +334,7 @@ from .tian_adjustment import (
     TianUCARepresentation,
     tian_adjustment_to_uca,
 )
+from .trek_separation import trek_separated
 from .visibility import (
     DirectedEdgeVisibilityWitness,
     MAGDirectedEdgeVisibilityWitness,
@@ -554,6 +557,8 @@ __all__ = [
     "graph_from_json",
     "graph_from_text",
     "graph_to_canonical_json",
+    "ges_delete_is_valid",
+    "ges_insert_is_valid",
     "graph_to_svg",
     "graph_to_text",
     "hedge_hull",
@@ -599,5 +604,7 @@ __all__ = [
     "sequential_adjustment_is_valid",
     "smucler_adjustment_set",
     "tian_adjustment_to_uca",
+    "trek_separated",
+    "unseparated_skeleton_edges",
     "value_expression_to_tex",
 ]
