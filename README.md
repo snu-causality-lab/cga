@@ -23,6 +23,8 @@ python -m pip install .
 | Topic | Operations and contracts |
 | --- | --- |
 | Graphs, equivalence and CI | Graph views, d- and m-separation, latent projection, ancestral marginalization and selection, maximal extension, CPDAG/MPDAG construction, GES operator validity, DAG and MAG equivalence, and conditional independence. [Graph operations](docs/reference/GRAPH_OPERATIONS.md) · [MAG and PAG construction and listing](docs/reference/MAG_ENUMERATION.md) |
+| ADMG Markov properties | Observational head–tail partition and ordered-local CI for an ancestral set. [ADMG Markov properties](docs/reference/ADMG_MARKOV.md) |
+| Chordal graphs | Perfect elimination order and elimination forest for undirected graphs. [Chordal graphs](docs/reference/CHORDAL.md) |
 | Constrained separators | Construct, minimize or enumerate separators with required, allowed or weighted vertices. [Separator search and the authors’ 2023 corrigendum](docs/reference/SEPARATOR_SEARCH.md) |
 | Adjustment | General adjustment, efficient DAG and optimal mixed-graph sets, conditional and sequential adjustment, and local sufficient selection rules. [DAG and O-set](docs/reference/DAG_ADJUSTMENT.md) · [Runge](docs/reference/RUNGE_ADJUSTMENT.md) · [Smucler et al.](docs/reference/SMUCLER_ADJUSTMENT.md) · [Conditional](docs/reference/CONDITIONAL_ADJUSTMENT.md) · [Sequential](docs/reference/SEQUENTIAL_ADJUSTMENT.md) · [Local selection](docs/reference/LSAS_SELECTION.md) |
 | Identification and recovery | ID, IDC, gID, c-gID, marginal PAG and MPDAG identification, Tian adjustment, CADMG and kernel fixing, and selection recovery with optional external data. [Identification and recovery](docs/reference/PUBLISHED_IDENTIFICATION.md) |

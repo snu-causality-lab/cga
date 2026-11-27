@@ -10,8 +10,10 @@ from .adjustment import (
     find_adjustment_set,
     find_minimal_adjustment_set,
 )
+from .admg_markov import ADMGHeadTail, admg_head_tail_partition, admg_ordered_local_ci
 from .ancestral import AncestralGraph
 from .ancestral_transform import ancestral_marginal_condition_transform
+from .chordal import EliminationBag, EliminationForest, chordal_elimination_forest
 from .conditional_adjustment import (
     ConditionalAdjustmentDomainError,
     ConditionalAdjustmentGraph,
@@ -345,6 +347,7 @@ from .visibility import (
 )
 
 __all__ = [
+    "ADMGHeadTail",
     "AcyclicDirectedBidirectedGraph",
     "AdjustmentDomainError",
     "AdjustmentGraph",
@@ -392,6 +395,8 @@ __all__ = [
     "DAGOptimalAdjustmentSet",
     "DirectedBidirectedGraph",
     "DirectedEdgeVisibilityWitness",
+    "EliminationBag",
+    "EliminationForest",
     "EndpointMarkedGraph",
     "ExternalRecoveryNotEstablished",
     "ExternalRecoveryResult",
@@ -512,8 +517,11 @@ __all__ = [
     "ValueRatio",
     "ValueSummation",
     "adjustment_set_is_valid",
+    "admg_head_tail_partition",
+    "admg_ordered_local_ci",
     "ancestral_marginal_condition_transform",
     "ancestral_multi_world_network",
+    "chordal_elimination_forest",
     "conditional_adjustment_set_is_valid",
     "consistency_rule_applies",
     "counterfactual_ancestors_reflexive",
