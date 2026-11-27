@@ -246,6 +246,7 @@ from .probability import (
     probability_expression_to_tex,
 )
 from .projection import latent_projection
+from .recanting_district import RecantingDistrictWitness, find_recanting_district
 from .runge_adjustment import (
     RungeAdjustmentDomainError,
     RungeAdjustmentResourceLimitError,
@@ -452,6 +453,7 @@ __all__ = [
     "ProjectionDomainError",
     "ProxyAdjustmentDesign",
     "Ratio",
+    "RecantingDistrictWitness",
     "RecoveredDistribution",
     "RecoveredExternalEffect",
     "RecoveryBudgetExceeded",
@@ -543,6 +545,7 @@ __all__ = [
     "find_minimum_cost_m_separator",
     "find_nonmaximality_witness",
     "find_primitive_inducing_path",
+    "find_recanting_district",
     "find_selection_adjustment_pair",
     "fix_kernel",
     "fix_vertices",

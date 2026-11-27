@@ -1,11 +1,12 @@
 # Identification, fixing, and selection recovery
 
-The Python functions below construct symbolic probability expressions from
-graphs and declared data sources. A `Probability` leaf describes an available
-observational, intervention, or selected source. `Product`, `Summation`, and
-`Ratio` combine those leaves. Use `probability_expression_to_tex(result.formula)`
-when an operation returns a formula. The caller supplies the underlying
-distributions, support and model assumptions needed to interpret it.
+The identification and recovery functions below construct symbolic probability
+expressions from graphs and declared data sources. A `Probability` leaf
+describes an available observational, intervention, or selected source.
+`Product`, `Summation`, and `Ratio` combine those leaves.
+Use `probability_expression_to_tex(result.formula)` to render a returned formula.
+The caller supplies the underlying distributions, support and model
+assumptions needed to interpret it.
 
 ## Known DAGs and acyclic directed mixed graphs
 
@@ -38,6 +39,50 @@ graph = DAG.from_text("Z --> X; Z --> Y; X --> Y")
 result = identify_causal_effect(graph, outcomes="Y", interventions="X")
 assert isinstance(result, IdentifiedEffect)
 ```
+
+## Recanting districts
+
+`find_recanting_district` checks Definition 2 of Shpitser (2013) on a `DAG` or
+an `AcyclicDirectedBidirectedGraph`, including ADMGs with bows. It removes the
+treatments, keeps the outcomes and their directed ancestors in the remaining
+graph, and finds the components connected by bidirected edges in the induced
+graph.
+A recanting district contains the first successors of a selected path and an
+excluded path from the same treatment. The successors may be the same vertex.
+[Shpitser, 2013](https://doi.org/10.1111/cogs.12058), [Definition 2 in the author preprint](https://arxiv.org/pdf/1205.0241#page=28)
+
+The `interventions` and `outcomes` arguments each take a vertex label or a nonempty
+iterable of labels. They must name disjoint sets of known vertices.
+Supply an iterable of ordered vertex-label sequences as `selected_paths`.
+A proper path follows one or more directed edges from a treatment to an
+outcome and encounters treatment only at its start. It may pass through one
+outcome on its way to another. Every proper path absent from the supplied set
+is excluded. An empty selection and repeated copies of a path are allowed.
+
+The function returns one deterministic `RecantingDistrictWitness` or `None`
+if no district meets Definition 2. The witness contains the treatment,
+district vertices in graph order, and both paths. Here the paths share the
+edge from `A` to `M`.
+
+```python
+from causal_graph_algorithms import DAG, find_recanting_district
+
+graph = DAG.from_text("A --> M --> Y; M --> L --> Y")
+witness = find_recanting_district(
+    graph,
+    interventions="A",
+    outcomes="Y",
+    selected_paths=[("A", "M", "Y")],
+)
+assert witness is not None
+assert witness.treatment == "A"
+assert witness.district == ("M",)
+assert witness.selected_path == ("A", "M", "Y")
+assert witness.excluded_path == ("A", "M", "L", "Y")
+```
+
+Open Causal Science proves equivalence to Definition 2 for its finite ADMG
+checker and checks Figures 4 and 5 in Lean. [OCS paper record](https://github.com/snu-causality-lab/open-causal-science/blob/51af06a9f7e0691cbfcc7e9fee8f81c0be8d6f29/docs/papers/shpitser-2013-longitudinal-mediation.md)
 
 ## Equivalence classes
 
