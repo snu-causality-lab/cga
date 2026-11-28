@@ -1,41 +1,52 @@
 # ADMG Markov properties
 
+Both operations take a `DAG` or `AcyclicDirectedBidirectedGraph`.
+`ancestral_vertices` accepts a label or iterable of labels that includes
+every directed parent of each selected vertex. Invalid inputs raise
+`GraphValidationError`.
+
 ## Head–tail partition
 
-`admg_head_tail_partition` returns the head and tail of every factor in
-Richardson's observational factorization for one ancestral margin. The
-default margin is all graph vertices. Supply `ancestral_vertices` to
-select a margin closed under directed parents. Both `DAG` and
-`AcyclicDirectedBidirectedGraph` are supported.
-[Richardson (2009), Theorem 4 and §3.2](https://arxiv.org/pdf/1406.6764#page=4)
+`admg_head_tail_partition` returns a tuple of `ADMGHeadTail` terms for
+one ancestral margin. The default margin contains every vertex. For a
+distribution satisfying the graph's global Markov property, each pair
+specifies the variables of one observational factor `p(X_H | X_T)`.
+[Richardson (2009), Theorem 4](https://arxiv.org/pdf/1406.6764#page=4) ·
+[Partition in §3.2](https://arxiv.org/pdf/1406.6764#page=5)
 
-Each round takes the barren vertices of each remaining bidirected district
-and removes those heads. A vertex is barren in its district when none of
-its strict directed descendants is in that district. Descendants are
-computed in the original graph, including paths through vertices already
-removed. The tail is the remainder of the district together with its
-external directed parents. For an ancestral margin, each round's
-district agrees with the head's district in its ancestral closure.
-Head–tail pairs follow partition rounds and then the first vertex of
-each district in graph order. Labels within each head and tail also
-follow graph order.
-[Richardson (2009), §2.2, Definition 5, Lemma 15 and Corollary 17](https://arxiv.org/pdf/1406.6764)
+Each round removes one head per remaining bidirected district. The head
+contains the district's barren vertices, which have no strict directed
+descendant in that district. Directed paths can pass through vertices
+removed earlier. The tail contains the rest of the district and its
+external directed parents. Lemma 15 and Corollary 17 equate the current
+district with the head's district in its ancestral closure. Within a round,
+districts follow their first vertex in input graph order. The same order
+applies to labels within each head and tail.
+[Richardson (2009), head and tail in §3.1](https://arxiv.org/pdf/1406.6764#page=4) ·
+[Lemma 15 and Corollary 17](https://arxiv.org/pdf/1406.6764#page=7)
 
-Each pair describes the scope of a factor `p(X_H | X_T)` for a
-distribution satisfying the graph's global Markov property. For
-Figure 1, the joint head `("X3", "X4")` has tail `("X1", "X2")`.
-In Figure 2, each factor conditions on a vertex in the other head.
-[Figures 1 and 2](https://proceedings.mlr.press/r7/richardson09a.html)
+Open Causal Science proves that the heads partition the selected
+vertices and computes the terms in Figures 1 and 2. In Figure 2,
+each factor conditions on a vertex in the other head.
+[OCS proof record and figures](https://github.com/snu-causality-lab/open-causal-science/blob/7da03c981cf6f9e062d40e0685446235e9f11e49/docs/papers/richardson-2009-admg-factorization.md#lean-results)
 
 ## Ordered-local statements
 
-`admg_ordered_local_ci` returns a `CIStatement` for a vertex in a supplied
-ancestral set. The vertex must have no directed child in the set. Its
-blanket consists of its district in the induced graph, with the vertex
-removed, and the district's external directed parents. The statement
-asserts independence of the vertex from the rest of the ancestral set
-given that blanket. When the remainder is empty, the statement is trivial.
-[Richardson (2003), §3](https://doi.org/10.1111/1467-9469.00323)
+`admg_ordered_local_ci` takes a member of the supplied ancestral set
+with no directed child there. Its Markov blanket contains the other
+members of its district in the induced graph and the district's external
+directed parents. The returned `CIStatement` describes independence of
+the vertex and the remaining vertices given that blanket. An empty
+remainder gives a trivial statement. Open Causal Science proves the
+blanket separation and the implication from global Markov to ordered-local
+Markov.
+[Richardson (2003), §3](https://doi.org/10.1111/1467-9469.00323) ·
+[OCS proof record](https://github.com/snu-causality-lab/open-causal-science/blob/7da03c981cf6f9e062d40e0685446235e9f11e49/docs/papers/richardson-2003-ordered-local-markov.md#lean-results)
+
+In Figure 1, the full margin has a joint head `("X3", "X4")` with tail
+`("X1", "X2")`. In the margin with just `X1`, `X2`, and `X3`, the
+ordered-local statement for `X3` is independence from `X2` given `X1`.
+[Richardson (2009), Figure 1](https://arxiv.org/pdf/1406.6764#page=1)
 
 ```python
 from causal_graph_algorithms import (
